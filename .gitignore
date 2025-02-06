@@ -368,3 +368,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /@res
 /lib
+*.pdf

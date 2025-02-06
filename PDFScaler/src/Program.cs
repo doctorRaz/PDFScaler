@@ -1,11 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Windows.Interop;
-
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
 
 namespace drz.PdfSharp_ConversionFactor
 {
@@ -23,33 +16,16 @@ namespace drz.PdfSharp_ConversionFactor
         [STAThread]
         static void Main(string[] args)
         {
-            //Assembly asm = Assembly.GetExecutingAssembly();
-            //string sAsmDir =Path.GetDirectoryName( asm.Location);
-            //string spath=Path.GetDirectoryName(typeof(userUnit).Assembly.Location);
-            
-
            
-
             TemplateConversionFactor tmp = new TemplateConversionFactor( );
             if (!tmp.Istmp)
             {
                 Console.WriteLine("Файл шаблона пустой, уходим");
+                Console.ReadKey();
                 return;
             }
 
-            COFD fsd = new COFD//save
-            {
-                Title = "Выберите каталог для напечатанных файлов",
-                Multiselect = false, //тут всегда один каталог _data.CHKmultiSelect,
-                //InitialDirectory = _dsf.TBLfolderOut,
-                IsFolderPicker = true,
-            };
-            //!хэндл Wpf окна
-            //IntPtr wpfHandle = new WindowInteropHelper(window).Handle;
-            if (!fsd.ShowDialog(/*wpfHandle*/))
-            {
-
-            }
+            
 
             string PdfFile = @"d:\@Developers\В работе\!Текущее\Programmers\!NET\Console_TEST\@res\exampl2\NOT_DESIGNATION.pdf";
 
@@ -57,7 +33,7 @@ namespace drz.PdfSharp_ConversionFactor
 
 
 
-
+            Console.WriteLine("Press any key");
             Console.ReadKey();
       
          
