@@ -18,36 +18,17 @@ using Application = HostMgd.ApplicationServices.Application;
 
 namespace drz.Infrastructure
 {
-    internal class ConsoleService : MessageService, IConsoleService
+    internal  class ConsoleService :MessageService, IConsoleService
     {
         #region Console
-
-        public void ConsoleColorMessage(string Message,
-                                        WConsoleColor FColor,
-                                        WConsoleColor BColor,
+        public void ConsoleMsg(string Message,
+                                        WConsoleColor FColor = WConsoleColor.Default,
+                                        WConsoleColor BColor = WConsoleColor.Default,
                                         string Title = null,
                                         [CallerMemberName] string CallerName = null)
-
         {
-#if DEBUG
-            Console.ForegroundColor = FColor;
-            Console.BackgroundColor = BColor;
-            Console.WriteLine($"{CallerName} : {Message}");
-            Console.ForegroundColor = Setting.ForegroundColorOld;
-            Console.BackgroundColor = Setting.BackgroundColorOld;
-#else
-            Console.ForegroundColor = FColor;
-            Console.BackgroundColor = BColor;
-            Console.WriteLine($"{Message}");
-            Console.ForegroundColor = Setting.ForegroundColorOld;
-            Console.BackgroundColor = Setting.BackgroundColorOld;
-#endif
-        }
-        public void ConsoleMessage(string Message,
-                                   string Title = null,
-                                   [CallerMemberName] string CallerName = null)
-        {
-#if NC || AC
+            _title = Title;
+#if NC || AC 
             Document doc = Application.DocumentManager.MdiActiveDocument;
             if (doc == null)
             {
@@ -62,55 +43,72 @@ namespace drz.Infrastructure
 #endif
 #else
 
-#if DEBUG
-            Console.WriteLine($"{CallerName} : {Message}");
+#if DEBUG 
+            Console.ForegroundColor = ConvertEnumWToConsole(FColor, FB.Foreground);
+            Console.BackgroundColor = ConvertEnumWToConsole(BColor, FB.Bacground);
+            Console.WriteLine($"{CallerName}: {Message}");
+            Console.ResetColor();
 #else
-           Console.WriteLine($"{Message}");
+            Console.ForegroundColor = ConvertEnumWToConsole(FColor, FB.Foreground);
+            Console.BackgroundColor = ConvertEnumWToConsole(BColor, FB.Bacground);
+            Console.WriteLine($"{Message}");
+            Console.ResetColor();
 #endif
 #endif
         }
         #endregion
 
+        #region Enum
+        enum FB
+        {
+            Foreground,
+            Bacground
+        }
 
-     
+        #endregion
+
 
 
         #region Convert Enum
 
         /// <summary>
-        /// Converts the enum MessageBoxResult to WindowResult.
-        /// </summary>
-        /// <param name="MsgBoxRes">MessageBoxResult</param>
-        /// <returns>WindowResult</returns>
-        /// <exception cref="System.ComponentModel.InvalidEnumArgumentException"></exception>
-        WindowResult ConvertEnumMsgBoxToWindow(MessageBoxResult MsgBoxRes)
-        {
-            switch (MsgBoxRes)
-            {
-                case MessageBoxResult.None: return WindowResult.None;
-                case MessageBoxResult.OK: return WindowResult.OK;
-                case MessageBoxResult.Cancel: return WindowResult.Cancel;
-                case MessageBoxResult.Yes: return WindowResult.Yes;
-                case MessageBoxResult.No: return WindowResult.No;
-                default: throw new InvalidEnumArgumentException();
-            }
-        }
-
-        /// <summary>
         /// Converts the enum WindowResult to MessageBoxResult.
         /// </summary>
-        /// <param name="WinRes">WindowResult</param>
+        /// <param name="WColor">WindowResult</param>
         /// <returns>MessageBoxResult</returns>
         /// <exception cref="System.ComponentModel.InvalidEnumArgumentException"></exception>
-        MessageBoxResult ConvertEnumWindowToMsgBox(WindowResult WinRes)
+        ConsoleColor ConvertEnumWToConsole(WConsoleColor WColor, FB fb)
         {
-            switch (WinRes)
+            switch (WColor)
             {
-                case WindowResult.None: return MessageBoxResult.None;
-                case WindowResult.OK: return MessageBoxResult.OK;
-                case WindowResult.Cancel: return MessageBoxResult.Cancel;
-                case WindowResult.Yes: return MessageBoxResult.Yes;
-                case WindowResult.No: return MessageBoxResult.No;
+
+                case WConsoleColor.Black: return ConsoleColor.Black;
+                case WConsoleColor.DarkBlue: return ConsoleColor.DarkBlue;
+                case WConsoleColor.DarkGreen: return ConsoleColor.DarkGreen;
+                case WConsoleColor.DarkCyan: return ConsoleColor.DarkCyan;
+                case WConsoleColor.DarkRed: return ConsoleColor.DarkRed;
+                case WConsoleColor.DarkMagenta: return ConsoleColor.DarkMagenta;
+                case WConsoleColor.DarkYellow: return ConsoleColor.DarkYellow;
+                case WConsoleColor.Gray: return ConsoleColor.Gray;
+                case WConsoleColor.DarkGray: return ConsoleColor.DarkGray;
+                case WConsoleColor.Blue: return ConsoleColor.Blue;
+                case WConsoleColor.Green: return ConsoleColor.Green;
+                case WConsoleColor.Cyan: return ConsoleColor.Cyan;
+                case WConsoleColor.Red: return ConsoleColor.Red;
+                case WConsoleColor.Magenta: return ConsoleColor.Magenta;
+                case WConsoleColor.Yellow: return ConsoleColor.Yellow;
+                case WConsoleColor.White: return ConsoleColor.White;
+                case WConsoleColor.Default:
+                    if (fb == FB.Foreground)
+                    {
+                        return Console.ForegroundColor;
+                    }
+                    else
+                    {
+                        return Console.BackgroundColor;
+
+                    }
+
                 default: throw new InvalidEnumArgumentException();
             }
         }

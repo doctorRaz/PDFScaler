@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using drz.Abstractions.Interfaces;
+using drz.Infrastructure;
+
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
@@ -26,12 +29,12 @@ namespace drz.PdfSharp_ConversionFactor
                                          "template_mm.res");
 
         /// <summary>
-        /// Gets or sets the arr bbox.
+        /// Gets or sets the arr VP.
         /// </summary>
         /// <value>
-        /// The arr b box.
+        /// The arr VP.
         /// </value>
-        public PdfArray arrBBox { get; set; }
+        public PdfArray arrVP { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="TemplateConversionFactor"/> is istmp.
@@ -46,20 +49,26 @@ namespace drz.PdfSharp_ConversionFactor
         /// </summary>
         public TemplateConversionFactor()
         {
+            IConsoleService CS = new ConsoleService();
+
             if (!File.Exists(pdftemp))
             {
                 Istmp = false;
-                Console.WriteLine("Не найден файл шаблона, продолжить работу невозможно!");
+                CS.ConsoleMsg("Не найден файл шаблона, продолжить работу невозможно!",
+                              WConsoleColor.White,
+                              WConsoleColor.DarkRed);
                 return;
             }
 
             PdfDocument PdfDoc = PdfReader.Open(pdftemp, PdfDocumentOpenMode.Import);
             PdfDictionary.DictionaryElements PdfDicEl = PdfDoc.Pages[0].Elements;
-            arrBBox = PdfDicEl.GetObject("/VP") as PdfArray;
-            if (arrBBox == null)
+            arrVP = PdfDicEl.GetObject("/VP") as PdfArray;
+            if (arrVP == null)
             {
                 Istmp = false;
-                Console.WriteLine("Файл шаблона пустой, продолжить работу невозможно!");
+                CS.ConsoleMsg("Файл шаблона пустой, продолжить работу невозможно!",
+                              WConsoleColor.White,
+                              WConsoleColor.DarkRed);
                 return;
             }
             Istmp = true;

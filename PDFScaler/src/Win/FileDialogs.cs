@@ -24,12 +24,12 @@ namespace drz.PdfSharp_ConversionFactor
         {
             CommonOpenFileDialog CFSD = new CommonOpenFileDialog
             {
-                Title="",
-                DefaultExtension="pdf",
+                Title = "",
+                DefaultExtension = "pdf",
                 IsFolderPicker = true,
             };
-       
-            if (CFSD.ShowDialog() ==   CommonFileDialogResult.Ok)
+
+            if (CFSD.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 return true;
             }
@@ -62,29 +62,30 @@ namespace drz.PdfSharp_ConversionFactor
 
         public bool FilesDialogOpen()
         {
-            OpenFileDialog OFD = new OpenFileDialog
+            using (OpenFileDialog OFD = new OpenFileDialog())
             {
-                Title = "Select PDF Files",
-                CheckFileExists = true,
-                CheckPathExists = true,
-                DefaultExt = "pdf",
-                Filter = "pdf files (*.pdf)|*.pdf",
-                FilterIndex = 2,
-                RestoreDirectory = true,
-                Multiselect = true,
+                OFD.Title = "Select PDF Files";
+                OFD.CheckFileExists = true;
+                OFD.CheckPathExists = true;
+                OFD.DefaultExt = "PDF";
+                OFD.Filter = "Files PDF (*.PDF)|*.PDF";
 
-                ReadOnlyChecked = false,
-                ShowReadOnly = true
-            };
-            if (OFD.ShowDialog() == DialogResult.OK)
-            {
-                _pdfFiles = OFD.FileNames;
+                OFD.FilterIndex = 2;
+                OFD.RestoreDirectory = true;
+                OFD.Multiselect = true;
+                OFD.ReadOnlyChecked = false;
+                //OFD.ShowReadOnly = true;
 
-                return true;
-            }
-            else
-            {
-                return false;
+                if (OFD.ShowDialog() == DialogResult.OK)
+                {
+                    _pdfFiles = OFD.FileNames;
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

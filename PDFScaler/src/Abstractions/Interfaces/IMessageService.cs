@@ -5,10 +5,7 @@ using System.Runtime.CompilerServices;
 namespace drz.Abstractions.Interfaces
 {
     public interface IMessageService
-    {
-        void ConsoleMessage(string Message,
-                            string Title = null,
-                            [CallerMemberName] string CallerName = null);
+    {        
         /// <summary> Вывод информационного сообщения </summary>
         /// <param name="Message">Выводимое сообщение</param>
         /// <param name="CallerName">Вызывающий метод. При использовании обязательно использование <code>[CallerMemberName]</code></param>

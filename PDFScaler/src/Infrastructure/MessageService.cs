@@ -18,60 +18,9 @@ using Application = HostMgd.ApplicationServices.Application;
 
 namespace drz.Infrastructure
 {
-    internal class MessageService : IAllMessageService// IMessageService,IInputBoxService,IQuestionService
+    internal partial class MessageService :  IMessageService,IInputBoxService,IQuestionService
     {
-        #region Console
-
-        public void ConsoleColorMessage(string Message,
-                                        WConsoleColor FColor,
-                                        WConsoleColor BColor,
-                                        string Title = null,
-                                        [CallerMemberName] string CallerName = null)
-
-        {
-#if DEBUG
-            Console.ForegroundColor = FColor;
-            Console.BackgroundColor = BColor;
-            Console.WriteLine($"{CallerName} : {Message}");
-            Console.ForegroundColor = Setting.ForegroundColorOld;
-            Console.BackgroundColor = Setting.BackgroundColorOld;
-#else
-            Console.ForegroundColor = FColor;
-            Console.BackgroundColor = BColor;
-            Console.WriteLine($"{Message}");
-            Console.ForegroundColor = Setting.ForegroundColorOld;
-            Console.BackgroundColor = Setting.BackgroundColorOld;
-#endif
-        }
-        public void ConsoleMessage(string Message,
-                                   string Title = null,
-                                   [CallerMemberName] string CallerName = null)
-        {
-#if NC || AC
-            Document doc = Application.DocumentManager.MdiActiveDocument;
-            if (doc == null)
-            {
-                InfoMessage(Message, CallerName);
-                return;
-            }
-            Editor ed = doc.Editor;
-#if DEBUG
-            ed.WriteMessage($"\n----------------\n{CallerName}:\n----------------\n{Message}");
-#else
-            ed.WriteMessage($"\n{Message}");
-#endif
-#else
-
-#if DEBUG
-            Console.WriteLine($"{CallerName} : {Message}");
-#else
-           Console.WriteLine($"{Message}");
-#endif
-#endif
-        }
-        #endregion
-
-
+        
         #region Message
 
 

@@ -1,4 +1,11 @@
 ﻿using System;
+using System.Windows;
+using System.Windows.Forms;
+
+using drz.Abstractions.Interfaces;
+using drz.Infrastructure;
+using drz.Servise;
+
 
 namespace drz.PdfSharp_ConversionFactor
 {
@@ -17,51 +24,31 @@ namespace drz.PdfSharp_ConversionFactor
         static void Main(string[] args)
         {
 
+            ConsoleKey response;
+
+            IConsoleService CS = new ConsoleService();
+
             TemplateConversionFactor tmp = new TemplateConversionFactor();
             if (!tmp.Istmp)
             {
-                Console.WriteLine("Press any Key");
-                var key = Console.ReadKey();
+                CS.ConsoleMsg("Press any Key");
+                response = Console.ReadKey().Key;
                 return;
             }
+            new Mesag();//сообщения
 
-            new Setting(); //set def
+            do
+            {
+                new Engine(tmp);//движок
 
-            //******* DisClaimer ****
-            //Console.BackgroundColor = ConsoleColor.Black;
-
-            Console.ForegroundColor = ConsoleColor.Red;
-
-            Console.WriteLine("Disclaimer");
-            Console.WriteLine("Программа изменяет содержимое файлов PDF");
-            Console.WriteLine("Будут созданы резервные копии существующих файлов с расширением *.BAK");
-            Console.WriteLine("Вы используете программу на свой страх и риск");
-
-            Console.ResetColor();
-
-
-            FileDialogs FD = new FileDialogs();
-
-            Console.WriteLine("");
-            Console.WriteLine("Если Вы готовы продолжить...");
-            Console.WriteLine("Yes/No");
-
-            bool cf = FD.FilesDialogOpen();
-
-
-            string PdfFile = @"d:\@Developers\В работе\!Текущее\Programmers\!NET\Console_TEST\@res\exampl2\NOT_DESIGNATION.pdf";
-
-            ConversionFactor.SetPagesConversionFactor(PdfFile, tmp);
-
-
-
-            Console.WriteLine("Press any key");
-            Console.ReadKey();
-
-
-
-
-
+                Console.Write("Хотите повторить \"Yes\" ");
+                response = Console.ReadKey(/*false*/).Key;
+                if (response == ConsoleKey.Y)
+                {
+                    Console.WriteLine();
+                    //Console.Clear();
+                }
+            } while (response == ConsoleKey.Y);
 
         }
     }

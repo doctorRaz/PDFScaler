@@ -63,11 +63,11 @@ namespace drz.PdfSharp_ConversionFactor
         {
             TemplateConversionFactor tmp = new TemplateConversionFactor( );
 
-            //test пустой с настройками
+            //x пустой с настройками
             PdfDocument pdfdoc = new PdfDocument();
             pdfdoc.AddPage();
             PdfDictionary.DictionaryElements p = pdfdoc.Pages[0].Elements;
-            p.Add("/VP", tmp.arrBBox);
+            p.Add("/VP", tmp.arrVP);
 
             pdfdoc.Save("test.tmp");
         }
