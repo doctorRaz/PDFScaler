@@ -16,16 +16,38 @@ namespace drz.PdfSharp_ConversionFactor
         [STAThread]
         static void Main(string[] args)
         {
-           
-            TemplateConversionFactor tmp = new TemplateConversionFactor( );
+
+            TemplateConversionFactor tmp = new TemplateConversionFactor();
             if (!tmp.Istmp)
             {
-                Console.WriteLine("Файл шаблона пустой, уходим");
-                Console.ReadKey();
+                Console.WriteLine("Press any Key");
+                var key = Console.ReadKey();
                 return;
             }
 
-            
+            new Setting(); //set def
+
+            //******* DisClaimer ****
+            //Console.BackgroundColor = ConsoleColor.Black;
+
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine("Disclaimer");
+            Console.WriteLine("Программа изменяет содержимое файлов PDF");
+            Console.WriteLine("Будут созданы резервные копии существующих файлов с расширением *.BAK");
+            Console.WriteLine("Вы используете программу на свой страх и риск");
+
+            Console.ResetColor();
+
+
+            FileDialogs FD = new FileDialogs();
+
+            Console.WriteLine("");
+            Console.WriteLine("Если Вы готовы продолжить...");
+            Console.WriteLine("Yes/No");
+
+            bool cf = FD.FilesDialogOpen();
+
 
             string PdfFile = @"d:\@Developers\В работе\!Текущее\Programmers\!NET\Console_TEST\@res\exampl2\NOT_DESIGNATION.pdf";
 
@@ -35,12 +57,12 @@ namespace drz.PdfSharp_ConversionFactor
 
             Console.WriteLine("Press any key");
             Console.ReadKey();
-      
-         
 
 
 
-             
+
+
+
         }
     }
 }

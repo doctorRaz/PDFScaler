@@ -23,7 +23,7 @@ namespace drz.PdfSharp_ConversionFactor
         /// </value>
         string pdftemp => Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location),
                                          "lib",
-                                         "template_mm.dll");
+                                         "template_mm.res");
 
         /// <summary>
         /// Gets or sets the arr bbox.
@@ -49,7 +49,7 @@ namespace drz.PdfSharp_ConversionFactor
             if (!File.Exists(pdftemp))
             {
                 Istmp = false;
-                Console.WriteLine("Нет файла шаблона, уходим");
+                Console.WriteLine("Не найден файл шаблона, продолжить работу невозможно!");
                 return;
             }
 
@@ -59,7 +59,7 @@ namespace drz.PdfSharp_ConversionFactor
             if (arrBBox == null)
             {
                 Istmp = false;
-                Console.WriteLine("Нет шаблона");
+                Console.WriteLine("Файл шаблона пустой, продолжить работу невозможно!");
                 return;
             }
             Istmp = true;
