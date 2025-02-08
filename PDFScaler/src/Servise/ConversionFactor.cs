@@ -50,7 +50,7 @@ namespace drz.PdfSharp_ConversionFactor
 
                 if (arrBBox1 == null)
                 {
-                    PdfDicEl.Add("/VP", tmp.arrVP);
+                    PdfDicEl.Add("/VP", tmp.ArrVP);
                     IsModifed = true;//если меняли хоть один лист
                     CS.ConsoleMsg($"Словарь добавлен Page:{++pageNum}", WConsoleColor.Green);
                 }

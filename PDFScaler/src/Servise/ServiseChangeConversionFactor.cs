@@ -67,7 +67,7 @@ namespace drz.PdfSharp_ConversionFactor
             PdfDocument pdfdoc = new PdfDocument();
             pdfdoc.AddPage();
             PdfDictionary.DictionaryElements p = pdfdoc.Pages[0].Elements;
-            p.Add("/VP", tmp.arrVP);
+            p.Add("/VP", tmp.ArrVP);
 
             pdfdoc.Save("test.tmp");
         }

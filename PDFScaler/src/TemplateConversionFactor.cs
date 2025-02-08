@@ -14,7 +14,8 @@ using PdfSharp.Pdf.IO;
 namespace drz.PdfSharp_ConversionFactor
 {
     /// <summary>
-    /// Получаем шаблон BBox
+    /// Получаем шаблон VP
+    /// Потом генерировать его программно
     /// </summary>
     internal class TemplateConversionFactor
     {
@@ -28,13 +29,17 @@ namespace drz.PdfSharp_ConversionFactor
                                          "lib",
                                          "template_mm.res");
 
+        PdfArray _arrVP;
+
         /// <summary>
         /// Gets or sets the arr VP.
         /// </summary>
         /// <value>
         /// The arr VP.
         /// </value>
-        public PdfArray arrVP { get; set; }
+        public PdfArray ArrVP { get; set; }
+
+        Boolean _isArrVP;
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="TemplateConversionFactor"/> is istmp.
@@ -42,7 +47,17 @@ namespace drz.PdfSharp_ConversionFactor
         /// <value>
         ///   <c>true</c> if istmp; otherwise, <c>false</c>.
         /// </value>
-        public Boolean Istmp { get; set; }
+        public Boolean IsArrVP => _isArrVP;
+
+        string _mesag;
+
+        /// <summary>
+        /// Gets the mesag.
+        /// </summary>
+        /// <value>
+        /// The mesag.
+        /// </value>
+        public string Mesag => _mesag;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateConversionFactor"/> class.
@@ -51,27 +66,24 @@ namespace drz.PdfSharp_ConversionFactor
         {
             IConsoleService CS = new ConsoleService();
 
-            if (!File.Exists(pdftemp))
+            if (!File.Exists(pdftemp))//файла нет
             {
-                Istmp = false;
-                CS.ConsoleMsg("Не найден файл шаблона, продолжить работу невозможно!",
-                              WConsoleColor.White,
-                              WConsoleColor.DarkRed);
+                _isArrVP = false;
+                _mesag="Не найден файл шаблона, продолжить работу невозможно!";
                 return;
             }
 
+            //пытаемся получить шаблон
             PdfDocument PdfDoc = PdfReader.Open(pdftemp, PdfDocumentOpenMode.Import);
             PdfDictionary.DictionaryElements PdfDicEl = PdfDoc.Pages[0].Elements;
-            arrVP = PdfDicEl.GetObject("/VP") as PdfArray;
-            if (arrVP == null)
+            ArrVP = PdfDicEl.GetObject("/VP") as PdfArray;
+            if (ArrVP == null)//шаблона VP  файле нет
             {
-                Istmp = false;
-                CS.ConsoleMsg("Файл шаблона пустой, продолжить работу невозможно!",
-                              WConsoleColor.White,
-                              WConsoleColor.DarkRed);
+                _isArrVP = false;
+                _mesag = "Файл шаблона пустой, продолжить работу невозможно!";                              
                 return;
             }
-            Istmp = true;
+            _isArrVP = true;
         }
 
     }

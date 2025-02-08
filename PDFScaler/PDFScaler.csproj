@@ -63,7 +63,7 @@
     <Compile Include="src\Abstractions\Interfaces\IMessageService.cs" />
     <Compile Include="src\Abstractions\Interfaces\IQuestionService.cs" />
     <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
-    <Compile Include="src\Engine.cs" />
+    <Compile Include="src\PdfScaler.cs" />
     <Compile Include="src\Infrastructure\ConsoleService.cs" />
     <Compile Include="src\Infrastructure\MessageService.cs" />
     <Compile Include="src\Servise\Mesag.cs" />

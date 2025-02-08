@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using drz.Abstractions.Interfaces;
 using drz.Infrastructure;
 using drz.Servise;
+ 
+using drz.PDFScaler;
 
 
 namespace drz.PdfSharp_ConversionFactor
@@ -26,20 +28,30 @@ namespace drz.PdfSharp_ConversionFactor
 
             ConsoleKey response;
 
+            //цветная консоль
             IConsoleService CS = new ConsoleService();
 
-            TemplateConversionFactor tmp = new TemplateConversionFactor();
-            if (!tmp.Istmp)
+            //собственно сам PdfScaler
+            PdfScaler PS = new PdfScaler();
+
+             
+            if (!PS.IsArrVP)
             {
+                CS.ConsoleMsg(PS.TCF.Mesag,
+                              WConsoleColor.White,
+                              WConsoleColor.DarkRed);
                 CS.ConsoleMsg("Press any Key");
                 response = Console.ReadKey().Key;
                 return;
             }
-            new Mesag();//сообщения
+            new Mesag();//приветственные сообщения
 
             do
             {
-                new Engine(tmp);//движок
+                if (!PS.PdfRun()) //движок
+                {
+                    CS.ConsoleMsg(PS.Mesag, WConsoleColor.Green);
+                }
 
                 Console.Write("Хотите повторить \"Yes\" ");
                 response = Console.ReadKey(/*false*/).Key;
