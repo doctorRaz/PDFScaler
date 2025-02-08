@@ -38,11 +38,11 @@ namespace drz.PdfSharp_ConversionFactor
             catch (Exception ex)
             {
                 IsModifed = false;
-                CS.ConsoleMsg($"{ex.Message}: {PdfFile}", WConsoleColor.White, WConsoleColor.DarkRed);
+                CS.ConsoleWriteLine($"{ex.Message}: {PdfFile}", WConsoleColor.White, WConsoleColor.DarkRed);
                 return false;
             }
 
-            CS.ConsoleMsg($"Open: {PdfFile}", WConsoleColor.Gray);
+            CS.ConsoleWriteLine($"Open: {PdfFile}", WConsoleColor.Gray);
             int pageNum = 0;
             foreach (PdfPage page in PdfDoc.Pages)
             {
@@ -53,11 +53,11 @@ namespace drz.PdfSharp_ConversionFactor
                 {
                     PdfDicEl.Add("/VP", ArrVP);//todo изменить размер BBox
                     IsModifed = true;//если меняли хоть один лист
-                    CS.ConsoleMsg($"Словарь добавлен Page:{++pageNum}", WConsoleColor.Green);
+                    CS.ConsoleWriteLine($"Словарь добавлен Page:{++pageNum}", WConsoleColor.Green);
                 }
                 else
                 {
-                    CS.ConsoleMsg($"Словарь существует Page:{++pageNum}", WConsoleColor.DarkRed);
+                    CS.ConsoleWriteLine($"Словарь существует Page:{++pageNum}", WConsoleColor.DarkRed);
                 }
             }
             try
@@ -67,19 +67,19 @@ namespace drz.PdfSharp_ConversionFactor
                     PdfSawer pds = new PdfSawer();
 
                     PdfDoc.Save(PdfFile); //todo в отдельный класс
-                    CS.ConsoleMsg($"Saved: {PdfFile}", WConsoleColor.Gray);
+                    CS.ConsoleWriteLine($"Saved: {PdfFile}", WConsoleColor.Gray);
                     return true;
                 }
                 else
                 {
-                    CS.ConsoleMsg($"Not changed: {PdfFile}", WConsoleColor.DarkRed);
+                    CS.ConsoleWriteLine($"Not changed: {PdfFile}", WConsoleColor.DarkRed);
                     return false ;
                 }
 
             }
             catch (Exception ex)
             {
-                CS.ConsoleMsg(ex.Message, WConsoleColor.White, WConsoleColor.DarkRed);
+                CS.ConsoleWriteLine(ex.Message, WConsoleColor.White, WConsoleColor.DarkRed);
                 return false;
             }
         }

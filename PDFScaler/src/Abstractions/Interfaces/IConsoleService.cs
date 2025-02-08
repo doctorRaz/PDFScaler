@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 
 namespace drz.Abstractions.Interfaces
 {
-    public partial interface IConsoleService
+    partial interface IConsoleService
     {
         /// <summary> Вывод сообщения в консоль </summary>
         /// <param name="Message">Выводимое сообщение</param>
         /// <param name="CallerName">Вызывающий метод. При использовании обязательно использование <code>[CallerMemberName]</code></param>
-        void ConsoleMsg(string Message,
+        void ConsoleWriteLine(string Message,
                                  WConsoleColor FColor = WConsoleColor.Default,
                                  WConsoleColor BColor = WConsoleColor.Default,
                                  string Title = null,
@@ -17,7 +17,29 @@ namespace drz.Abstractions.Interfaces
 
     }
 
-    public enum WConsoleColor
+
+    enum TypeMesag
+    {
+        /// <summary>
+        /// The none
+        /// </summary>
+        None,
+        /// <summary>
+        /// The information
+        /// </summary>
+        Info,
+        /// <summary>
+        /// The warning
+        /// </summary>
+        Warning,
+        /// <summary>
+        /// The error
+        /// </summary>
+        Error,
+
+    }
+
+    enum WConsoleColor
     {
         //
         // Сводка:

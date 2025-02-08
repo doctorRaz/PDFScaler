@@ -25,7 +25,6 @@ namespace drz.PdfSharp_ConversionFactor
         [STAThread]
         static void Main(string[] args)
         {
-
             ConsoleKey response;
 
             //цветная консоль
@@ -37,20 +36,20 @@ namespace drz.PdfSharp_ConversionFactor
              
             if (!PS.IsArrVP)
             {
-                CS.ConsoleMsg(PS.TCF.Mesag,
+                CS.ConsoleWriteLine(PS.TCF.Mesag,
                               WConsoleColor.White,
                               WConsoleColor.DarkRed);
-                CS.ConsoleMsg("Press any Key");
+                CS.ConsoleWriteLine("Press any Key");
                 response = Console.ReadKey().Key;
                 return;
             }
-            new Mesag();//приветственные сообщения
+            new Mesag(CS);//приветственные сообщения
 
             do
             {
                 if (!PS.PdfRun()) //движок
                 {
-                    CS.ConsoleMsg(PS.Mesag, WConsoleColor.Green);
+                    CS.ConsoleWriteLine(PS.Mesag, WConsoleColor.Green);
                 }
 
                 Console.Write("Хотите повторить \"Yes\" ");

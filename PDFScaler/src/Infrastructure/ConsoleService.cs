@@ -18,10 +18,17 @@ using Application = HostMgd.ApplicationServices.Application;
 
 namespace drz.Infrastructure
 {
-    internal  class ConsoleService :MessageService, IConsoleService
+    internal class ConsoleService : MessageService, IConsoleService
     {
+        public ConsoleService()
+        {
+            //Console.BackgroundColor =ConsoleColor.Black;
+            //Console.Clear();
+            Console.Title=Title;
+        }
+
         #region Console
-        public void ConsoleMsg(string Message,
+        public void ConsoleWriteLine(string Message,
                                         WConsoleColor FColor = WConsoleColor.Default,
                                         WConsoleColor BColor = WConsoleColor.Default,
                                         string Title = null,
@@ -116,7 +123,7 @@ namespace drz.Infrastructure
 
         string _title;
 
-        string title
+        string Title
         {
             get
             {
