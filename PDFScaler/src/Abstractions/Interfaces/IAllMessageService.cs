@@ -3,7 +3,7 @@
 
 namespace drz.Abstractions.Interfaces
 {
-      public interface IAllMessageService:IInputBoxService,IMessageService,IQuestionService,IConsoleService
+      interface IAllMessageService:IInputBoxService,IMessageService,IQuestionService,IConsoleService
     {
 
     }
