@@ -5,13 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using drz.Abstractions.Interfaces;
+using drz.Infrastructure;
+
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
 namespace drz.PdfSharp_ConversionFactor
 {
     /// <summary>
-    /// Получаем шаблон BBox
+    /// Получаем шаблон VP
+    /// Потом генерировать его программно
     /// </summary>
     internal class TemplateConversionFactor
     {
@@ -23,15 +27,19 @@ namespace drz.PdfSharp_ConversionFactor
         /// </value>
         string pdftemp => Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location),
                                          "lib",
-                                         "template_mm.dll");
+                                         "template_mm.res");
+
+        PdfArray _arrVP;
 
         /// <summary>
-        /// Gets or sets the arr bbox.
+        /// Gets or sets the arr VP.
         /// </summary>
         /// <value>
-        /// The arr b box.
+        /// The arr VP.
         /// </value>
-        public PdfArray arrBBox { get; set; }
+        public PdfArray ArrVP { get; set; }
+
+        Boolean _isArrVP;
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="TemplateConversionFactor"/> is istmp.
@@ -39,30 +47,43 @@ namespace drz.PdfSharp_ConversionFactor
         /// <value>
         ///   <c>true</c> if istmp; otherwise, <c>false</c>.
         /// </value>
-        public Boolean Istmp { get; set; }
+        public Boolean IsArrVP => _isArrVP;
+
+        string _mesag;
+
+        /// <summary>
+        /// Gets the mesag.
+        /// </summary>
+        /// <value>
+        /// The mesag.
+        /// </value>
+        public string Mesag => _mesag;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateConversionFactor"/> class.
         /// </summary>
         public TemplateConversionFactor()
         {
-            if (!File.Exists(pdftemp))
+            IConsoleService CS = new ConsoleService();
+
+            if (!File.Exists(pdftemp))//файла нет
             {
-                Istmp = false;
-                Console.WriteLine("Нет файла шаблона, уходим");
+                _isArrVP = false;
+                _mesag="Не найден файл шаблона, продолжить работу невозможно!";
                 return;
             }
 
+            //пытаемся получить шаблон
             PdfDocument PdfDoc = PdfReader.Open(pdftemp, PdfDocumentOpenMode.Import);
             PdfDictionary.DictionaryElements PdfDicEl = PdfDoc.Pages[0].Elements;
-            arrBBox = PdfDicEl.GetObject("/VP") as PdfArray;
-            if (arrBBox == null)
+            ArrVP = PdfDicEl.GetObject("/VP") as PdfArray;
+            if (ArrVP == null)//шаблона VP  файле нет
             {
-                Istmp = false;
-                Console.WriteLine("Нет шаблона");
+                _isArrVP = false;
+                _mesag = "Файл шаблона пустой, продолжить работу невозможно!";                              
                 return;
             }
-            Istmp = true;
+            _isArrVP = true;
         }
 
     }

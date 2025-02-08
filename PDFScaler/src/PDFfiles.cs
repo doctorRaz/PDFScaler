@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace drz.src
+ 
+
+namespace drz.PdfSharp_ConversionFactor
 {
     /// <summary>
     /// Получаем список PDF файлов
@@ -15,6 +17,9 @@ namespace drz.src
 
         public List<string> PdfFiles=>_pdfFiles;
 
-
+        public PDFfiles()
+        {
+            var dd = Setting.ForegroundColorOld;
+        }
     }
 }

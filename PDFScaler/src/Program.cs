@@ -1,4 +1,13 @@
 ﻿using System;
+using System.Windows;
+using System.Windows.Forms;
+
+using drz.Abstractions.Interfaces;
+using drz.Infrastructure;
+using drz.Servise;
+ 
+using drz.PDFScaler;
+
 
 namespace drz.PdfSharp_ConversionFactor
 {
@@ -16,31 +25,43 @@ namespace drz.PdfSharp_ConversionFactor
         [STAThread]
         static void Main(string[] args)
         {
-           
-            TemplateConversionFactor tmp = new TemplateConversionFactor( );
-            if (!tmp.Istmp)
-            {
-                Console.WriteLine("Файл шаблона пустой, уходим");
-                Console.ReadKey();
-                return;
-            }
 
-            
+            ConsoleKey response;
 
-            string PdfFile = @"d:\@Developers\В работе\!Текущее\Programmers\!NET\Console_TEST\@res\exampl2\NOT_DESIGNATION.pdf";
+            //цветная консоль
+            IConsoleService CS = new ConsoleService();
 
-            ConversionFactor.SetPagesConversionFactor(PdfFile, tmp);
-
-
-
-            Console.WriteLine("Press any key");
-            Console.ReadKey();
-      
-         
-
-
+            //собственно сам PdfScaler
+            PdfScaler PS = new PdfScaler();
 
              
+            if (!PS.IsArrVP)
+            {
+                CS.ConsoleMsg(PS.TCF.Mesag,
+                              WConsoleColor.White,
+                              WConsoleColor.DarkRed);
+                CS.ConsoleMsg("Press any Key");
+                response = Console.ReadKey().Key;
+                return;
+            }
+            new Mesag();//приветственные сообщения
+
+            do
+            {
+                if (!PS.PdfRun()) //движок
+                {
+                    CS.ConsoleMsg(PS.Mesag, WConsoleColor.Green);
+                }
+
+                Console.Write("Хотите повторить \"Yes\" ");
+                response = Console.ReadKey(/*false*/).Key;
+                if (response == ConsoleKey.Y)
+                {
+                    Console.WriteLine();
+                    //Console.Clear();
+                }
+            } while (response == ConsoleKey.Y);
+
         }
     }
 }
