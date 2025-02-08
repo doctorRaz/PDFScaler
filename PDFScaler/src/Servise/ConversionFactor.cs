@@ -15,14 +15,15 @@ namespace drz.PdfSharp_ConversionFactor
 {
     internal class ConversionFactor
     {
-        TemplateConversionFactor _tmp;
-        TemplateConversionFactor tmp => _tmp;
+        PdfArray ArrVP=>_arrVP;
+
+        PdfArray _arrVP;
 
         string _mesag;
         public string Mesag => _mesag;
-        public ConversionFactor(TemplateConversionFactor tmp)
+        public ConversionFactor(PdfArray ArrVP)
         {
-            _tmp = tmp;
+            _arrVP = ArrVP;
         }
 
         public bool SetPagesConversionFactor(string PdfFile)
@@ -50,7 +51,7 @@ namespace drz.PdfSharp_ConversionFactor
 
                 if (arrBBox1 == null)
                 {
-                    PdfDicEl.Add("/VP", tmp.ArrVP);
+                    PdfDicEl.Add("/VP", ArrVP);//todo изменить размер BBox
                     IsModifed = true;//если меняли хоть один лист
                     CS.ConsoleMsg($"Словарь добавлен Page:{++pageNum}", WConsoleColor.Green);
                 }

@@ -69,7 +69,7 @@ namespace drz.PDFScaler
                 return false;
             }
             //добавляем VP
-            ConversionFactor Conversion = new ConversionFactor(tmp);
+            ConversionFactor Conversion = new ConversionFactor(ArrVP);
 
             string[] PdfFiles = FD.PdfFiles;
             foreach (string pdffile in PdfFiles)
