@@ -1,21 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using drz.Abstractions.Interfaces;
-using drz.Infrastructure;
-using drz.PdfSharp_ConversionFactor;
+using drz.PDFScaler;
 using drz.Servise;
 
 using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
 
-namespace drz.PDFScaler
+namespace drz.PDF_Engine
 {
     internal class Scaler
     {
+        PdfDocument _pdfDoc;
+
+        /// <summary>
+        /// Gets the PDF document.
+        /// </summary>
+        /// <value>
+        /// The PDF document.
+        /// </value>
+        public PdfDocument PdfDoc => _pdfDoc;
+
+        Logger logItem;
+
+        /// <summary>
+        /// The is modifed
+        /// </summary>
+        public bool IsModifed;
 
         /// <summary>
         /// The logger
@@ -25,10 +36,8 @@ namespace drz.PDFScaler
         PdfArray ArrVP => _arrVP;
 
         PdfArray _arrVP;
-
-        string _mesag;
-        public string Mesag => _mesag;
-        public Scaler(PdfArray ArrVP)
+    
+         public Scaler(PdfArray ArrVP)
         {
             Logger = Program.Loger;
             _arrVP = ArrVP;
@@ -39,26 +48,10 @@ namespace drz.PDFScaler
         /// </summary>
         /// <param name="PdfFile">The PDF file.</param>
         /// <returns></returns>
-        public bool SetPagesConversionFactor(string PdfFile)
+        public bool SetPagesConversionFactor(PdfDocument pdfDoc)
         {
-            Logger logItem;
 
-            bool IsModifed = false;
-            PdfDocument PdfDoc = new PdfDocument();
-            try
-            {
-                PdfDoc = PdfReader.Open(PdfFile, PdfDocumentOpenMode.Modify);
-            }
-            catch (Exception ex)
-            {
-                IsModifed = false;
-                logItem = new Logger($"{ex.Message}: {PdfFile}", MesagType.Error);
-                Logger.Add(logItem);
-                return false;
-            }
-
-            logItem = new Logger($"Open: {PdfFile}", MesagType.Info);
-            Logger.Add(logItem);
+            _pdfDoc = pdfDoc;
 
             int pageNum = 0;
             foreach (PdfPage page in PdfDoc.Pages)
@@ -84,7 +77,7 @@ namespace drz.PDFScaler
                 if (IsModifed)
                 {
                     PdfSawer pds = new PdfSawer();
-                    if(PdfDoc.Version<16)
+                    if (PdfDoc.Version < 16)
                     {
                         PdfDoc.Version = 17;
                     }

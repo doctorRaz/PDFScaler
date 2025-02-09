@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Microsoft.WindowsAPICodePack.Dialogs;
 
-namespace drz.PdfSharp_ConversionFactor
+namespace drz.Win
 {
     /// <summary>
     /// Обертка над Microsoft.WindowsAPICodePack.Dialogs

@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using drz.Abstractions.Interfaces;
-using drz.Infrastructure;
-using drz.PdfSharp_ConversionFactor;
+using drz.PDFScaler;
 using drz.Servise;
+using drz.Win;
 
 using PdfSharp.Pdf;
 
-namespace drz.PDFScaler
+namespace drz.PDF_Engine
 {
     internal class PdfScaler
     {
+        Logger logItem;
 
         List<Logger> Logger;
 
@@ -30,7 +27,7 @@ namespace drz.PDFScaler
 
         TemplateConversionFactor _tcf;
         public TemplateConversionFactor TCF => _tcf;
-       
+
         bool _isArrVP;
         public bool IsArrVP => _isArrVP;
 
@@ -46,10 +43,10 @@ namespace drz.PDFScaler
         public PdfScaler()
         {
             Logger = Program.Loger;
-            _tcf = new TemplateConversionFactor();
+            _tcf = new TemplateConversionFactor();//получаем шаблон
             if (TCF.IsArrVP)
             {
-                _arrVP = TCF.ArrVP;
+                _arrVP = TCF.ArrVP;//виевпорт из шаблона
 
                 _isArrVP = true;
             }
@@ -57,30 +54,39 @@ namespace drz.PDFScaler
             {
                 _isArrVP = false;
             }
-
-
         }
 
-
+        /// <summary>
+        /// PDFs обработка.
+        /// </summary>
+        /// <returns></returns>
         public bool PdfRun()
         {
             FileDialogs FD = new FileDialogs();
-            //запрашиваем файлы
+
+            //получаем файлы для обработки
             if (!FD.FilesDialogOpen())
             {
-                Logger logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
+                logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
                 Logger.Add(logItem);
 
                 return false;
             }
-            //добавляем VP
+            // добавлятор VP
             Scaler Conversion = new Scaler(ArrVP);
 
             string[] PdfFiles = FD.PdfFiles;
 
             foreach (string pdffile in PdfFiles)
             {
-                Conversion.SetPagesConversionFactor(pdffile);
+                //получаем документ
+                OpenPDF OpenDoc=new OpenPDF(pdffile);
+                if (!OpenDoc.IsOpenedPdf)
+                {
+                    continue;
+                }
+
+                Conversion.SetPagesConversionFactor(OpenDoc.PdfDoc);
             }
             return true;
         }

@@ -62,21 +62,22 @@
     <Compile Include="src\Abstractions\Interfaces\IInputBoxService.cs" />
     <Compile Include="src\Abstractions\Interfaces\IMessageService.cs" />
     <Compile Include="src\Abstractions\Interfaces\IQuestionService.cs" />
+    <Compile Include="src\PDF Engine\SavePDF.cs" />
     <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
-    <Compile Include="src\PdfScaler.cs" />
+    <Compile Include="src\PDF Engine\PdfScaler.cs" />
     <Compile Include="src\Infrastructure\ConsoleService.cs" />
     <Compile Include="src\Infrastructure\MessageService.cs" />
     <Compile Include="src\Servise\Logger.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />
-    <Compile Include="src\Servise\PdfSawer.cs" />
-    <Compile Include="src\Servise\ServiseChangeConversionFactor.cs" />
+    <Compile Include="src\PDF Engine\PdfSawer.cs" />
+    <Compile Include="src\Others\ServiseChangeConversionFactor.cs" />
     <Compile Include="src\Win\COFD.cs" />
     <Compile Include="src\Win\FileDialogs.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
-    <Compile Include="src\TemplateConversionFactor.cs" />
-    <Compile Include="src\PDFfiles.cs" />
+    <Compile Include="src\PDF Engine\TemplateConversionFactor.cs" />
+    <Compile Include="src\PDF Engine\OpenPDF.cs" />
     <Compile Include="src\Program.cs" />
-    <Compile Include="src\Servise\Scaler.cs" />
+    <Compile Include="src\PDF Engine\Scaler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

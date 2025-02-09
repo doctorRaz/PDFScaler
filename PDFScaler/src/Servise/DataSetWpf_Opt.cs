@@ -1,12 +1,10 @@
-﻿//!отрефакторил
-
-
+﻿
 using System;
 using System.IO;
 using System.Reflection;
 
 
-namespace drz.Infrastructure
+namespace drz.Servise
 {
     /// <summary> Пути разделители и пр.</summary>
     public class DataSetWpfOpt
@@ -177,7 +175,8 @@ namespace drz.Infrastructure
         /// <summary>Имя машины</summary>
         public static string sMachineName => Environment.MachineName;
 
-       
+        /// <summary>папка темп</summary>
+       public static string sTemp=>Path.GetTempPath();
  
 
         #endregion

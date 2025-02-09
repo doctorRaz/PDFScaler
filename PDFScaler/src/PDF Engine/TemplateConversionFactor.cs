@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using drz.Abstractions.Interfaces;
-using drz.Infrastructure;
+using drz.PDFScaler;
 using drz.Servise;
 
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
-namespace drz.PdfSharp_ConversionFactor
+namespace drz.PDF_Engine
 {
     /// <summary>
     /// Получаем шаблон VP
@@ -56,16 +53,7 @@ namespace drz.PdfSharp_ConversionFactor
         /// </value>
         public Boolean IsArrVP => _isArrVP;
 
-        string _mesag;
-
-        /// <summary>
-        /// Gets the mesag.
-        /// </summary>
-        /// <value>
-        /// The mesag.
-        /// </value>
-        public string Mesag => _mesag;
-
+ 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateConversionFactor"/> class.
         /// </summary>

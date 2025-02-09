@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Forms;
+using System.Collections.Generic;
 
 using drz.Abstractions.Interfaces;
 using drz.Infrastructure;
+using drz.PDF_Engine;
 using drz.Servise;
 
-using drz.PDFScaler;
-using System.Collections.Generic;
 
-
-namespace drz.PdfSharp_ConversionFactor
+namespace drz.PDFScaler
 {
     /*PDF documents, such as those created by CAD software, may contain graphics that are intended to represent
      * real-world objects. Users of such documents often require information about the scale and units of

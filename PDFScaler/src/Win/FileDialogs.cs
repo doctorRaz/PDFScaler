@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-using drz.PdfSharp_ConversionFactor;
+﻿using System.Windows.Forms;
 
 using Microsoft.WindowsAPICodePack.Dialogs;
 
-namespace drz.PdfSharp_ConversionFactor
+namespace drz.Win
 {
     internal class FileDialogs
     {

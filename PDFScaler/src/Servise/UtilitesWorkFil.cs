@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace drz. Servise
+namespace drz.Servise
 {
     internal class UtilitesWorkFil
     {
@@ -64,7 +60,7 @@ namespace drz. Servise
             //string sFilExt = sFilExtDot.Replace( ".", "");
             //новое уникальное имя
             // перегрузка для имени файла
-            sFilTmp =  GetFileNameUniqu(sPathTmp, sFilTmp, sFilExt);
+            sFilTmp = GetFileNameUniqu(sPathTmp, sFilTmp, sFilExt);
 
             return Path.Combine(sPathTmp, sFilTmp + "." + sFilExt);
         }

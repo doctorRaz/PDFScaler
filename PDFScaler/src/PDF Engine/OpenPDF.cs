@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using drz.Abstractions.Interfaces;
-using drz.PdfSharp_ConversionFactor;
+using drz.PDFScaler;
+using drz.Servise;
 
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
 
 
-namespace drz.Servise
+namespace drz.PDF_Engine
 {
     /// <summary>
     /// Открываем PDF
