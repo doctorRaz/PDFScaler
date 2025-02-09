@@ -84,7 +84,10 @@ namespace drz.PDFScaler
                 if (IsModifed)
                 {
                     PdfSawer pds = new PdfSawer();
-
+                    if(PdfDoc.Version<16)
+                    {
+                        PdfDoc.Version = 17;
+                    }
                     PdfDoc.Save(PdfFile); //todo в отдельный класс
                     logItem = new Logger($"Saved: {PdfFile}", MesagType.Ok);
                     Logger.Add(logItem);
@@ -92,7 +95,7 @@ namespace drz.PDFScaler
                 }
                 else
                 {
-                    logItem = new Logger($"Saved: {PdfFile}", MesagType.Info);
+                    logItem = new Logger($"Not Saved: {PdfFile}", MesagType.Info);
                     Logger.Add(logItem);
                     return false;
                 }
