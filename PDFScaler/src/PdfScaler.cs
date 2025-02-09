@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using drz.Abstractions.Interfaces;
 using drz.Infrastructure;
 using drz.PdfSharp_ConversionFactor;
+using drz.Servise;
 
 using PdfSharp.Pdf;
 
@@ -14,6 +15,8 @@ namespace drz.PDFScaler
 {
     internal class PdfScaler
     {
+
+        List<Logger> Logger;
 
         string _mesag;
 
@@ -26,9 +29,8 @@ namespace drz.PDFScaler
         public string Mesag => _mesag;
 
         TemplateConversionFactor _tcf;
-        public  TemplateConversionFactor TCF=>_tcf;
-        IConsoleService CS => new ConsoleService();
-
+        public TemplateConversionFactor TCF => _tcf;
+       
         bool _isArrVP;
         public bool IsArrVP => _isArrVP;
 
@@ -43,7 +45,8 @@ namespace drz.PDFScaler
 
         public PdfScaler()
         {
-              _tcf = new TemplateConversionFactor();
+            Logger = Program.Loger;
+            _tcf = new TemplateConversionFactor();
             if (TCF.IsArrVP)
             {
                 _arrVP = TCF.ArrVP;
@@ -59,19 +62,22 @@ namespace drz.PDFScaler
         }
 
 
-        public bool PdfRun( )
+        public bool PdfRun()
         {
             FileDialogs FD = new FileDialogs();
             //запрашиваем файлы
             if (!FD.FilesDialogOpen())
             {
-               _mesag="Файлы PDF не выбраны" ;
+                Logger logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
+                Logger.Add(logItem);
+
                 return false;
             }
             //добавляем VP
-            ConversionFactor Conversion = new ConversionFactor(ArrVP);
+            Scaler Conversion = new Scaler(ArrVP);
 
             string[] PdfFiles = FD.PdfFiles;
+
             foreach (string pdffile in PdfFiles)
             {
                 Conversion.SetPagesConversionFactor(pdffile);

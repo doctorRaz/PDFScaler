@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using drz.Abstractions.Interfaces;
 using drz.Infrastructure;
+using drz.Servise;
 
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
@@ -19,6 +20,12 @@ namespace drz.PdfSharp_ConversionFactor
     /// </summary>
     internal class TemplateConversionFactor
     {
+        /// <summary>
+        /// The logger
+        /// </summary>
+        List<Logger> _logger;
+        public List<Logger> Logger => _logger;
+
         /// <summary>
         /// Gets the pdftemp.
         /// </summary>
@@ -64,13 +71,14 @@ namespace drz.PdfSharp_ConversionFactor
         /// </summary>
         public TemplateConversionFactor()
         {
-            IConsoleService CS = new ConsoleService();
+            _logger = Program.Loger;
 
             if (!File.Exists(pdftemp))//файла нет
             {
                 _isArrVP = false;
-                _mesag="Не найден файл шаблона, продолжить работу невозможно!";
-                return;
+                Logger log=new Logger("Не найден файл шаблона, продолжить работу невозможно!",MesagType.Error);
+                _logger.Add(log);   
+                  return;
             }
 
             //пытаемся получить шаблон
@@ -80,7 +88,8 @@ namespace drz.PdfSharp_ConversionFactor
             if (ArrVP == null)//шаблона VP  файле нет
             {
                 _isArrVP = false;
-                _mesag = "Файл шаблона пустой, продолжить работу невозможно!";                              
+                Logger log = new Logger("Файл шаблона пустой, продолжить работу невозможно!", MesagType.Error);
+                _logger.Add(log);
                 return;
             }
             _isArrVP = true;

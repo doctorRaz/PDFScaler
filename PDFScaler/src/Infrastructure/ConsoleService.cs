@@ -24,18 +24,20 @@ namespace drz.Infrastructure
         {
             //Console.BackgroundColor =ConsoleColor.Black;
             //Console.Clear();
-            Console.Title=Title;
+            Console.Title = Title;
         }
 
         #region Console
+
+#if NC || AC
         public void ConsoleWriteLine(string Message,
                                         WConsoleColor FColor = WConsoleColor.Default,
                                         WConsoleColor BColor = WConsoleColor.Default,
                                         string Title = null,
                                         [CallerMemberName] string CallerName = null)
-        {
-            _title = Title;
-#if NC || AC 
+        { 
+         _title = Title;
+
             Document doc = Application.DocumentManager.MdiActiveDocument;
             if (doc == null)
             {
@@ -48,21 +50,70 @@ namespace drz.Infrastructure
 #else
             ed.WriteMessage($"\n{Message}");
 #endif
+        }
 #else
 
-#if DEBUG 
+        public void ConsoleWriteLineFB(string Message,
+                                        WConsoleColor FColor = WConsoleColor.Default,
+                                        WConsoleColor BColor = WConsoleColor.Default,
+                                        string Title = null,
+                                        [CallerMemberName] string CallerName = null)
+        {
+            _title = Title;
+
+
             Console.ForegroundColor = ConvertEnumWToConsole(FColor, FB.Foreground);
             Console.BackgroundColor = ConvertEnumWToConsole(BColor, FB.Bacground);
+
+#if DEBUG
             Console.WriteLine($"{CallerName}: {Message}");
-            Console.ResetColor();
 #else
-            Console.ForegroundColor = ConvertEnumWToConsole(FColor, FB.Foreground);
-            Console.BackgroundColor = ConvertEnumWToConsole(BColor, FB.Bacground);
-            Console.WriteLine($"{Message}");
+            Console.WriteLine($"{Message}"); 
+#endif
             Console.ResetColor();
-#endif
-#endif
+
         }
+
+        public void ConsoleWriteLine(string Message,
+                            MesagType TypeMesag = MesagType.None,
+                             string Title = null,
+                             [CallerMemberName] string CallerName = null)
+        {
+            _title = Title;
+            ColorFB CFB = new ColorFB(TypeMesag);
+            Console.ForegroundColor = CFB.ColorF;
+            Console.BackgroundColor = CFB.ColorB;
+#if DEBUG
+            Console.WriteLine($"{CallerName}: {Message}");
+#else
+            Console.WriteLine($"{Message}");
+#endif
+
+            Console.ResetColor();
+
+        }
+
+        public void ConsoleWrite(string Message,
+             MesagType TypeMesag = MesagType.None,
+              string Title = null,
+              [CallerMemberName] string CallerName = null)
+        {
+            _title = Title;
+            ColorFB CFB = new ColorFB(TypeMesag);
+            Console.ForegroundColor = CFB.ColorF;
+            Console.BackgroundColor = CFB.ColorB;
+#if DEBUG
+            Console.Write($"{CallerName}: {Message}");
+#else
+            Console.Write($"{Message}");
+#endif
+
+            Console.ResetColor();
+        }
+
+
+
+#endif
         #endregion
 
         #region Enum
@@ -120,6 +171,48 @@ namespace drz.Infrastructure
             }
         }
         #endregion
+
+
+
+        /// <summary>
+        /// Цвета
+        /// </summary>
+        class ColorFB
+        {
+            public ColorFB(MesagType Tmsg)
+            {
+                switch (Tmsg)
+                {
+                    case MesagType.None:
+                        _colorF = Console.ForegroundColor;
+                        _colorB = Console.BackgroundColor;
+                        break;
+                    case MesagType.Error:
+                        _colorF = ConsoleColor.White;
+                        _colorB = ConsoleColor.DarkRed;
+                        break;
+                    case MesagType.Warning:
+                        _colorF = ConsoleColor.DarkRed;
+                        _colorB = Console.BackgroundColor;
+                        break;
+                    case MesagType.Info:
+                        _colorF = ConsoleColor.DarkGray;
+                        _colorB = Console.BackgroundColor;
+                        break;
+                    case MesagType.Ok:
+                        _colorF = ConsoleColor.Green;
+                        _colorB = Console.BackgroundColor;
+                        break;
+                    default: throw new InvalidEnumArgumentException();
+                }
+            }
+
+            ConsoleColor _colorF;
+            internal ConsoleColor ColorF => _colorF;
+
+            ConsoleColor _colorB;
+            internal ConsoleColor ColorB => _colorB;
+        }
 
         string _title;
 

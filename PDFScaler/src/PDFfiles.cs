@@ -19,7 +19,7 @@ namespace drz.PdfSharp_ConversionFactor
 
         public PDFfiles()
         {
-            var dd = Setting.ForegroundColorOld;
+            //var dd = Setting.ForegroundColorOld;
         }
     }
 }

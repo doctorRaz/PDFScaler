@@ -66,17 +66,17 @@
     <Compile Include="src\PdfScaler.cs" />
     <Compile Include="src\Infrastructure\ConsoleService.cs" />
     <Compile Include="src\Infrastructure\MessageService.cs" />
-    <Compile Include="src\Servise\Mesag.cs" />
+    <Compile Include="src\Servise\Logger.cs" />
+    <Compile Include="src\Servise\MessagWelcom.cs" />
     <Compile Include="src\Servise\PdfSawer.cs" />
     <Compile Include="src\Servise\ServiseChangeConversionFactor.cs" />
     <Compile Include="src\Win\COFD.cs" />
     <Compile Include="src\Win\FileDialogs.cs" />
-    <Compile Include="src\Servise\Setting.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
     <Compile Include="src\TemplateConversionFactor.cs" />
     <Compile Include="src\PDFfiles.cs" />
     <Compile Include="src\Program.cs" />
-    <Compile Include="src\Servise\ConversionFactor.cs" />
+    <Compile Include="src\Servise\Scaler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

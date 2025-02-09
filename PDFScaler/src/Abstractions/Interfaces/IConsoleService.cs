@@ -6,39 +6,75 @@ namespace drz.Abstractions.Interfaces
 {
     partial interface IConsoleService
     {
-        /// <summary> Вывод сообщения в консоль </summary>
+        /// <summary>
+        /// Вывод сообщения в консоль, принудительная раскраска 
+        /// </summary>
         /// <param name="Message">Выводимое сообщение</param>
+        /// <param name="FColor">Color of the foreground</param>
+        /// <param name="BColor">Color of the background</param>
+        /// <param name="Title">The title.</param>
         /// <param name="CallerName">Вызывающий метод. При использовании обязательно использование <code>[CallerMemberName]</code></param>
-        void ConsoleWriteLine(string Message,
+        void ConsoleWriteLineFB(string Message,
                                  WConsoleColor FColor = WConsoleColor.Default,
                                  WConsoleColor BColor = WConsoleColor.Default,
                                  string Title = null,
                                  [CallerMemberName] string CallerName = null);
 
+
+        /// <summary>
+        /// Consoles the write line.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="TypeMesag">The type mesag.</param>
+        /// <param name="Title">The title.</param>
+        /// <param name="CallerName">Name of the caller.</param>
+        void ConsoleWriteLine(string Message,
+                            MesagType TypeMesag = MesagType.None,
+                             string Title = null,
+                             [CallerMemberName] string CallerName = null);
+
+        void ConsoleWrite(string Message,
+                    MesagType TypeMesag = MesagType.None,
+                     string Title = null,
+                     [CallerMemberName] string CallerName = null);
     }
 
 
-    enum TypeMesag
+    /// <summary>
+    /// тип сообщения
+    /// </summary>
+    enum MesagType
     {
         /// <summary>
         /// The none
         /// </summary>
         None,
+
         /// <summary>
         /// The information
         /// </summary>
         Info,
+
         /// <summary>
         /// The warning
         /// </summary>
         Warning,
+
         /// <summary>
         /// The error
         /// </summary>
         Error,
 
+        /// <summary>
+        /// The ok
+        /// </summary>
+        Ok,
+
     }
 
+    /// <summary>
+    ////Цвет раскраски текста или фона
+    /// </summary>
     enum WConsoleColor
     {
         //

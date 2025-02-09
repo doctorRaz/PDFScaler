@@ -5,8 +5,9 @@ using System.Windows.Forms;
 using drz.Abstractions.Interfaces;
 using drz.Infrastructure;
 using drz.Servise;
- 
+
 using drz.PDFScaler;
+using System.Collections.Generic;
 
 
 namespace drz.PdfSharp_ConversionFactor
@@ -22,6 +23,8 @@ namespace drz.PdfSharp_ConversionFactor
 
     internal class Program
     {
+        public static List<Logger> Loger;
+
         [STAThread]
         static void Main(string[] args)
         {
@@ -30,33 +33,60 @@ namespace drz.PdfSharp_ConversionFactor
             //цветная консоль
             IConsoleService CS = new ConsoleService();
 
+            //logger
+            Loger = new List<Logger>();
+
             //собственно сам PdfScaler
             PdfScaler PS = new PdfScaler();
 
-             
-            if (!PS.IsArrVP)
+            if (!PS.IsArrVP)//косяк с шаблоном
             {
-                CS.ConsoleWriteLine(PS.TCF.Mesag,
-                              WConsoleColor.White,
-                              WConsoleColor.DarkRed);
-                CS.ConsoleWriteLine("Press any Key");
+                foreach (Logger logger in Loger)
+                {
+                    CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
+                }
+
+                CS.ConsoleWriteLine("Press any Key");//даем возможность прочитать
                 response = Console.ReadKey().Key;
                 return;
             }
-            new Mesag(CS);//приветственные сообщения
+
+            //приветственные сообщения
+            CS.ConsoleWrite(MessagWelcom.Header, MesagType.Warning);
+            foreach (string item in MessagWelcom.Welcom)
+            {
+                CS.ConsoleWriteLine(item, MesagType.Ok);
+            }
+            
+            CS.ConsoleWrite(MessagWelcom.Futer,MesagType.Ok);
+            
+            response = Console.ReadKey(/*false*/).Key;
+            CS.ConsoleWriteLine("");
+            if (response != ConsoleKey.Y)//юзер отказался
+            {
+                return;
+            }
+
+
 
             do
             {
-                if (!PS.PdfRun()) //движок
+                PS.PdfRun();
+                //if (!PS.PdfRun()) //движок
+                //{
+                foreach (Logger logger in Loger)
                 {
-                    CS.ConsoleWriteLine(PS.Mesag, WConsoleColor.Green);
+                    CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
                 }
+                //}
 
-                Console.Write("Хотите повторить \"Yes\" ");
+                CS.ConsoleWrite(MessagWelcom.Replase);
                 response = Console.ReadKey(/*false*/).Key;
                 if (response == ConsoleKey.Y)
                 {
                     Console.WriteLine();
+                    //logger
+                    Loger = new List<Logger>();
                     //Console.Clear();
                 }
             } while (response == ConsoleKey.Y);
