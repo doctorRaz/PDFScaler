@@ -41,7 +41,7 @@ namespace drz.PDF_Engine
         /// <value>
         /// The arr VP.
         /// </value>
-        public PdfArray ArrVP { get; set; }
+        public PdfArray ArrVP => _arrVP;
 
         Boolean _isArrVP;
 
@@ -59,7 +59,7 @@ namespace drz.PDF_Engine
         /// </summary>
         public TemplateConversionFactor()
         {
-            _logger = Program.Loger;
+            _logger = Program.Logger;
 
             if (!File.Exists(pdftemp))//файла нет
             {
@@ -72,7 +72,7 @@ namespace drz.PDF_Engine
             //пытаемся получить шаблон
             PdfDocument PdfDoc = PdfReader.Open(pdftemp, PdfDocumentOpenMode.Import);
             PdfDictionary.DictionaryElements PdfDicEl = PdfDoc.Pages[0].Elements;
-            ArrVP = PdfDicEl.GetObject("/VP") as PdfArray;
+            _arrVP = PdfDicEl.GetObject("/VP") as PdfArray;
             if (ArrVP == null)//шаблона VP  файле нет
             {
                 _isArrVP = false;

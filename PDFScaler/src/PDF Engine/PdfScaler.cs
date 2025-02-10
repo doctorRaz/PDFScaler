@@ -15,7 +15,7 @@ namespace drz.PDF_Engine
 
         List<Logger> Logger;
 
-        string _mesag;
+        //string _mesag;
 
         /// <summary>
         /// Gets the mesag.
@@ -23,7 +23,7 @@ namespace drz.PDF_Engine
         /// <value>
         /// The mesag.
         /// </value>
-        public string Mesag => _mesag;
+        //public string Mesag => _mesag;
 
         TemplateConversionFactor _tcf;
         public TemplateConversionFactor TCF => _tcf;
@@ -42,7 +42,7 @@ namespace drz.PDF_Engine
 
         public PdfScaler()
         {
-            Logger = Program.Loger;
+            Logger = Program.Logger;
             _tcf = new TemplateConversionFactor();//получаем шаблон
             if (TCF.IsArrVP)
             {
@@ -80,7 +80,7 @@ namespace drz.PDF_Engine
             foreach (string pdffile in PdfFiles)
             {
                 //получаем документ
-                OpenPDF OpenDoc = new OpenPDF(pdffile);
+                PDFOpen OpenDoc = new PDFOpen(pdffile);
                 if (!OpenDoc.IsOpenedPdf)
                 {
                     continue;
@@ -88,7 +88,7 @@ namespace drz.PDF_Engine
 
                 if (Conversion.SetPagesConversionFactor(OpenDoc.PdfDoc))//VP добавлен
                 {
-                    SavePDF savePDF = new SavePDF(OpenDoc.PdfDoc);//todo переделать вызов
+                    PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);//todo переделать вызов
                                                                   //вызывать метод с возвртатом bool или вообще на статик??
                     if (savePDF.IsSavedPdf)
                     {

@@ -10,7 +10,7 @@ using PdfSharp.Pdf;
 
 namespace drz.PDF_Engine
 {
-    internal class SavePDF
+    internal class PDFSave
     {
         bool _isSavedPdf;
         public bool IsSavedPdf => _isSavedPdf;
@@ -21,9 +21,9 @@ namespace drz.PDF_Engine
         Logger logItem;
 
         List<Logger> Logger;
-        public SavePDF(PdfDocument PdfDoc)
+        public PDFSave(PdfDocument PdfDoc)
         {
-            Logger = Program.Loger;
+            Logger = Program.Logger;
 
             try
             {

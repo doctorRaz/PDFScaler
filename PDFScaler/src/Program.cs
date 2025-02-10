@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 using drz.Abstractions.Interfaces;
 using drz.Infrastructure;
@@ -20,25 +22,28 @@ namespace drz.PDFScaler
 
     internal class Program
     {
-        public static List<Logger> Loger;
+        public static List<Logger> Logger;
 
         [STAThread]
         static void Main(string[] args)
         {
+            ReflectionLoader cmd = new ReflectionLoader();
+
+
             ConsoleKey response;
 
             //цветная консоль
             IConsoleService CS = new ConsoleService();
 
             //logger просто сообщения
-            Loger = new List<Logger>();
+            Logger = new List<Logger>();
 
             //движок PdfScaler
             PdfScaler PS = new PdfScaler();
 
             if (!PS.IsArrVP)//косяк с шаблоном
             {
-                foreach (Logger logger in Loger)
+                foreach (Logger logger in Logger)
                 {
                     CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
                 }
@@ -69,7 +74,7 @@ namespace drz.PDFScaler
                 PS.PdfRun();
                 //if (!PS.PdfRun()) //движок
                 //{
-                foreach (Logger logger in Loger)
+                foreach (Logger logger in Logger)
                 {
                     CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
                 }
@@ -81,11 +86,16 @@ namespace drz.PDFScaler
                 {
                     CS.ConsoleWriteLine("");
                     //logger
-                    Loger = new List<Logger>();
+                    Logger = new List<Logger>();
                     //Console.Clear();
                 }
             } while (response == ConsoleKey.Y);
 
         }
+
+
+       
     }
+
+  
 }

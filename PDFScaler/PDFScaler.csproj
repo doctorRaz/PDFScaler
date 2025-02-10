@@ -40,12 +40,16 @@
     <Reference Include="Microsoft.WindowsAPICodePack.Shell">
       <HintPath>..\lib\WindowsAPICodePack.7.0.4\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharp-gdi">
+    <Reference Include="PdfSharp-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\PDFsharp-gdi.1.50.5147\lib\net20\PdfSharp-gdi.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -62,11 +66,13 @@
     <Compile Include="src\Abstractions\Interfaces\IInputBoxService.cs" />
     <Compile Include="src\Abstractions\Interfaces\IMessageService.cs" />
     <Compile Include="src\Abstractions\Interfaces\IQuestionService.cs" />
-    <Compile Include="src\PDF Engine\SavePDF.cs" />
+    <Compile Include="src\PDF Engine\PDFSave.cs" />
+    <Compile Include="src\Servise\ConsoleFocus.cs" />
     <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
     <Compile Include="src\PDF Engine\PdfScaler.cs" />
     <Compile Include="src\Infrastructure\ConsoleService.cs" />
     <Compile Include="src\Infrastructure\MessageService.cs" />
+    <Compile Include="src\Servise\InfrastructureCommand.cs" />
     <Compile Include="src\Servise\Logger.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />
     <Compile Include="src\Others\ServiseChangeConversionFactor.cs" />
@@ -74,7 +80,7 @@
     <Compile Include="src\Win\FileDialogs.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
     <Compile Include="src\PDF Engine\TemplateConversionFactor.cs" />
-    <Compile Include="src\PDF Engine\OpenPDF.cs" />
+    <Compile Include="src\PDF Engine\PDFOpen.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="src\PDF Engine\Scaler.cs" />
   </ItemGroup>

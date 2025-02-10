@@ -15,9 +15,12 @@ namespace drz.PDF_Engine
     /// <summary>
     /// Открываем PDF
     /// </summary>
-    internal class OpenPDF
+    internal class PDFOpen
     {
         PdfDocument _pdfDoc;
+        /// <summary>
+        /// Документ PDF, забираем отсюда поссылке
+        /// </summary>
         public PdfDocument PdfDoc => _pdfDoc;
 
         Logger logItem;
@@ -25,11 +28,19 @@ namespace drz.PDF_Engine
         List<Logger> Logger;
 
         bool _isOpenedPdf;
+
+        /// <summary>
+        /// Флаг успех неуспех
+        /// </summary>
         public bool IsOpenedPdf => _isOpenedPdf;
 
-        public OpenPDF(string pdffile)
+        /// <summary>
+        /// Открывает документ
+        /// </summary>
+        /// <param name="pdffile"></param>
+        public PDFOpen(string pdffile)
         {
-              Logger = Program.Loger;
+              Logger = Program.Logger;
 
               _pdfDoc = new PdfDocument();
 
