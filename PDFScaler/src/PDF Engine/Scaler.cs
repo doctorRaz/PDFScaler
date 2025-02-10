@@ -39,7 +39,7 @@ namespace drz.PDF_Engine
 
         public Scaler(PdfArray ArrVP)
         {
-            Logger = Program.Loger;
+            Logger = Program.Logger;
             _arrVP = ArrVP;
         }
 
@@ -56,20 +56,33 @@ namespace drz.PDF_Engine
             int pageNum = 0;
             foreach (PdfPage page in PdfDoc.Pages)
             {
-                PdfDictionary.DictionaryElements PdfDicEl = page.Elements;
-                PdfArray arrBBox1 = PdfDicEl.GetObject("/VP") as PdfArray;
 
-                if (arrBBox1 == null)
+
+
+                PdfDictionary.DictionaryElements PdfDicEl = page.Elements;
+                PdfArray arrBBox = PdfDicEl.GetObject("/VP") as PdfArray;
+
+                if (arrBBox == null)
                 {
                     PdfDicEl.Add("/VP", ArrVP);//todo изменить размер BBox
+                              
+                    //размеры MB
+                    PdfRectangle mediaBox = page.MediaBox;
+                    double mbX1 = mediaBox.X1;
+                    double mbY1 = mediaBox.Y1;
+                    double mbX2 = mediaBox.X2;
+                    double mbY2 = mediaBox.Y2;
+
+
+
                     IsModified = true;//если меняли хоть один лист
-                    logItem = new Logger($"VP добавлен в Page:{++pageNum}", MesagType.Ok);
+                    logItem = new Logger($"\tVP добавлен в Page:{++pageNum}", MesagType.Ok);
                     Logger.Add(logItem);
                 }
                 else
                 {
                     IsModified = false;
-                    logItem = new Logger($"VP существует в Page:{++pageNum}", MesagType.Info);
+                    logItem = new Logger($"\tVP существует в Page:{++pageNum}", MesagType.Info);
                     Logger.Add(logItem);
                 }
             }
