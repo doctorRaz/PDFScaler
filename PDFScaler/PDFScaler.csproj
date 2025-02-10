@@ -72,7 +72,7 @@
     <Compile Include="src\PDF Engine\PdfScaler.cs" />
     <Compile Include="src\Infrastructure\ConsoleService.cs" />
     <Compile Include="src\Infrastructure\MessageService.cs" />
-    <Compile Include="src\Servise\InfrastructureCommand.cs" />
+    <Compile Include="src\Servise\ReflectionLoader.cs" />
     <Compile Include="src\Servise\Logger.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />
     <Compile Include="src\Others\ServiseChangeConversionFactor.cs" />
