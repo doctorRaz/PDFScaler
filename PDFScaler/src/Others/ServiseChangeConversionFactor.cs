@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using drz.PDF_Engine;
+
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 

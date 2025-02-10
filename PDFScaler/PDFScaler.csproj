@@ -69,7 +69,6 @@
     <Compile Include="src\Infrastructure\MessageService.cs" />
     <Compile Include="src\Servise\Logger.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />
-    <Compile Include="src\PDF Engine\PdfSawer.cs" />
     <Compile Include="src\Others\ServiseChangeConversionFactor.cs" />
     <Compile Include="src\Win\COFD.cs" />
     <Compile Include="src\Win\FileDialogs.cs" />

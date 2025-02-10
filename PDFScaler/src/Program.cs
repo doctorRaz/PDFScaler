@@ -30,10 +30,10 @@ namespace drz.PDFScaler
             //цветная консоль
             IConsoleService CS = new ConsoleService();
 
-            //logger
+            //logger просто сообщения
             Loger = new List<Logger>();
 
-            //собственно сам PdfScaler
+            //движок PdfScaler
             PdfScaler PS = new PdfScaler();
 
             if (!PS.IsArrVP)//косяк с шаблоном
@@ -54,9 +54,9 @@ namespace drz.PDFScaler
             {
                 CS.ConsoleWriteLine(item, MesagType.Ok);
             }
-            
-            CS.ConsoleWrite(MessagWelcom.Futer,MesagType.Ok);
-            
+
+            CS.ConsoleWrite(MessagWelcom.Futer, MesagType.Ok);
+
             response = Console.ReadKey(/*false*/).Key;
             CS.ConsoleWriteLine("");
             if (response != ConsoleKey.Y)//юзер отказался

@@ -5,6 +5,7 @@ using System.Windows;
 
 using drz.Abstractions.Interfaces;
 using drz.PdfSharp_ConversionFactor;
+using drz.Servise;
 
 using Microsoft.VisualBasic;
 
