@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 using Microsoft.WindowsAPICodePack.Dialogs;
 
@@ -55,31 +56,31 @@ namespace drz.Win
 
         public bool FilesDialogOpen()
         {
-            using (OpenFileDialog OFD = new OpenFileDialog())
+            OpenFileDialog OFD = new OpenFileDialog
             {
-                OFD.Title = "Select PDF Files";
-                OFD.CheckFileExists = true;
-                OFD.CheckPathExists = true;
-                OFD.DefaultExt = "PDF";
-                OFD.Filter = "Files PDF (*.PDF)|*.PDF";
+                Title = "Выбор файлов PDF",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "PDF",
+                Filter = "Files PDF (*.PDF)|*.PDF",
 
-                OFD.FilterIndex = 2;
-                OFD.RestoreDirectory = true;
-                OFD.Multiselect = true;
-                OFD.ReadOnlyChecked = false;
+                FilterIndex = 2,
+                RestoreDirectory = true,
+                Multiselect = true,
+                ReadOnlyChecked = false,
                 //OFD.ShowReadOnly = true;
-
-                if (OFD.ShowDialog() == DialogResult.OK)
-                {
-                    _pdfFiles = OFD.FileNames;
-
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+            };
+            if (OFD.ShowDialog(new Form() { TopMost = true/*, TopLevel =true*/ }) == DialogResult.OK)
+            {
+                _pdfFiles = OFD.FileNames;
+             
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
 }
+
