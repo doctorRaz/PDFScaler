@@ -11,8 +11,8 @@
             
         };
 
-        public static string Futer = "\t\tПродолжить \"Yes\", выход по любой клавише ";
+        public static string MesagStart = "\t\tПродолжить \"Y\", выход по любой клавише ";
 
-        public static string Replase = "Хотите повторить \"Yes\", выход по любой клавише ";
+        public static string MesagReplase = "Хотите повторить \"Y\", выход по любой клавише ";
     }
 }
