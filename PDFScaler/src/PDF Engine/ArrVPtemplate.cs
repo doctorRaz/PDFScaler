@@ -53,24 +53,34 @@ namespace drz.PDF_Engine
         /// </value>
         public Boolean IsArrVP => _isArrVP;
 
- 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrVPtemplate"/> class.
         /// </summary>
         public ArrVPtemplate()
         {
             _logger = Program.Logger;
-
+            PdfDocument PdfDoc = new PdfDocument();
             if (!File.Exists(pdftemp))//файла нет
             {
                 _isArrVP = false;
-                Logger log=new Logger("Не найден файл шаблона, продолжить работу невозможно!",MesagType.Error);
-                _logger.Add(log);   
-                  return;
+                Logger log = new Logger("Не найден файл шаблона, продолжить работу невозможно!", MesagType.Error);
+                _logger.Add(log);
+                return;
             }
 
-            //пытаемся получить шаблон
-            PdfDocument PdfDoc = PdfReader.Open(pdftemp, PdfDocumentOpenMode.Import);
+            //пытаемся получить документ шаблона
+            try
+            {
+                PdfDoc = PdfReader.Open(pdftemp, PdfDocumentOpenMode.Import);
+            }
+            catch (Exception ex)
+            {
+                _isArrVP = false;
+                Logger log = new Logger("Файл шаблона испорчен, продолжить работу невозможно!", MesagType.Error);
+                _logger.Add(log);
+                return;
+            }
             PdfDictionary.DictionaryElements PdfDicEl = PdfDoc.Pages[0].Elements;
             _arrVP = PdfDicEl.GetObject("/VP") as PdfArray;
             if (ArrVP == null)//шаблона VP  файле нет
