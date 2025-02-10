@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+
+using drz.PDFScaler;
 
 namespace drz.Servise
 {
     internal class UtilitesWorkFil
     {
+
         /// <summary>
         /// Копирует файл в назначенную дирректорию
         /// </summary>
@@ -91,5 +95,29 @@ namespace drz.Servise
 
             return Path.GetFileNameWithoutExtension(filename_current);
         }
+
+        /// <summary>Получить список путей фалов в директории</summary>
+        /// <param name="sPath">Директория с файлами</param>
+        /// <param name="WithSubfolders">Учитывать поддиректории</param>
+        /// <param name="sSerchPatern">Маска поиска</param>
+        /// <returns>Пути к файлам</returns>
+        internal static string[] GetFilesOfDir(string sPath, bool WithSubfolders, string sSerchPatern = "*.pdf")
+        {
+            try
+            {
+                return Directory.GetFiles(sPath,
+                                            sSerchPatern,
+                                            (WithSubfolders
+                                            ? SearchOption.AllDirectories
+                                            : SearchOption.TopDirectoryOnly));
+            }
+            catch (System.Exception ex)
+            {
+                Logger logItem = new Logger(ex.Message, Abstractions.Interfaces.MesagType.Error);
+                Program.Logger.Add(logItem);
+                return new string[0];
+            }
+        }
     }
+
 }
