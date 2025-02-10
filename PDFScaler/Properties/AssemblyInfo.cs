@@ -5,15 +5,15 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные с этой сборкой.
-[assembly: AssemblyTitle("PDFScale")]
-[assembly: AssemblyDescription("Добавление scale factor к PDF")]
+[assembly: AssemblyTitle("PDFScaler")]
+[assembly: AssemblyDescription("Добавление scale factor в страницы файла PDF")]
 [assembly: AssemblyConfiguration("Alfa")]
 [assembly: AssemblyCompany("doctorRaz@gmail.com")]
-[assembly: AssemblyProduct("PDFScale")]
+[assembly: AssemblyProduct("PDFScaler")]
 [assembly: AssemblyCopyright("Разыграев Андрей")]
 [assembly: AssemblyTrademark("©doctorRAZ 2014-2025")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyInformationalVersion("PDFScale for PDF")]
+[assembly: AssemblyInformationalVersion("PDFScaler for PDF")]
 
 // Установка значения False для параметра ComVisible делает типы в этой сборке невидимыми
 // для компонентов COM. Если необходимо обратиться к типу в этой сборке через
