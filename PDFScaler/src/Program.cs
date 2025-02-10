@@ -54,8 +54,8 @@ namespace drz.PDFScaler
             {
                 CS.ConsoleWriteLine(item, MesagType.Ok);
             }
-
-            CS.ConsoleWrite(MessagWelcom.Futer, MesagType.Ok);
+            //предложение продолжить
+            CS.ConsoleWrite(MessagWelcom.MesagStart, MesagType.Ok);
 
             response = Console.ReadKey(/*false*/).Key;
             CS.ConsoleWriteLine("");
@@ -63,8 +63,6 @@ namespace drz.PDFScaler
             {
                 return;
             }
-
-
 
             do
             {
@@ -77,11 +75,11 @@ namespace drz.PDFScaler
                 }
                 //}
 
-                CS.ConsoleWrite(MessagWelcom.Replase);
+                CS.ConsoleWrite(MessagWelcom.MesagReplase);
                 response = Console.ReadKey(/*false*/).Key;
                 if (response == ConsoleKey.Y)
                 {
-                    Console.WriteLine();
+                    CS.ConsoleWriteLine("");
                     //logger
                     Loger = new List<Logger>();
                     //Console.Clear();

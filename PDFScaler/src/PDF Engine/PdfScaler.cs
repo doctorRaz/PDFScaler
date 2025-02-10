@@ -80,13 +80,31 @@ namespace drz.PDF_Engine
             foreach (string pdffile in PdfFiles)
             {
                 //получаем документ
-                OpenPDF OpenDoc=new OpenPDF(pdffile);
+                OpenPDF OpenDoc = new OpenPDF(pdffile);
                 if (!OpenDoc.IsOpenedPdf)
                 {
                     continue;
                 }
 
-                Conversion.SetPagesConversionFactor(OpenDoc.PdfDoc);
+                if (Conversion.SetPagesConversionFactor(OpenDoc.PdfDoc))//VP добавлен
+                {
+                    SavePDF savePDF = new SavePDF(OpenDoc.PdfDoc);//todo переделать вызов
+                                                                  //вызывать метод с возвртатом bool или вообще на статик??
+                    if (savePDF.IsSavedPdf)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                    //проверка на удачное или нет сохранение
+                }
+                else//сохранять не надо
+                {
+                    logItem = new Logger($"Изменений нет. Файл не сохранен: {pdffile}", MesagType.Info);
+                    Logger.Add(logItem);
+                }
             }
             return true;
         }
