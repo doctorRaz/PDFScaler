@@ -25,8 +25,8 @@ namespace drz.PDF_Engine
         /// </value>
         //public string Mesag => _mesag;
 
-        TemplateConversionFactor _tcf;
-        public TemplateConversionFactor TCF => _tcf;
+        ArrVPtemplate _tcf;
+        public ArrVPtemplate TCF => _tcf;
 
         bool _isArrVP;
         public bool IsArrVP => _isArrVP;
@@ -43,7 +43,7 @@ namespace drz.PDF_Engine
         public PdfScaler()
         {
             Logger = Program.Logger;
-            _tcf = new TemplateConversionFactor();//получаем шаблон
+            _tcf = new ArrVPtemplate();//получаем шаблон
             if (TCF.IsArrVP)
             {
                 _arrVP = TCF.ArrVP;//виевпорт из шаблона
@@ -90,15 +90,6 @@ namespace drz.PDF_Engine
                 {
                     PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);//todo переделать вызов
                                                                   //вызывать метод с возвртатом bool или вообще на статик??
-                    if (savePDF.IsSavedPdf)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-                    //проверка на удачное или нет сохранение
                 }
                 else//сохранять не надо
                 {

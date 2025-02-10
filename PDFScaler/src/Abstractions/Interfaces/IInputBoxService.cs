@@ -1,7 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-
-namespace drz.Abstractions.Interfaces
+﻿namespace drz.Abstractions.Interfaces
 {
     public interface IInputBoxService
     {

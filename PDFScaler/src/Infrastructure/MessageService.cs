@@ -4,18 +4,13 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 
 using drz.Abstractions.Interfaces;
-using drz.PdfSharp_ConversionFactor;
 using drz.Servise;
 
 using Microsoft.VisualBasic;
 
 using MessageBox = System.Windows.MessageBox;
 
-#if NC
-using HostMgd.ApplicationServices;
-using HostMgd.EditorInput;
-using Application = HostMgd.ApplicationServices.Application;
-#endif
+
 
 namespace drz.Infrastructure
 {

@@ -15,7 +15,7 @@ namespace drz.PDF_Engine
     /// Получаем шаблон VP
     /// Потом генерировать его программно
     /// </summary>
-    internal class TemplateConversionFactor
+    internal class ArrVPtemplate
     {
         /// <summary>
         /// The logger
@@ -46,7 +46,7 @@ namespace drz.PDF_Engine
         Boolean _isArrVP;
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="TemplateConversionFactor"/> is istmp.
+        /// Gets or sets a value indicating whether this <see cref="ArrVPtemplate"/> is istmp.
         /// </summary>
         /// <value>
         ///   <c>true</c> if istmp; otherwise, <c>false</c>.
@@ -55,9 +55,9 @@ namespace drz.PDF_Engine
 
  
         /// <summary>
-        /// Initializes a new instance of the <see cref="TemplateConversionFactor"/> class.
+        /// Initializes a new instance of the <see cref="ArrVPtemplate"/> class.
         /// </summary>
-        public TemplateConversionFactor()
+        public ArrVPtemplate()
         {
             _logger = Program.Logger;
 

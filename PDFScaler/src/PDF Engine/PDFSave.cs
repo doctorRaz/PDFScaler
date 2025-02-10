@@ -15,8 +15,7 @@ namespace drz.PDF_Engine
         bool _isSavedPdf;
         public bool IsSavedPdf => _isSavedPdf;
 
-        //PdfDocument _pdfDoc;
-        //public PdfDocument PdfDoc => _pdfDoc;
+        string sPDFfile;
 
         Logger logItem;
 
@@ -25,47 +24,43 @@ namespace drz.PDF_Engine
         {
             Logger = Program.Logger;
 
+
             try
             {
-           
+
                 if (PdfDoc.Version < 16)
                 {
                     PdfDoc.Version = 17;
                 }
 
-                string sPDFfile = PdfDoc.FullPath;
+                sPDFfile = PdfDoc.FullPath;
 
-                string sTempFile =Path.Combine( DataSetWpfOpt.sTemp,"temp.pdf");
+                string sTempFile = Path.Combine(DataSetWpfOpt.sTemp, "temp.pdf");
 
                 //подбираем в темп уникальное имя
+                sTempFile = UtilitesWorkFil.GetFileNameUniqu(sTempFile);
 
                 //сохраняем в темп, если все Ок
+                PdfDoc.Save(sTempFile);
 
                 //подбираем сущ. файлу уникальное имя *.BAK
+                string sPDFfileBAK = UtilitesWorkFil.GetFileNameUniqu($"{sPDFfile}.BAK");
 
-                //перемещаем из темп сохраненный в родную директорию с оригинальным именем
+                //переименовываем сущ. файл
+                File.Move(sPDFfile, sPDFfileBAK);
 
-                //
+                //перекидываем из темп новый файл на место суцществующего
+                File.Move(sTempFile, sPDFfile);
 
-                //            PdfDoc.Save(PdfFile); //todo в отдельный класс
-                //           
-                //            return true;
-                //        }
-                //        else
-                //        {
-                //            logItem = new Logger($"Not Saved: {PdfFile}", MesagType.Info);
-                //            Logger.Add(logItem);
-                //            return false;
-                //        }
                 logItem = new Logger($"Файл сохранен: {sPDFfile}", MesagType.Ok);
                 Logger.Add(logItem);
                 _isSavedPdf = true;
             }
             catch (Exception ex)
             {
-                logItem = new Logger(ex.Message, MesagType.Error);
+                logItem = new Logger($"{ex.Message}\nНе удалось сохранить: {sPDFfile}", MesagType.Error);
                 Logger.Add(logItem);
-                _isSavedPdf= false;
+                _isSavedPdf = false;
             }
         }
     }

@@ -79,7 +79,7 @@
     <Compile Include="src\Win\COFD.cs" />
     <Compile Include="src\Win\FileDialogs.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
-    <Compile Include="src\PDF Engine\TemplateConversionFactor.cs" />
+    <Compile Include="src\PDF Engine\ArrVPtemplate.cs" />
     <Compile Include="src\PDF Engine\PDFOpen.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="src\PDF Engine\Scaler.cs" />
