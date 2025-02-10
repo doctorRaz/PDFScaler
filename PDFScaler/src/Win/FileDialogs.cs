@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+
+using drz.Servise;
 
 using Microsoft.WindowsAPICodePack.Dialogs;
 
@@ -73,14 +77,17 @@ namespace drz.Win
             if (OFD.ShowDialog(new Form() { TopMost = true/*, TopLevel =true*/ }) == DialogResult.OK)
             {
                 _pdfFiles = OFD.FileNames;
-             
+                ConsoleFocus.FocusProcess(DataSetWpfOpt.sAsmFileNameWithoutExtension);
                 return true;
             }
             else
             {
+                ConsoleFocus.FocusProcess(DataSetWpfOpt.sAsmFileNameWithoutExtension);
                 return false;
             }
         }
+
+
     }
 }
 
