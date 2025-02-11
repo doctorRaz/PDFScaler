@@ -28,10 +28,10 @@ namespace drz.PDF_Engine
             try
             {
 
-                if (PdfDoc.Version < 16)
-                {
-                    PdfDoc.Version = 17;
-                }
+                //if (PdfDoc.Version < 16)
+                //{
+                //    PdfDoc.Version = 17;
+                //}
 
                 sPDFfile = PdfDoc.FullPath;
 
@@ -49,7 +49,7 @@ namespace drz.PDF_Engine
                 //переименовываем сущ. файл
                 File.Move(sPDFfile, sPDFfileBAK);
 
-                //перекидываем из темп новый файл на место суцществующего
+                //перекидываем из темп новый файл на место существующего
                 File.Move(sTempFile, sPDFfile);
 
                 logItem = new Logger($"Файл сохранен: {sPDFfile}", MesagType.Ok);
