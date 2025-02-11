@@ -4,7 +4,7 @@ using System.IO;
 
 namespace drz.Servise
 {
-    /// <summary> Все входы в печать </summary>
+    /// <summary> Подгрузка библиотек </summary>
     partial class ReflectionLoader
 
     {

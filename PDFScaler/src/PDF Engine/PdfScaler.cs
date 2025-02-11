@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 using drz.Abstractions.Interfaces;
 using drz.PDFScaler;
@@ -29,6 +30,10 @@ namespace drz.PDF_Engine
         public ArrVPtemplate TCF => _tcf;
 
         bool _isArrVP;
+
+        /// <summary>
+        /// Шаблон загружен
+        /// </summary>
         public bool IsArrVP => _isArrVP;
 
         PdfArray _arrVP;
@@ -62,6 +67,8 @@ namespace drz.PDF_Engine
         /// <returns></returns>
         public bool PdfRun()
         {
+
+#if !ADDVP
             FileDialogs FD = new FileDialogs();
 
             //получаем файлы для обработки
@@ -73,9 +80,10 @@ namespace drz.PDF_Engine
                 return false;
             }
             // добавлятор VP
-            Scaler Conversion = new Scaler(ArrVP);
-
             string[] PdfFiles = FD.PdfFiles;
+#endif
+            string[] PdfFiles = new string[]{@"d:\@Developers\В работе\!Текущее\Programmers\!NET\GitHubMy\PDFScaler\temp\АК.pdf" };
+            Scaler Conversion = new Scaler(ArrVP);
 
             foreach (string pdffile in PdfFiles)
             {
@@ -85,6 +93,15 @@ namespace drz.PDF_Engine
                 {
                     continue;
                 }
+
+#if ADDVP
+                Conversion.AddVP(OpenDoc.PdfDoc);
+                string sDir=Path.GetDirectoryName(pdffile);
+                string sTempFile = Path.Combine(sDir, "temp.pdf");
+                OpenDoc.PdfDoc.Save(sTempFile);
+                return true;
+#endif
+
 
                 if (Conversion.SetPagesConversionFactor(OpenDoc.PdfDoc))//VP добавлен
                 {

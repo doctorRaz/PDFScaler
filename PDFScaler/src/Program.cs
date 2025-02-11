@@ -46,11 +46,11 @@ namespace drz.PDFScaler
                     CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
                 }
 
-                CS.ConsoleWriteLine("Press any Key");//даем возможность прочитать
-                response = Console.ReadKey().Key;
+                CS.ConsoleWriteLine("Press any Key");
+                response = Console.ReadKey().Key;//даем возможность прочитать
                 return;
             }
-
+#if !ADDVP
             //приветственные сообщения
             CS.ConsoleWrite(MessagWelcom.Header, MesagType.Warning);
             foreach (string item in MessagWelcom.Welcom)
@@ -66,7 +66,7 @@ namespace drz.PDFScaler
             {
                 return;
             }
-
+#endif
             do
             {
                 PS.PdfRun();
