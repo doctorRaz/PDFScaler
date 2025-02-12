@@ -21,6 +21,9 @@ namespace drz.PDFScaler
 
     internal class Program
     {
+        /// <summary>
+        /// логгер событий
+        /// </summary>
         public static List<Logger> Logger;
 
         [STAThread]
@@ -28,7 +31,10 @@ namespace drz.PDFScaler
         {
             //загрузчик dll
             ReflectionLoader cmd = new ReflectionLoader();
-
+            Prog();
+        }
+        static void Prog()
+        {
             ConsoleKey response;
 
             //цветная консоль
@@ -36,12 +42,6 @@ namespace drz.PDFScaler
 
             //logger сообщения
             Logger = new List<Logger>();
-
-
-
-
-
-
 
             //приветственные сообщения
             CS.ConsoleWrite(MessagWelcom.Header, MesagType.Warning);
@@ -61,17 +61,13 @@ namespace drz.PDFScaler
 
             //движок PdfScaler
             PdfScaler PS = new PdfScaler(WinGraphicsUnit.Millimeter);
-
+            GetFiles GF = new GetFiles();
             do
             {
-                string[] pdfFiles = GetFiles.GetPDFfiles();
-                if (pdfFiles.Length > 0)
+                if (GF.GetPDFfiles())
                 {
-                    PS.PdfRun(pdfFiles);
-
+                    PS.PdfRun(GF.PdfFiles);
                 }
-                //if (!PS.PdfRun()) //движок
-                //{
                 foreach (Logger logger in Logger)
                 {
                     CS.ConsoleWriteLine(logger.Messag, logger.MesagType);

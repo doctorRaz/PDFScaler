@@ -4,6 +4,10 @@ using drz.Abstractions.Interfaces;
 
 namespace drz.Servise
 {
+    /// <summary>
+    /// Сервис сохранения сообщений
+    /// </summary>
+    [Serializable]
     internal class Logger
     {
         DateTime _dateTimeStamp;

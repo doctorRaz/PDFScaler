@@ -33,7 +33,7 @@ namespace drz.PdfSharp.Pdf
         /// <summary>
         /// Sets the pages conversion factor.
         /// </summary>
-        /// <param name="pdfDoc">The PDF document.</param>
+        /// <param name="PdfDoc">The PDF document.</param>
         /// <returns></returns>
         public bool SetPdfSf(PdfDocument PdfDoc)
         {
@@ -52,14 +52,14 @@ namespace drz.PdfSharp.Pdf
                     page.Elements.Add("/VP", PdfSf(page));//добавить VP
 
                     IsModified = true;//если меняли хоть один лист
-                    logItem = new Logger($"\tVP добавлен в Page:{++pageNum}", MesagType.Ok);
-                    Logger.Add(logItem);
+                    _logItem = new Logger($"\tVP добавлен в Page:{++pageNum}", MesagType.Ok);
+                    Logger.Add(_logItem);
                 }
                 else
                 {
                     IsModified = false;
-                    logItem = new Logger($"\tVP существует в Page:{++pageNum}", MesagType.Info);
-                    Logger.Add(logItem);
+                    _logItem = new Logger($"\tVP существует в Page:{++pageNum}", MesagType.Info);
+                    Logger.Add(_logItem);
                 }
             }
             if (IsModified)
@@ -73,9 +73,10 @@ namespace drz.PdfSharp.Pdf
         }
 
         /// <summary>
-        /// Adds the vp.
+        /// PDFs the sf.
         /// </summary>
-        /// <param name="pdfDoc">The PDF document.</param>
+        /// <param name="page">The page.</param>
+        /// <returns></returns>
         public PdfArray PdfSf(PdfPage page)
         {
             #region VP0
@@ -179,7 +180,7 @@ namespace drz.PdfSharp.Pdf
 
         #region Servise
 
-        Logger logItem;
+        Logger _logItem;
 
         /// <summary>
         /// The logger

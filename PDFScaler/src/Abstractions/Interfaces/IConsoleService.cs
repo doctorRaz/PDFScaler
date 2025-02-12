@@ -3,6 +3,9 @@
 
 namespace drz.Abstractions.Interfaces
 {
+    /// <summary>
+    /// Интерфейс сообщений консоли
+    /// </summary>
     partial interface IConsoleService
     {
         /// <summary>
@@ -32,6 +35,13 @@ namespace drz.Abstractions.Interfaces
                              string Title = null,
                              [CallerMemberName] string CallerName = null);
 
+        /// <summary>
+        /// Consoles the write.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="TypeMesag">The type mesag.</param>
+        /// <param name="Title">The title.</param>
+        /// <param name="CallerName">Name of the caller.</param>
         void ConsoleWrite(string Message,
                     MesagType TypeMesag = MesagType.None,
                      string Title = null,
@@ -40,7 +50,7 @@ namespace drz.Abstractions.Interfaces
 
 
     /// <summary>
-    /// тип сообщения
+    /// тип сообщения Info Warning...
     /// </summary>
     enum MesagType
     {
@@ -72,7 +82,7 @@ namespace drz.Abstractions.Interfaces
     }
 
     /// <summary>
-    ////Цвет раскраски текста или фона
+    ///Цвет раскраски текста или фона
     /// </summary>
     enum WConsoleColor
     {
@@ -142,5 +152,14 @@ namespace drz.Abstractions.Interfaces
         White,
         //текущий цвет
         Default,
+    }
+
+    /// <summary>
+    /// Признак фон или текст
+    /// </summary>
+    enum FB
+    {
+        Foreground,
+        Bacground
     }
 }

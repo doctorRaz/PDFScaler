@@ -31,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\PDFScaler.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>share.te.ua.ico</ApplicationIcon>
@@ -40,15 +41,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.WindowsAPICodePack.Core">
-      <HintPath>..\lib\WindowsAPICodePack.7.0.4\lib\net48\Microsoft.WindowsAPICodePack.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
-      <HintPath>..\lib\WindowsAPICodePack.7.0.4\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-    </Reference>
     <Reference Include="PdfSharp-gdi, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\PDFsharp-gdi.1.50.5147\lib\net20\PdfSharp-gdi.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -72,8 +68,6 @@
     <Compile Include="src\Servise\Logger.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />
     <Compile Include="src\Servise\GraphicsUnit.cs" />
-    <Compile Include="src\Win\COFD.cs" />
-    <Compile Include="src\Win\FileDialogs.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
     <Compile Include="src\PDF Engine\PDFOpen.cs" />
     <Compile Include="src\Program.cs" />
@@ -83,8 +77,6 @@
   <ItemGroup>
     <Content Include="share.te.ua.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Others\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,6 +9,9 @@ using PdfSharp.Drawing;
 
 namespace drz.PdfSharp.Pdf
 {
+    /// <summary>
+    /// Движок
+    /// </summary>
     internal class PdfScaler
     {
         Logger logItem;
@@ -68,7 +71,7 @@ namespace drz.PdfSharp.Pdf
         /// PDFs обработка.
         /// </summary>
         /// <returns></returns>
-        public bool PdfRun(string[] PdfFiles)
+        public void PdfRun(string[] PdfFiles)
         {
 
             //инит передаем желаемые единицы
@@ -84,18 +87,16 @@ namespace drz.PdfSharp.Pdf
                     continue;
                 }
 
-                //added VP
-                if (Conversion.SetPdfSf(OpenDoc.PdfDoc))// еслиVP добавлен
+                if (Conversion.SetPdfSf(OpenDoc.PdfDoc))// если хоть один VP добавлен
                 {
                     PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);
                 }
-                else//косяк сохранять не надо
+                else//ни один VP не добавлен, сохранять не надо
                 {
                     logItem = new Logger($"Изменений нет. Файл не сохранен: {pdffile}", MesagType.Info);
                     Logger.Add(logItem);
                 }
             }
-            return true;
         }
     }
 }
