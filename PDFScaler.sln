@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFScaler", "PDFScaler\PDFScaler.csproj", "{4659C31B-1CCA-45D6-A47B-431A317D1706}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFScaler.NET", "PDFScaler.NET\PDFScaler.NET.csproj", "{D65E9199-4B25-4ADC-A5FF-7ACEF6AD4199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFUnisci", "PDFUnisci\PDFUnisci.csproj", "{D6900F1E-7911-46B7-A2CF-F9C3D27CFD96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{D65E9199-4B25-4ADC-A5FF-7ACEF6AD4199}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D65E9199-4B25-4ADC-A5FF-7ACEF6AD4199}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D65E9199-4B25-4ADC-A5FF-7ACEF6AD4199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330F0D28-A700-43E0-9F9C-104DE3E08558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330F0D28-A700-43E0-9F9C-104DE3E08558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330F0D28-A700-43E0-9F9C-104DE3E08558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330F0D28-A700-43E0-9F9C-104DE3E08558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6900F1E-7911-46B7-A2CF-F9C3D27CFD96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6900F1E-7911-46B7-A2CF-F9C3D27CFD96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6900F1E-7911-46B7-A2CF-F9C3D27CFD96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6900F1E-7911-46B7-A2CF-F9C3D27CFD96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

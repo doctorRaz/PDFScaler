@@ -77,6 +77,5 @@
   <ItemGroup>
     <Content Include="share.te.ua.ico" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
