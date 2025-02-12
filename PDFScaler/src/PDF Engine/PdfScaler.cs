@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 
 using drz.Abstractions.Interfaces;
@@ -6,6 +7,7 @@ using drz.PDFScaler;
 using drz.Servise;
 using drz.Win;
 
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
 namespace drz.PDF_Engine
@@ -16,75 +18,66 @@ namespace drz.PDF_Engine
 
         List<Logger> Logger;
 
-        //string _mesag;
+        XGraphicsUnit _convertUnit;
+        XGraphicsUnit ConvertUnit => _convertUnit;
+
+        WinGraphicsUnit WinConvertUnit
+        {
+            set
+            {
+                switch (value)
+                {
+                    case WinGraphicsUnit.Presentation: _convertUnit = XGraphicsUnit.Presentation; break;
+                    case WinGraphicsUnit.Point: _convertUnit = XGraphicsUnit.Point; break;
+                    case WinGraphicsUnit.Millimeter: _convertUnit = XGraphicsUnit.Millimeter; break;
+                    case WinGraphicsUnit.Centimeter: _convertUnit = XGraphicsUnit.Centimeter; break;
+                    case WinGraphicsUnit.Inch: _convertUnit = XGraphicsUnit.Inch; break;
+                    default: throw new InvalidEnumArgumentException();
+                }
+            }
+        }
 
         /// <summary>
-        /// Gets the mesag.
+        /// Initializes a new instance of the <see cref="PdfScaler"/> class.
+        /// <br>Default unit Millimeter <see cref="XGraphicsUnit.Millimeter"/></br> 
         /// </summary>
-        /// <value>
-        /// The mesag.
-        /// </value>
-        //public string Mesag => _mesag;
-
-        ArrVPtemplate _tcf;
-        public ArrVPtemplate TCF => _tcf;
-
-        bool _isArrVP;
-
-        /// <summary>
-        /// Шаблон загружен
-        /// </summary>
-        public bool IsArrVP => _isArrVP;
-
-        PdfArray _arrVP;
-        /// <summary>
-        /// Gets or sets the arr View Port.
-        /// </summary>
-        /// <value>
-        /// The arr View Port.
-        /// </value>
-        public PdfArray ArrVP => _arrVP;
-
         public PdfScaler()
         {
             Logger = Program.Logger;
-            _tcf = new ArrVPtemplate();//получаем шаблон
-            if (TCF.IsArrVP)
-            {
-                _arrVP = TCF.ArrVP;//виевпорт из шаблона
+            _convertUnit = XGraphicsUnit.Millimeter;
+        }
 
-                _isArrVP = true;
-            }
-            else
-            {
-                _isArrVP = false;
-            }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PdfScaler"/> class.
+        /// </summary>
+        /// <param name="convertUnit">The convert unit.</param>
+        public PdfScaler(XGraphicsUnit convertUnit)
+        {
+            Logger = Program.Logger;
+            _convertUnit = convertUnit;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PdfScaler"/> class.
+        /// </summary>
+        /// <param name="convertUnit">The convert unit.</param>
+        public PdfScaler(WinGraphicsUnit convertUnit)
+        {
+            Logger = Program.Logger;
+            WinConvertUnit =  convertUnit;
         }
 
         /// <summary>
         /// PDFs обработка.
         /// </summary>
         /// <returns></returns>
-        public bool PdfRun()
+        public bool PdfRun(string[] PdfFiles)
         {
 
-#if !ADDVP
-            FileDialogs FD = new FileDialogs();
+            //инит передаем желаемые единицы
+            PdfVPsf Conversion = new PdfVPsf(ConvertUnit);
 
-            //получаем файлы для обработки
-            if (!FD.FilesDialogOpen())
-            {
-                logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
-                Logger.Add(logItem);
-
-                return false;
-            }
-            // добавлятор VP
-            string[] PdfFiles = FD.PdfFiles;
-#endif
-            string[] PdfFiles = new string[]{@"d:\@Developers\В работе\!Текущее\Programmers\!NET\GitHubMy\PDFScaler\temp\АК.pdf" };
-            PdfVPSF Conversion = new PdfVPSF(ArrVP);
-
+            //по списку документов
             foreach (string pdffile in PdfFiles)
             {
                 //получаем документ
@@ -94,21 +87,12 @@ namespace drz.PDF_Engine
                     continue;
                 }
 
-#if ADDVP
-                Conversion.PdfSf(OpenDoc.PdfDoc);
-                string sDir=Path.GetDirectoryName(pdffile);
-                string sTempFile = Path.Combine(sDir, "temp.pdf");
-                OpenDoc.PdfDoc.Save(sTempFile);
-                return true;
-#endif
-
-
-                if (Conversion.SetPdfSf(OpenDoc.PdfDoc))//VP добавлен
+                //added VP
+                if (Conversion.SetPdfSf(OpenDoc.PdfDoc))// еслиVP добавлен
                 {
-                    PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);//todo переделать вызов
-                                                                  //вызывать метод с возвртатом bool или вообще на статик??
+                    PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);
                 }
-                else//сохранять не надо
+                else//косяк сохранять не надо
                 {
                     logItem = new Logger($"Изменений нет. Файл не сохранен: {pdffile}", MesagType.Info);
                     Logger.Add(logItem);

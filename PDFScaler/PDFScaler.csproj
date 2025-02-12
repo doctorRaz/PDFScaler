@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;ADDVP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -76,17 +76,20 @@
     <Compile Include="src\Servise\ReflectionLoader.cs" />
     <Compile Include="src\Servise\Logger.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />
-    <Compile Include="src\Others\ServiseChangeConversionFactor.cs" />
+    <Compile Include="src\Servise\GraphicsUnit.cs" />
     <Compile Include="src\Win\COFD.cs" />
     <Compile Include="src\Win\FileDialogs.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
-    <Compile Include="src\PDF Engine\ArrVPtemplate.cs" />
     <Compile Include="src\PDF Engine\PDFOpen.cs" />
     <Compile Include="src\Program.cs" />
-    <Compile Include="src\PDF Engine\PdfVPSF.cs" />
+    <Compile Include="src\PDF Engine\PdfVPsf.cs" />
+    <Compile Include="src\Win\GetFiles.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="share.te.ua.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Others\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

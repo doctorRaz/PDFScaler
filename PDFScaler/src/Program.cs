@@ -5,6 +5,7 @@ using drz.Abstractions.Interfaces;
 using drz.Infrastructure;
 using drz.PDF_Engine;
 using drz.Servise;
+using drz.Win;
 
 
 namespace drz.PDFScaler
@@ -25,32 +26,23 @@ namespace drz.PDFScaler
         [STAThread]
         static void Main(string[] args)
         {
+            //загрузчик dll
             ReflectionLoader cmd = new ReflectionLoader();
-
 
             ConsoleKey response;
 
             //цветная консоль
             IConsoleService CS = new ConsoleService();
 
-            //logger просто сообщения
+            //logger сообщения
             Logger = new List<Logger>();
 
-            //движок PdfScaler
-            PdfScaler PS = new PdfScaler();
 
-            if (!PS.IsArrVP)//косяк с шаблоном
-            {
-                foreach (Logger logger in Logger)
-                {
-                    CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
-                }
 
-                CS.ConsoleWriteLine("Press any Key");
-                response = Console.ReadKey().Key;//даем возможность прочитать
-                return;
-            }
-#if !ADDVP
+
+
+
+
             //приветственные сообщения
             CS.ConsoleWrite(MessagWelcom.Header, MesagType.Warning);
             foreach (string item in MessagWelcom.Welcom)
@@ -66,10 +58,17 @@ namespace drz.PDFScaler
             {
                 return;
             }
-#endif
+            //движок PdfScaler
+            PdfScaler PS = new PdfScaler(WinGraphicsUnit.Millimeter);
+
             do
             {
-                PS.PdfRun();
+                string[] pdfFiles = GetFiles.GetPDFfiles();
+                if (pdfFiles.Length > 0)
+                {
+                    PS.PdfRun(pdfFiles);
+
+                }
                 //if (!PS.PdfRun()) //движок
                 //{
                 foreach (Logger logger in Logger)
@@ -92,8 +91,8 @@ namespace drz.PDFScaler
         }
 
 
-       
+
     }
 
-  
+
 }

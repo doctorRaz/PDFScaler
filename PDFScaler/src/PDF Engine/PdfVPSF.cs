@@ -1,19 +1,31 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms.VisualStyles;
 
 using drz.Abstractions.Interfaces;
 using drz.PDFScaler;
 using drz.Servise;
 
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
 namespace PdfSharp.Pdf
 {
-    internal class PdfVPSF
+    internal class PdfVPsf
     {
-        public PdfVPSF(PdfArray ArrVP)
+        /// <summary>
+        /// Настройка конвертора VP
+        /// </summary>
+        /// <param name="convertUnit">Единицы в которые преобразуем</param>
+        public PdfVPsf(XGraphicsUnit convertUnit)
         {
+            _convertUnit=convertUnit;
+
             Logger = Program.Logger;
-            _arrVP = ArrVP;
+
+            XUnit unit = new XUnit(1, ConvertUnit);
+
+            _scalefactor = 1 / unit.Point;//пересчет единиц в точку
+           
         }
 
         /// <summary>
@@ -23,19 +35,19 @@ namespace PdfSharp.Pdf
         /// <returns></returns>
         public bool SetPdfSf(PdfDocument PdfDoc)
         {
-            //_pdfDoc = pdfDoc;
             IsModified = false;
-            int pageNum = 0;
+
+            int pageNum = 0;//номер стр для логера
+
+            //перебор страниц
             foreach (PdfPage page in PdfDoc.Pages)
             {
+                //get VP
+                PdfArray arrBBox = page.Elements.GetObject("/VP") as PdfArray;
 
-                PdfDictionary.DictionaryElements PdfDicEl = page.Elements;
-                PdfArray arrBBox = PdfDicEl.GetObject("/VP") as PdfArray;
-
-                if (arrBBox == null)
+                if (arrBBox == null)//если VP нет
                 {
-                    PdfDicEl.Add("/VP", ArrVP);//todo изменить размер BBox
-
+                    page.Elements.Add("/VP", PdfSf(page));//добавить VP
 
                     IsModified = true;//если меняли хоть один лист
                     logItem = new Logger($"\tVP добавлен в Page:{++pageNum}", MesagType.Ok);
@@ -58,64 +70,18 @@ namespace PdfSharp.Pdf
             }
         }
 
-
-
-
-        #region Servise
-
-        Logger logItem;
-
-          /// <summary>
-        /// The logger
-        /// </summary>
-        public List<Logger> Logger;
-
-        #endregion
-
-        #region PDF
-
-        double _scalefactor;
-        double Scalefactor => _scalefactor;
-
-        PdfPage _page;
-        PdfPage Page=>_page;
-
-        PdfDocument _pdfDoc;
-
-        /// <summary>
-        /// Gets the PDF document.
-        /// </summary>
-        /// <value>
-        /// The PDF document.
-        /// </value>
-        public PdfDocument PdfDoc => _pdfDoc;
-
-        #endregion
-
-        /// <summary>
-        /// The is PDF modified
-        /// </summary>
-        public bool IsModified;      
-
-        PdfArray ArrVP => _arrVP;
-
-        PdfArray _arrVP;
-
-     
-
-
         /// <summary>
         /// Adds the vp.
         /// </summary>
         /// <param name="pdfDoc">The PDF document.</param>
-        public PdfArray PdfSf(PdfDocument pdfDoc)
-        {           
+        public PdfArray PdfSf(PdfPage page0)
+        {
             #region VP0
 
-            PdfPage page0 = pdfDoc.Pages[1];
+            //PdfPage page0 = pdfDoc.Pages[1];
 
             PdfArray arrVP0 = new PdfArray();
-            page0.Elements.Add("/VP", arrVP0);
+            //page0.Elements.Add("/VP", arrVP0);
 
             PdfDictionary dicVPitem0 = new PdfDictionary();
             arrVP0.Elements.Add(dicVPitem0);
@@ -185,7 +151,7 @@ namespace PdfSharp.Pdf
             PdfDictionary dicXitem0 = new PdfDictionary();
             arrX0.Elements.Add(dicXitem0);
 
-            dicXitem0.Elements.Add("/C", new PdfReal(0.35278));
+            dicXitem0.Elements.Add("/C", new PdfReal(Scalefactor));//0.35278
             dicXitem0.Elements.Add("/U", new PdfString(" "));
 
             #endregion
@@ -202,10 +168,61 @@ namespace PdfSharp.Pdf
 
             #region Example Get VP sf
 #if DEBUG
-            GetSF(pdfDoc);
+            //GetSF(pdfDoc);
 #endif
             #endregion
         }
+
+        #region ПОЛЯ СВОЙСТВА
+
+        #region Servise
+
+        Logger logItem;
+
+        /// <summary>
+        /// The logger
+        /// </summary>
+        public List<Logger> Logger;
+
+        #endregion
+
+        #region VP
+
+        double _scalefactor;
+        double Scalefactor => _scalefactor;
+
+
+        XGraphicsUnit _convertUnit;
+        XGraphicsUnit ConvertUnit => _convertUnit;
+
+        #endregion
+        #region PDF
+
+        PdfPage _page;
+        PdfPage Page => _page;
+
+        PdfDocument _pdfDoc;
+
+        /// <summary>
+        /// Gets the PDF document.
+        /// </summary>
+        /// <value>
+        /// The PDF document.
+        /// </value>
+        public PdfDocument PdfDoc => _pdfDoc;
+
+        #endregion
+
+        /// <summary>
+        /// The is PDF modified
+        /// </summary>
+        public bool IsModified;
+
+
+        #endregion
+
+
+
 
 
 
@@ -250,4 +267,5 @@ namespace PdfSharp.Pdf
 #endif
         #endregion
     }
+
 }
