@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 using drz.Abstractions.Interfaces;
 using drz.Infrastructure;
-using drz.PDF_Engine;
 using drz.Servise;
-using drz.Win;
+
+using drz.PdfSharp.Pdf;
 
 
 namespace drz.PDFScaler
@@ -58,6 +58,7 @@ namespace drz.PDFScaler
             {
                 return;
             }
+
             //движок PdfScaler
             PdfScaler PS = new PdfScaler(WinGraphicsUnit.Millimeter);
 

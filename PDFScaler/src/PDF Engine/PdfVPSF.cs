@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms.VisualStyles;
 
 using drz.Abstractions.Interfaces;
 using drz.PDFScaler;
@@ -8,25 +7,28 @@ using drz.Servise;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace PdfSharp.Pdf
+namespace drz.PdfSharp.Pdf
 {
     internal class PdfVPsf
     {
+        #region INIT       
+
         /// <summary>
         /// Настройка конвертора VP
         /// </summary>
         /// <param name="convertUnit">Единицы в которые преобразуем</param>
         public PdfVPsf(XGraphicsUnit convertUnit)
         {
-            _convertUnit=convertUnit;
+            _convertUnit = convertUnit;
 
             Logger = Program.Logger;
 
             XUnit unit = new XUnit(1, ConvertUnit);
 
             _scalefactor = 1 / unit.Point;//пересчет единиц в точку
-           
+
         }
+        #endregion
 
         /// <summary>
         /// Sets the pages conversion factor.
@@ -74,7 +76,7 @@ namespace PdfSharp.Pdf
         /// Adds the vp.
         /// </summary>
         /// <param name="pdfDoc">The PDF document.</param>
-        public PdfArray PdfSf(PdfPage page0)
+        public PdfArray PdfSf(PdfPage page)
         {
             #region VP0
 
@@ -91,10 +93,10 @@ namespace PdfSharp.Pdf
             PdfArray dicBBox0 = new PdfArray();
             dicVPitem0.Elements.Add("/BBox", dicBBox0);
 
-            dicBBox0.Elements.Add(new PdfInteger((int)page0.MediaBox.X1));
-            dicBBox0.Elements.Add(new PdfInteger((int)page0.MediaBox.Y1));
-            dicBBox0.Elements.Add(new PdfInteger((int)page0.MediaBox.X2));
-            dicBBox0.Elements.Add(new PdfInteger((int)page0.MediaBox.Y2));
+            dicBBox0.Elements.Add(new PdfInteger((int)page.MediaBox.X1));
+            dicBBox0.Elements.Add(new PdfInteger((int)page.MediaBox.Y1));
+            dicBBox0.Elements.Add(new PdfInteger((int)page.MediaBox.X2));
+            dicBBox0.Elements.Add(new PdfInteger((int)page.MediaBox.Y2));
 
             #endregion
 

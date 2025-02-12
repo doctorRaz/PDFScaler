@@ -9,7 +9,7 @@ using drz.Servise;
 
 namespace drz.Infrastructure
 {
-    internal class ConsoleService : MessageService, IConsoleService
+    internal class ConsoleService :/* MessageService,*/ IConsoleService
     {
         public ConsoleService()
         {

@@ -10,7 +10,7 @@ using PdfSharp.Pdf.IO;
 
 
 
-namespace drz.PDF_Engine
+namespace drz.PdfSharp.Pdf
 {
     /// <summary>
     /// Открываем PDF

@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 
 using drz.Abstractions.Interfaces;
 using drz.PDFScaler;
 using drz.Servise;
-using drz.Win;
 
 using PdfSharp.Drawing;
-using PdfSharp.Pdf;
 
-namespace drz.PDF_Engine
+namespace drz.PdfSharp.Pdf
 {
     internal class PdfScaler
     {
