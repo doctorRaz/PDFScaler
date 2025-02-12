@@ -37,7 +37,7 @@ namespace drz.PdfSharp.Pdf
         /// <returns></returns>
         public bool SetPdfSf(PdfDocument PdfDoc)
         {
-            IsModified = false;
+            _isModified = false;
 
             int pageNum = 0;//номер стр для логера
 
@@ -51,13 +51,13 @@ namespace drz.PdfSharp.Pdf
                 {
                     page.Elements.Add("/VP", PdfSf(page));//добавить VP
 
-                    IsModified = true;//если меняли хоть один лист
+                    _isModified = true;//если меняли хоть один лист
                     _logItem = new Logger($"\tVP добавлен в Page:{++pageNum}", MesagType.Ok);
                     Logger.Add(_logItem);
                 }
                 else
                 {
-                    IsModified = false;
+                    _isModified = false;
                     _logItem = new Logger($"\tVP существует в Page:{++pageNum}", MesagType.Info);
                     Logger.Add(_logItem);
                 }
@@ -219,8 +219,9 @@ namespace drz.PdfSharp.Pdf
         /// <summary>
         /// The is PDF modified
         /// </summary>
-        public bool IsModified;
+        public bool IsModified => _isModified;
 
+          bool _isModified;
 
         #endregion
 
