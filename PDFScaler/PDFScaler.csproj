@@ -83,7 +83,7 @@
     <Compile Include="src\PDF Engine\ArrVPtemplate.cs" />
     <Compile Include="src\PDF Engine\PDFOpen.cs" />
     <Compile Include="src\Program.cs" />
-    <Compile Include="src\PDF Engine\Scaler.cs" />
+    <Compile Include="src\PDF Engine\PdfVPSF.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="share.te.ua.ico" />

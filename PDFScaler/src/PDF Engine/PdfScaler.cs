@@ -83,7 +83,7 @@ namespace drz.PDF_Engine
             string[] PdfFiles = FD.PdfFiles;
 #endif
             string[] PdfFiles = new string[]{@"d:\@Developers\В работе\!Текущее\Programmers\!NET\GitHubMy\PDFScaler\temp\АК.pdf" };
-            Scaler Conversion = new Scaler(ArrVP);
+            PdfVPSF Conversion = new PdfVPSF(ArrVP);
 
             foreach (string pdffile in PdfFiles)
             {
@@ -95,7 +95,7 @@ namespace drz.PDF_Engine
                 }
 
 #if ADDVP
-                Conversion.AddVP(OpenDoc.PdfDoc);
+                Conversion.PdfSf(OpenDoc.PdfDoc);
                 string sDir=Path.GetDirectoryName(pdffile);
                 string sTempFile = Path.Combine(sDir, "temp.pdf");
                 OpenDoc.PdfDoc.Save(sTempFile);
@@ -103,7 +103,7 @@ namespace drz.PDF_Engine
 #endif
 
 
-                if (Conversion.SetPagesConversionFactor(OpenDoc.PdfDoc))//VP добавлен
+                if (Conversion.SetPdfSf(OpenDoc.PdfDoc))//VP добавлен
                 {
                     PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);//todo переделать вызов
                                                                   //вызывать метод с возвртатом bool или вообще на статик??
