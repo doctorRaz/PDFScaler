@@ -12,9 +12,7 @@ namespace drz.Servise
         #region Служебные
         /// <summary>Домен машины</summary>
         internal static string Userdomain = System.Environment.GetEnvironmentVariable("USERDOMAIN");
-
-        /// <summary>Почта</summary>
-       
+                
         #endregion
         #region ВЕРСИЯ ПРОГРАММЫ
         /// <summary>Версия программы</summary>

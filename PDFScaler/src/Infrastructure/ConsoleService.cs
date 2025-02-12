@@ -9,8 +9,15 @@ using drz.Servise;
 
 namespace drz.Infrastructure
 {
+    /// <summary>
+    /// Реализация сообщений в консоль
+    /// </summary>
+    /// <seealso cref="drz.Abstractions.Interfaces.IConsoleService" />
     internal class ConsoleService :/* MessageService,*/ IConsoleService
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleService"/> class.
+        /// </summary>
         public ConsoleService()
         {
             //Console.BackgroundColor =ConsoleColor.Black;
@@ -66,12 +73,12 @@ namespace drz.Infrastructure
         }
 
         public void ConsoleWriteLine(string Message,
-                            MesagType TypeMesag = MesagType.None,
+                            MesagType TypeMessage = MesagType.None,
                              string Title = null,
                              [CallerMemberName] string CallerName = null)
         {
             _title = Title;
-            ColorFB CFB = new ColorFB(TypeMesag);
+            ColorFB CFB = new ColorFB(TypeMessage);
             Console.ForegroundColor = CFB.ColorF;
             Console.BackgroundColor = CFB.ColorB;
 #if DEBUG
@@ -108,23 +115,18 @@ namespace drz.Infrastructure
         #endregion
 
         #region Enum
-        enum FB
-        {
-            Foreground,
-            Bacground
-        }
+
 
         #endregion
-
-
 
         #region Convert Enum
 
         /// <summary>
-        /// Converts the enum WindowResult to MessageBoxResult.
+        /// Converts the enum w to console.
         /// </summary>
-        /// <param name="WColor">WindowResult</param>
-        /// <returns>MessageBoxResult</returns>
+        /// <param name="WColor">Color of the w.</param>
+        /// <param name="fb">The fb.</param>
+        /// <returns></returns>
         /// <exception cref="System.ComponentModel.InvalidEnumArgumentException"></exception>
         ConsoleColor ConvertEnumWToConsole(WConsoleColor WColor, FB fb)
         {

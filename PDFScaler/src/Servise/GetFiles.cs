@@ -1,40 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 using drz.Abstractions.Interfaces;
 using drz.PDFScaler;
-using drz.Servise;
-using drz.Win;
 
 namespace drz.Servise
 {
+    /// <summary>
+    /// Сервис получения файлов
+    /// </summary>
     internal class GetFiles
     {
         string[] _pdfFiles;
+
+        /// <summary>
+        /// Gets the PDF files.
+        /// </summary>
+        /// <value>
+        /// The PDF files.
+        /// </value>
         public string[] PdfFiles => _pdfFiles;
 
-        public static string[] GetPDFfiles()
+
+        Logger logItem;
+
+        List<Logger> Logger;
+
+
+        public GetFiles()
         {
-            //получаем файлы для обработки
-            FileDialogs FD = new FileDialogs();
-            if (!FD.FilesDialogOpen())
-            {
-                Logger logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
-                Program.Logger.Add(logItem);
-                return new string[0];
-
-            }
-            // добавлятор VP
-            return FD.PdfFiles;
-
-
+            Logger = Program.Logger;
         }
 
-        public bool FilesDialogOpen()
+        public  bool GetPDFfiles()
         {
             OpenFileDialog OFD = new OpenFileDialog
             {
@@ -44,7 +42,7 @@ namespace drz.Servise
                 DefaultExt = "PDF",
                 Filter = "Files PDF (*.PDF)|*.PDF",
 
-                FilterIndex = 2,
+                FilterIndex = 0,
                 RestoreDirectory = true,
                 Multiselect = true,
                 ReadOnlyChecked = false,
@@ -58,6 +56,9 @@ namespace drz.Servise
             }
             else
             {
+                logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
+                Logger.Add(logItem);
+
                 ConsoleFocus.FocusProcess(DataSetWpfOpt.sAsmFileNameWithoutExtension);
                 return false;
             }
