@@ -47,7 +47,7 @@ namespace drz.Servise
                 RestoreDirectory = true,
                 Multiselect = true,
                 ReadOnlyChecked = false,
-                //OFD.ShowReadOnly = true;
+
             };
             if (OFD.ShowDialog(new Form() { TopMost = true/*, TopLevel =true*/ }) == DialogResult.OK)
             {
