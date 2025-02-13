@@ -1,5 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
+using drz.Enum;
+
 
 namespace drz.Abstractions.Interfaces
 {
@@ -49,117 +51,9 @@ namespace drz.Abstractions.Interfaces
     }
 
 
-    /// <summary>
-    /// тип сообщения Info Warning...
-    /// </summary>
-    enum MesagType
-    {
-        /// <summary>
-        /// The none
-        /// </summary>
-        None,
+   
 
-        /// <summary>
-        /// The information
-        /// </summary>
-        Info,
+    
 
-        /// <summary>
-        /// The warning
-        /// </summary>
-        Warning,
-
-        /// <summary>
-        /// The error
-        /// </summary>
-        Error,
-
-        /// <summary>
-        /// The ok
-        /// </summary>
-        Ok,
-
-    }
-
-    /// <summary>
-    ///Цвет раскраски текста или фона
-    /// </summary>
-    enum WConsoleColor
-    {
-        //
-        // Сводка:
-        //     Черный цвет.
-        Black,
-        //
-        // Сводка:
-        //     Темно-синий цвет.
-        DarkBlue,
-        //
-        // Сводка:
-        //     Темно-зеленый цвет.
-        DarkGreen,
-        //
-        // Сводка:
-        //     Темно-голубой цвет (темный сине-зеленый).
-        DarkCyan,
-        //
-        // Сводка:
-        //     Темно-красный цвет.
-        DarkRed,
-        //
-        // Сводка:
-        //     Темно-пурпурный цвет (темный фиолетово-красный).
-        DarkMagenta,
-        //
-        // Сводка:
-        //     Темно-желтый цвет (коричнево-желтый).
-        DarkYellow,
-        //
-        // Сводка:
-        //     Серый цвет.
-        Gray,
-        //
-        // Сводка:
-        //     Темно-серый цвет.
-        DarkGray,
-        //
-        // Сводка:
-        //     Синий цвет.
-        Blue,
-        //
-        // Сводка:
-        //     Зеленый цвет.
-        Green,
-        //
-        // Сводка:
-        //     Голубой цвет (сине-зеленый).
-        Cyan,
-        //
-        // Сводка:
-        //     Красный цвет.
-        Red,
-        //
-        // Сводка:
-        //     Пурпурный цвет (фиолетово-красный).
-        Magenta,
-        //
-        // Сводка:
-        //     Желтый цвет.
-        Yellow,
-        //
-        // Сводка:
-        //     Белый цвет.
-        White,
-        //текущий цвет
-        Default,
-    }
-
-    /// <summary>
-    /// Признак фон или текст
-    /// </summary>
-    enum FB
-    {
-        Foreground,
-        Bacground
-    }
+    
 }

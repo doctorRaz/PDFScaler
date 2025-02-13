@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFScaler.NET", "PDFScaler.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFUnisci", "PDFUnisci\PDFUnisci.csproj", "{D6900F1E-7911-46B7-A2CF-F9C3D27CFD96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfVPtoPage", "PdfExt\PdfVPtoPage.csproj", "{51C6EBD6-3C9C-470D-9B55-988533B029F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfVPtoPage", "PdfVPtoPage\PdfVPtoPage.csproj", "{51C6EBD6-3C9C-470D-9B55-988533B029F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

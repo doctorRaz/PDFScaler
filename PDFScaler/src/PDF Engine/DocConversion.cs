@@ -9,6 +9,7 @@ using drz.Abstractions.Interfaces;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using drz.Enum;
 
 namespace drz.PdfSharp.Pdf
 {

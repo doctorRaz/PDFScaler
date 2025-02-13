@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 
 using drz.Abstractions.Interfaces;
+using drz.Enum;
 
 namespace drz.Servise
 {

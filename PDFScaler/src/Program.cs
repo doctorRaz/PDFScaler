@@ -7,6 +7,7 @@ using drz.Servise;
 
 using drz.PdfSharp.Pdf;
 using System.Linq;
+using drz.Enum;
 
 
 namespace drz.PDFScaler

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 
+using drz.Enum;
 using drz.PDFScaler;
 
 namespace drz.Servise
@@ -112,7 +113,7 @@ namespace drz.Servise
             }
             catch (System.Exception ex)
             {
-                Logger logItem = new Logger(ex.Message, Abstractions.Interfaces.MesagType.Error);
+                Logger logItem = new Logger(ex.Message, MesagType.Error);
                 Program.Logger.Add(logItem);
                 return new string[0];
             }

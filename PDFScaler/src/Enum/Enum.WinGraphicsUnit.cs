@@ -1,4 +1,4 @@
-﻿namespace drz.Servise
+﻿namespace drz.Enum
 {
     /// <summary>
     /// Specifies the unit of measure.

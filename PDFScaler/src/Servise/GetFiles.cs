@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 
 using drz.Abstractions.Interfaces;
+using drz.Enum;
 using drz.PDFScaler;
 
 namespace drz.Servise
