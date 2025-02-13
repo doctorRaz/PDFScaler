@@ -152,7 +152,7 @@ namespace drz.PDFScaler
             }
 
             //движок PdfScaler
-            PdfScaler PS = new PdfScaler(WinGraphicsUnit.Millimeter);
+            PdfScaler PS = new PdfScaler(Logger,WinGraphicsUnit.Millimeter);
             GetFiles GF = new GetFiles();
             do
             {

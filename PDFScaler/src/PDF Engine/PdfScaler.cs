@@ -40,32 +40,35 @@ namespace drz.PdfSharp.Pdf
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfScaler"/> class.
-        /// <br>Default unit Millimeter <see cref="XGraphicsUnit.Millimeter"/></br> 
+        /// Initializes a new instance of the <see cref="PdfScaler" /> class.
+        /// <br>Default unit Millimeter <see cref="XGraphicsUnit.Millimeter" /></br>
         /// </summary>
-        public PdfScaler()
+        /// <param name="logger">The logger.</param>
+        public PdfScaler(List<ILogger> logger)
         {
-            Logger = Program.Logger;
+            Logger = logger;
             _convertUnit = XGraphicsUnit.Millimeter;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfScaler"/> class.
+        /// Initializes a new instance of the <see cref="PdfScaler" /> class.
         /// </summary>
+        /// <param name="logger">The logger.</param>
         /// <param name="convertUnit">The convert unit.</param>
-        public PdfScaler(XGraphicsUnit convertUnit)
+        public PdfScaler(List<ILogger> logger,XGraphicsUnit convertUnit)
         {
-            Logger = Program.Logger;
+            Logger = logger;
             _convertUnit = convertUnit;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfScaler"/> class.
+        /// Initializes a new instance of the <see cref="PdfScaler" /> class.
         /// </summary>
+        /// <param name="logger">The logger.</param>
         /// <param name="convertUnit">The convert unit.</param>
-        public PdfScaler(WinGraphicsUnit convertUnit)
+        public PdfScaler(List<ILogger> logger,WinGraphicsUnit convertUnit)
         {
-            Logger = Program.Logger;
+            Logger = logger;
             WinConvertUnit = convertUnit;
         }
 
