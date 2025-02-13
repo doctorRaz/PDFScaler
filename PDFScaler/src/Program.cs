@@ -160,7 +160,11 @@ namespace drz.PDFScaler
                 }
                 foreach (Logger logger in Logger)
                 {
-                    CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
+#if DEBUG
+                    CS.ConsoleWriteLine($"{logger.DateTimeStamp}: {logger.CallerName} {logger.Messag}", logger.MesagType);
+#else
+                    CS.ConsoleWriteLine($"{logger.Messag}", logger.MesagType);
+#endif
                 }
                 //}
 

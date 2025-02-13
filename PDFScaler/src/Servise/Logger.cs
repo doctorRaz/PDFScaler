@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 using drz.Abstractions.Interfaces;
 
@@ -10,22 +11,61 @@ namespace drz.Servise
     [Serializable]
     internal class Logger : ILogger
     {
-        DateTime _dateTimeStamp;
+        /// <summary>
+        /// Gets the name of the caller.
+        /// </summary>
+        /// <value>
+        /// The name of the caller.
+        /// </value>
+        public string CallerName => _callerName;
+
+        /// <summary>
+        /// Gets the date time stamp.
+        /// </summary>
+        /// <value>
+        /// The date time stamp.
+        /// </value>
         public DateTime DateTimeStamp => _dateTimeStamp;
 
-        string _messag;
+        /// <summary>
+        /// Gets the messag.
+        /// </summary>
+        /// <value>
+        /// The messag.
+        /// </value>
         public string Messag => _messag;
 
-        MesagType _mesagType;
+        /// <summary>
+        /// Gets the type of the mesag.
+        /// </summary>
+        /// <value>
+        /// The type of the mesag.
+        /// </value>
         public MesagType MesagType => _mesagType;
 
-        public Logger(string messag, MesagType mesagType = MesagType.None)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Logger"/> class.
+        /// </summary>
+        /// <param name="messag">The messag.</param>
+        /// <param name="mesagType">Type of the mesag.</param>
+        /// <param name="CallerName">Name of the caller.</param>
+        public Logger(string messag,
+                      MesagType mesagType = MesagType.None,
+                      [CallerMemberName] string CallerName = null)
         {
             _dateTimeStamp = DateTime.Now;
+
+            _callerName = CallerName;
 
             _messag = messag;
 
             _mesagType = mesagType;
         }
+
+       
+        DateTime _dateTimeStamp;
+        string _callerName;
+        string _messag;
+        MesagType _mesagType;
     }
 }

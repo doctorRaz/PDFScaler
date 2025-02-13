@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 using drz.Abstractions.Interfaces;
 using drz.PDFScaler;
@@ -76,19 +77,20 @@ namespace drz.PdfSharp.Pdf
         {
 
             //инит передаем желаемые единицы
-            PdfVPsf Conversion = new PdfVPsf(ConvertUnit, Logger);
+            DocConversion Conversion = new DocConversion                (ConvertUnit, Logger);
 
             //по списку документов
             foreach (string pdffile in PdfFiles)
             {
                 //получаем документ
                 PDFOpen OpenDoc = new PDFOpen(pdffile);
+
                 if (!OpenDoc.IsOpenedPdf)
                 {
                     continue;
                 }
 
-                if (Conversion.SetPdfSf(OpenDoc.PdfDoc))// если хоть один VP добавлен
+                if (Conversion.DocRun(OpenDoc.PdfDoc))// если хоть один VP добавлен
                 {
                     PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);
                 }
