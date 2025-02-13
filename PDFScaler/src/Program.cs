@@ -25,13 +25,14 @@ namespace drz.PDFScaler
         /// <summary>
         /// логгер событий
         /// </summary>
-        public static List<Logger> Logger;
+        public static List<ILogger> Logger;
 
         [STAThread]
         static void Main(string[] args)
         {
+           
             //загрузчик dll
-            ReflectionLoader cmd = new ReflectionLoader();
+            new ReflectionLoader();
             Prog(args);
         }
         static void Prog(string[] args)
@@ -42,7 +43,7 @@ namespace drz.PDFScaler
             IConsoleService CS = new ConsoleService();
 
             //logger сообщения
-            Logger = new List<Logger>();
+            Logger = new List<ILogger>();
 
             //todo в отдельный класс
             #region UINSI
@@ -158,9 +159,13 @@ namespace drz.PDFScaler
                 {
                     PS.PdfRun(GF.PdfFiles);
                 }
-                foreach (Logger logger in Logger)
+                foreach (Logger logger in Logger.Cast<Logger>())
                 {
-                    CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
+#if DEBUG
+                    CS.ConsoleWriteLine($"{logger.DateTimeStamp}: {logger.CallerName} {logger.Messag}", logger.MesagType);
+#else
+                    CS.ConsoleWriteLine($"{logger.Messag}", logger.MesagType);
+#endif
                 }
                 //}
 
@@ -170,7 +175,7 @@ namespace drz.PDFScaler
                 {
                     CS.ConsoleWriteLine("");
                     //logger
-                    Logger = new List<Logger>();
+                    Logger = new List<ILogger>();
                     //Console.Clear();
                 }
             } while (response == ConsoleKey.Y);

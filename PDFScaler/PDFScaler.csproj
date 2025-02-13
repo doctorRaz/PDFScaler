@@ -19,9 +19,10 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CONSOLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Debug\PDFScaler.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -59,10 +60,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Abstractions\Interfaces\IConsoleService.cs" />
     <Compile Include="src\PDF Engine\PDFSave.cs" />
+    <Compile Include="src\PDF Engine\VPtoPage.cs" />
     <Compile Include="src\Servise\ConsoleFocus.cs" />
     <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
     <Compile Include="src\PDF Engine\PdfScaler.cs" />
     <Compile Include="src\Infrastructure\ConsoleService.cs" />
+    <Compile Include="src\Abstractions\Interfaces\ILogger.cs" />
     <Compile Include="src\Servise\ReflectionLoader.cs" />
     <Compile Include="src\Servise\Logger.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />
@@ -70,7 +73,7 @@
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
     <Compile Include="src\PDF Engine\PDFOpen.cs" />
     <Compile Include="src\Program.cs" />
-    <Compile Include="src\PDF Engine\PdfVPsf.cs" />
+    <Compile Include="src\PDF Engine\DocConversion.cs" />
     <Compile Include="src\Servise\GetFiles.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,7 @@ namespace drz.Servise
 
         Logger logItem;
 
-        List<Logger> Logger;
+        List<ILogger> Logger;
 
 
         public GetFiles()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using System.ComponentModel;
 
 using drz.Abstractions.Interfaces;
@@ -14,9 +15,9 @@ namespace drz.PdfSharp.Pdf
     /// </summary>
     internal class PdfScaler
     {
-        Logger logItem;
+        ILogger logItem;
 
-        List<Logger> Logger;
+        List<ILogger> Logger;
 
         XGraphicsUnit _convertUnit;
         XGraphicsUnit ConvertUnit => _convertUnit;
@@ -27,11 +28,11 @@ namespace drz.PdfSharp.Pdf
             {
                 switch (value)
                 {
-                    case WinGraphicsUnit.Presentation: _convertUnit = XGraphicsUnit.Presentation; break;
-                    case WinGraphicsUnit.Point: _convertUnit = XGraphicsUnit.Point; break;
-                    case WinGraphicsUnit.Millimeter: _convertUnit = XGraphicsUnit.Millimeter; break;
                     case WinGraphicsUnit.Centimeter: _convertUnit = XGraphicsUnit.Centimeter; break;
                     case WinGraphicsUnit.Inch: _convertUnit = XGraphicsUnit.Inch; break;
+                    case WinGraphicsUnit.Millimeter: _convertUnit = XGraphicsUnit.Millimeter; break;
+                    case WinGraphicsUnit.Point: _convertUnit = XGraphicsUnit.Point; break;
+                    case WinGraphicsUnit.Presentation: _convertUnit = XGraphicsUnit.Presentation; break;
                     default: throw new InvalidEnumArgumentException();
                 }
             }
@@ -64,30 +65,30 @@ namespace drz.PdfSharp.Pdf
         public PdfScaler(WinGraphicsUnit convertUnit)
         {
             Logger = Program.Logger;
-            WinConvertUnit =  convertUnit;
+            WinConvertUnit = convertUnit;
         }
 
         /// <summary>
         /// PDFs обработка.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="PdfFiles">The PDF files.</param>
         public void PdfRun(string[] PdfFiles)
         {
-
             //инит передаем желаемые единицы
-            PdfVPsf Conversion = new PdfVPsf(ConvertUnit);
+            DocConversion Conversion = new DocConversion(Logger);
 
             //по списку документов
             foreach (string pdffile in PdfFiles)
             {
                 //получаем документ
                 PDFOpen OpenDoc = new PDFOpen(pdffile);
+
                 if (!OpenDoc.IsOpenedPdf)
                 {
                     continue;
                 }
 
-                if (Conversion.SetPdfSf(OpenDoc.PdfDoc))// если хоть один VP добавлен
+                if (Conversion.DocRun(OpenDoc.PdfDoc, ConvertUnit))// если хоть один VP добавлен
                 {
                     PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);
                 }

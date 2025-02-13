@@ -15,7 +15,7 @@ namespace drz.PdfSharp.Pdf
     /// <summary>
     /// Открываем PDF
     /// </summary>
-    internal class PDFOpen
+    internal class PDFOpen//todo add one Class Filer
     {
         PdfDocument _pdfDoc;
         /// <summary>
@@ -25,7 +25,7 @@ namespace drz.PdfSharp.Pdf
 
         Logger logItem;
 
-        List<Logger> Logger;
+        List<ILogger> Logger;
 
         bool _isOpenedPdf;
 
@@ -40,23 +40,23 @@ namespace drz.PdfSharp.Pdf
         /// <param name="pdffile"></param>
         public PDFOpen(string pdffile)
         {
-              Logger = Program.Logger;
+            Logger = Program.Logger;
 
-              _pdfDoc = new PdfDocument();
-
+            _pdfDoc = new PdfDocument();
             try
             {
                 _pdfDoc = PdfReader.Open(pdffile, PdfDocumentOpenMode.Modify);
                 logItem = new Logger($"Open: {pdffile}", MesagType.Info);
                 Logger.Add(logItem);
-                _isOpenedPdf=true;
+                _isOpenedPdf = true;
             }
             catch (Exception ex)
             {
                 logItem = new Logger($"{ex.Message}: {pdffile}", MesagType.Error);
                 Logger.Add(logItem);
-                _isOpenedPdf=false;
+                _isOpenedPdf = false;
             }
+
         }
     }
 }
