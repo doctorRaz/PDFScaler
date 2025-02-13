@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using System.ComponentModel;
 
 using drz.Abstractions.Interfaces;
@@ -75,7 +76,7 @@ namespace drz.PdfSharp.Pdf
         {
 
             //инит передаем желаемые единицы
-            PdfVPsf Conversion = new PdfVPsf(ConvertUnit);
+            PdfVPsf Conversion = new PdfVPsf(ConvertUnit, Logger);
 
             //по списку документов
             foreach (string pdffile in PdfFiles)

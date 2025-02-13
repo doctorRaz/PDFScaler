@@ -1,8 +1,14 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 
-using drz.Abstractions.Interfaces;
-using drz.PDFScaler;
 using drz.Servise;
+using drz.Abstractions.Interfaces;
+
+#if CONSOLE
+
+
+using drz.PDFScaler;
+#endif
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -17,11 +23,11 @@ namespace drz.PdfSharp.Pdf
         /// Настройка конвертора VP
         /// </summary>
         /// <param name="convertUnit">Единицы в которые преобразуем</param>
-        public PdfVPsf(XGraphicsUnit convertUnit)
+        public PdfVPsf(XGraphicsUnit convertUnit,List<Logger> logger)
         {
             _convertUnit = convertUnit;
 
-            Logger = Program.Logger;
+            Logger = logger;
 
             XUnit unit = new XUnit(1, ConvertUnit);
 
@@ -173,7 +179,7 @@ namespace drz.PdfSharp.Pdf
 #if DEBUG
             //GetSF(pdfDoc);
 #endif
-            #endregion
+#endregion
         }
 
         #region ПОЛЯ СВОЙСТВА
@@ -269,7 +275,7 @@ namespace drz.PdfSharp.Pdf
         }
 
 #endif
-        #endregion
+#endregion
     }
 
 }
