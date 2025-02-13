@@ -214,7 +214,7 @@ namespace drz.Infrastructure
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_title)) return DataSetWpfOpt.sTitleAttribute + " " + DataSetWpfOpt.sVersion;
+                if (string.IsNullOrWhiteSpace(_title)) return DataSetWpfOpt.TitleAttribute + " " + DataSetWpfOpt.Version;
                 else return _title;
             }
         }

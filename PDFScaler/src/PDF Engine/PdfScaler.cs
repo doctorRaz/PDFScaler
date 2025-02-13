@@ -4,10 +4,11 @@ using System.ComponentModel;
 
 using drz.Abstractions.Interfaces;
 using drz.Enum;
-using drz.PDFScaler;
+
 using drz.Servise;
 
 using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 
 namespace drz.PdfSharp.Pdf
 {
@@ -18,7 +19,7 @@ namespace drz.PdfSharp.Pdf
     {
         ILogger logItem;
 
-        List<ILogger> Logger;
+        List<ILogger> Logger{ get; set; }
 
         XGraphicsUnit _convertUnit;
         XGraphicsUnit ConvertUnit => _convertUnit;
@@ -55,7 +56,7 @@ namespace drz.PdfSharp.Pdf
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="convertUnit">The convert unit.</param>
-        public PdfScaler(List<ILogger> logger,XGraphicsUnit convertUnit)
+        public PdfScaler(List<ILogger> logger, XGraphicsUnit convertUnit)
         {
             Logger = logger;
             _convertUnit = convertUnit;
@@ -66,7 +67,7 @@ namespace drz.PdfSharp.Pdf
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="convertUnit">The convert unit.</param>
-        public PdfScaler(List<ILogger> logger,WinGraphicsUnit convertUnit)
+        public PdfScaler(List<ILogger> logger, WinGraphicsUnit convertUnit)
         {
             Logger = logger;
             WinConvertUnit = convertUnit;
@@ -78,23 +79,35 @@ namespace drz.PdfSharp.Pdf
         /// <param name="PdfFiles">The PDF files.</param>
         public void PdfRun(string[] PdfFiles)
         {
-            //инит передаем желаемые единицы
+            //новый филер документов
+            PdfFiler PF = new PdfFiler(Logger);
+
+            //новый конвертер
             DocConversion Conversion = new DocConversion(Logger);
 
             //по списку документов
             foreach (string pdffile in PdfFiles)
             {
-                //получаем документ
-                PDFOpen OpenDoc = new PDFOpen(pdffile);
 
-                if (!OpenDoc.IsOpenedPdf)
+
+                //получаем документ
+                if (!PF.OpenPdf(pdffile))
                 {
                     continue;
                 }
 
-                if (Conversion.DocRun(OpenDoc.PdfDoc, ConvertUnit))// если хоть один VP добавлен
+                PdfDocument pdfDoc = PF.PdfDoc;
+
+                if (Conversion.DocRun(PF.PdfDoc, ConvertUnit))// если хоть один VP добавлен
                 {
-                    PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);
+                  if(  PF.SavePDF(pdfDoc))
+                    {
+                        //todo не используется
+                    }
+                    else
+                    {
+                        //todo не используется
+                    }
                 }
                 else//ни один VP не добавлен, сохранять не надо
                 {

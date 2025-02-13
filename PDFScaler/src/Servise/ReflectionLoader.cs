@@ -44,7 +44,7 @@ namespace drz.Servise
         string AssemblFulNameDll(string sDllName)
         {
             string asmPath = String.Empty;
-            string sAsmFileFullName = DataSetWpfOpt.sAsmFulPath;//каталог DLL
+            string sAsmFileFullName = DataSetWpfOpt.AsmFulPath;//каталог DLL
             // string sAsmFileFullName = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
             string sPath = Directory.GetParent(sAsmFileFullName).FullName;
 

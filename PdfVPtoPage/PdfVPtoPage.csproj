@@ -54,8 +54,20 @@
     <Compile Include="..\PDFScaler\src\Abstractions\Interfaces\ILogger.cs">
       <Link>src\Abstractions\Interfaces\ILogger.cs</Link>
     </Compile>
+    <Compile Include="..\PDFScaler\src\Enum\Enum.MesagType.cs">
+      <Link>src\Enum\Enum.MesagType.cs</Link>
+    </Compile>
+    <Compile Include="..\PDFScaler\src\Enum\Enum.WinGraphicsUnit.cs">
+      <Link>src\Enum\Enum.WinGraphicsUnit.cs</Link>
+    </Compile>
     <Compile Include="..\PDFScaler\src\PDF Engine\DocConversion.cs">
       <Link>src\PDF Engine\DocConversion.cs</Link>
+    </Compile>
+    <Compile Include="..\PDFScaler\src\PDF Engine\PdfFiler.cs">
+      <Link>src\PDF Engine\PdfFiler.cs</Link>
+    </Compile>
+    <Compile Include="..\PDFScaler\src\PDF Engine\PdfScaler.cs">
+      <Link>src\PDF Engine\PdfScaler.cs</Link>
     </Compile>
     <Compile Include="..\PDFScaler\src\PDF Engine\VPtoPage.cs">
       <Link>src\PDF Engine\VPtoPage.cs</Link>
@@ -63,11 +75,16 @@
     <Compile Include="..\PDFScaler\src\Servise\Logger.cs">
       <Link>src\Servise\Logger.cs</Link>
     </Compile>
+    <Compile Include="..\PDFScaler\src\Servise\UtilitesWorkFil.cs">
+      <Link>src\Servise\UtilitesWorkFil.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="share.te.ua.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\Infrastructure\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

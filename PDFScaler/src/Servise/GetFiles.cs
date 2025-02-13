@@ -52,7 +52,7 @@ namespace drz.Servise
             if (OFD.ShowDialog(new Form() { TopMost = true/*, TopLevel =true*/ }) == DialogResult.OK)
             {
                 _pdfFiles = OFD.FileNames;
-                ConsoleFocus.FocusProcess(DataSetWpfOpt.sAsmFileNameWithoutExtension);
+                ConsoleFocus.FocusProcess(DataSetWpfOpt.AsmFileNameWithoutExtension);
                 return true;
             }
             else
@@ -60,7 +60,7 @@ namespace drz.Servise
                 logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
                 Logger.Add(logItem);
 
-                ConsoleFocus.FocusProcess(DataSetWpfOpt.sAsmFileNameWithoutExtension);
+                ConsoleFocus.FocusProcess(DataSetWpfOpt.AsmFileNameWithoutExtension);
                 return false;
             }
         }

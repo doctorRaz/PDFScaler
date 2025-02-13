@@ -61,7 +61,7 @@
     <Compile Include="src\Abstractions\Interfaces\IConsoleService.cs" />
     <Compile Include="src\Enum\Enum.FB.cs" />
     <Compile Include="src\Enum\Enum.WConsoleColor.cs" />
-    <Compile Include="src\PDF Engine\PDFSave.cs" />
+    <Compile Include="src\PDF Engine\PdfFiler.cs" />
     <Compile Include="src\PDF Engine\VPtoPage.cs" />
     <Compile Include="src\Servise\ConsoleFocus.cs" />
     <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
@@ -73,7 +73,6 @@
     <Compile Include="src\Servise\MessagWelcom.cs" />
     <Compile Include="src\Enum\Enum.WinGraphicsUnit.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
-    <Compile Include="src\PDF Engine\PDFOpen.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="src\PDF Engine\DocConversion.cs" />
     <Compile Include="src\Servise\GetFiles.cs" />
