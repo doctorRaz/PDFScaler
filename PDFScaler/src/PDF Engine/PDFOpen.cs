@@ -25,7 +25,7 @@ namespace drz.PdfSharp.Pdf
 
         Logger logItem;
 
-        List<Logger> Logger;
+        List<ILogger> Logger;
 
         bool _isOpenedPdf;
 

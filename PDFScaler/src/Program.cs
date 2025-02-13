@@ -25,7 +25,7 @@ namespace drz.PDFScaler
         /// <summary>
         /// логгер событий
         /// </summary>
-        public static List<Logger> Logger;
+        public static List<ILogger> Logger;
 
         [STAThread]
         static void Main(string[] args)
@@ -42,7 +42,7 @@ namespace drz.PDFScaler
             IConsoleService CS = new ConsoleService();
 
             //logger сообщения
-            Logger = new List<Logger>();
+            Logger = new List<ILogger>();
 
             //todo в отдельный класс
             #region UINSI
@@ -170,7 +170,7 @@ namespace drz.PDFScaler
                 {
                     CS.ConsoleWriteLine("");
                     //logger
-                    Logger = new List<Logger>();
+                    Logger = new List<ILogger>();
                     //Console.Clear();
                 }
             } while (response == ConsoleKey.Y);

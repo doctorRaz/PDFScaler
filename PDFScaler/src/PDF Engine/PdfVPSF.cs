@@ -23,7 +23,7 @@ namespace drz.PdfSharp.Pdf
         /// Настройка конвертора VP
         /// </summary>
         /// <param name="convertUnit">Единицы в которые преобразуем</param>
-        public PdfVPsf(XGraphicsUnit convertUnit,List<Logger> logger)
+        public PdfVPsf(XGraphicsUnit convertUnit,List<ILogger> logger)
         {
             _convertUnit = convertUnit;
 
@@ -186,12 +186,12 @@ namespace drz.PdfSharp.Pdf
 
         #region Servise
 
-        Logger _logItem;
+       ILogger _logItem;
 
         /// <summary>
         /// The logger
         /// </summary>
-        public List<Logger> Logger;
+        public List<ILogger> Logger;
 
         #endregion
 

@@ -63,6 +63,7 @@
     <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
     <Compile Include="src\PDF Engine\PdfScaler.cs" />
     <Compile Include="src\Infrastructure\ConsoleService.cs" />
+    <Compile Include="src\Abstractions\Interfaces\ILogger.cs" />
     <Compile Include="src\Servise\ReflectionLoader.cs" />
     <Compile Include="src\Servise\Logger.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />

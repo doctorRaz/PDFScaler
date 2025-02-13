@@ -15,9 +15,9 @@ namespace drz.PdfSharp.Pdf
     /// </summary>
     internal class PdfScaler
     {
-        Logger logItem;
+        ILogger logItem;
 
-        List<Logger> Logger;
+        List<ILogger> Logger;
 
         XGraphicsUnit _convertUnit;
         XGraphicsUnit ConvertUnit => _convertUnit;
@@ -28,11 +28,11 @@ namespace drz.PdfSharp.Pdf
             {
                 switch (value)
                 {
-                    case WinGraphicsUnit.Presentation: _convertUnit = XGraphicsUnit.Presentation; break;
-                    case WinGraphicsUnit.Point: _convertUnit = XGraphicsUnit.Point; break;
-                    case WinGraphicsUnit.Millimeter: _convertUnit = XGraphicsUnit.Millimeter; break;
                     case WinGraphicsUnit.Centimeter: _convertUnit = XGraphicsUnit.Centimeter; break;
                     case WinGraphicsUnit.Inch: _convertUnit = XGraphicsUnit.Inch; break;
+                    case WinGraphicsUnit.Millimeter: _convertUnit = XGraphicsUnit.Millimeter; break;
+                    case WinGraphicsUnit.Point: _convertUnit = XGraphicsUnit.Point; break;
+                    case WinGraphicsUnit.Presentation: _convertUnit = XGraphicsUnit.Presentation; break;
                     default: throw new InvalidEnumArgumentException();
                 }
             }

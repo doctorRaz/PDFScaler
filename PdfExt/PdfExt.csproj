@@ -47,11 +47,11 @@
     <Compile Include="..\PDFScaler\src\Abstractions\Interfaces\IConsoleService.cs">
       <Link>src\IConsoleService.cs</Link>
     </Compile>
+    <Compile Include="..\PDFScaler\src\Abstractions\Interfaces\ILogger.cs">
+      <Link>src\ILogger.cs</Link>
+    </Compile>
     <Compile Include="..\PDFScaler\src\PDF Engine\PdfVPsf.cs">
       <Link>src\PdfVPsf.cs</Link>
-    </Compile>
-    <Compile Include="..\PDFScaler\src\Servise\Logger.cs">
-      <Link>src\Logger.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

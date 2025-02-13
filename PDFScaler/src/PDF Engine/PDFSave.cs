@@ -19,7 +19,7 @@ namespace drz.PdfSharp.Pdf
 
         Logger logItem;
 
-        List<Logger> Logger;
+        List<ILogger> Logger;
         public PDFSave(PdfDocument PdfDoc)
         {
             Logger = Program.Logger;

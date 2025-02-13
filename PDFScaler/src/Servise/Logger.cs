@@ -8,24 +8,24 @@ namespace drz.Servise
     /// Сервис сохранения сообщений
     /// </summary>
     [Serializable]
-    internal class Logger
+    internal class Logger : ILogger
     {
         DateTime _dateTimeStamp;
         public DateTime DateTimeStamp => _dateTimeStamp;
 
         string _messag;
-        public string Messag=>_messag;
+        public string Messag => _messag;
 
         MesagType _mesagType;
         public MesagType MesagType => _mesagType;
 
-        public Logger(string messag,  MesagType mesagType=MesagType.None)
+        public Logger(string messag, MesagType mesagType = MesagType.None)
         {
-            _dateTimeStamp= DateTime.Now;
+            _dateTimeStamp = DateTime.Now;
 
-            _messag= messag;
+            _messag = messag;
 
-            _mesagType= mesagType;
+            _mesagType = mesagType;
         }
     }
 }
