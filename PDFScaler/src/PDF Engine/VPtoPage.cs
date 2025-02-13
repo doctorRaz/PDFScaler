@@ -11,132 +11,182 @@ namespace drz.PdfSharp.Pdf
     public class VPtoPage
     {
 
-        public VPtoPage(XGraphicsUnit convertUnit)
-        {          
+        public VPtoPage(PdfPage page,
+                        XGraphicsUnit convertUnit = XGraphicsUnit.Millimeter,
+                        bool changeVpPage = false)
+        {
+            _page = page;
+
             XUnit unit = new XUnit(1, convertUnit);
 
             _scalefactor = 1 / unit.Point;//пересчет единиц в точку
-                       
-        
+
+            try
+            {
+                #region Check VP Page
+                _arrVP = Page.Elements.GetObject("/VP") as PdfArray;
+                if (ArrVP == null)//если VP нет
+                {
+                    #region VP NEW
+                    _arrVP = new PdfArray();
+                    Page.Elements.Add("/VP", ArrVP);//добавить VP
+                    #endregion
+
+                    if (AddArrVP())
+                    {
+                        _mesag = "VP добавлен в";
+                        _isChanged = true;
+                    }
+                    else
+                    {
+                        _isChanged = false;
+                    }
+                }
+                else if (changeVpPage)//заказано изменить VP scalefactor
+                {
+                    if(ModArrVP())
+                    {
+                    _mesag = "VP изменен в";
+                    
+                    _isChanged = true;
+                    }
+                }
+                else
+                {
+                    _mesag = "VP существует в";
+                    _isChanged = false;
+                }
+                #endregion
+
+
+            }
+            catch (Exception ex)
+            {
+                _mesag = ex.Message;
+                _isErr = true;
+                _isChanged = false;
+            }
         }
 
-        /// <summary>
-        /// PDFs the sf.
-        /// </summary>
-        /// <param name="page">The page.</param>
-        /// <returns></returns>
-        public bool PdfSf(PdfPage page)
+         bool ModArrVP()
+        {
+            //todo добавить изменение scalefactor
+            throw new NotImplementedException();
+            
+        }
+
+        bool AddArrVP()
         {
             try
             {
-                #region VP0
+                #region VP
 
-                //PdfPage page0 = pdfDoc.Pages[1];
-
-                PdfArray arrVP0 = new PdfArray();
-                page.Elements.Add("/VP", arrVP0);//добавить VP
-
-                PdfDictionary dicVPitem0 = new PdfDictionary();
-                arrVP0.Elements.Add(dicVPitem0);
+                PdfDictionary dicVPitem = new PdfDictionary();
+                ArrVP.Elements.Add(dicVPitem);
 
                 #region BBox
 
-                PdfArray dicBBox0 = new PdfArray();
-                dicVPitem0.Elements.Add("/BBox", dicBBox0);
+                PdfArray dicBBox = new PdfArray();
+                dicVPitem.Elements.Add("/BBox", dicBBox);
 
-                dicBBox0.Elements.Add(new PdfInteger((int)page.MediaBox.X1));
-                dicBBox0.Elements.Add(new PdfInteger((int)page.MediaBox.Y1));
-                dicBBox0.Elements.Add(new PdfInteger((int)page.MediaBox.X2));
-                dicBBox0.Elements.Add(new PdfInteger((int)page.MediaBox.Y2));
+                dicBBox.Elements.Add(new PdfInteger((int)Page.MediaBox.X1));
+                dicBBox.Elements.Add(new PdfInteger((int)Page.MediaBox.Y1));
+                dicBBox.Elements.Add(new PdfInteger((int)Page.MediaBox.X2));
+                dicBBox.Elements.Add(new PdfInteger((int)Page.MediaBox.Y2));
 
                 #endregion
 
                 #region Measure
 
-                PdfDictionary dicMeasure0 = new PdfDictionary();
-                dicVPitem0.Elements.Add("/Measure", dicMeasure0);
+                PdfDictionary dicMeasure = new PdfDictionary();
+                dicVPitem.Elements.Add("/Measure", dicMeasure);
 
                 #region /A
-                PdfArray arrA0 = new PdfArray();
-                dicMeasure0.Elements.Add("/A", arrA0);
+                PdfArray arrA = new PdfArray();
+                dicMeasure.Elements.Add("/A", arrA);
 
-                PdfDictionary arrAitem0 = new PdfDictionary();
-                arrA0.Elements.Add(arrAitem0);
+                PdfDictionary arrAitem = new PdfDictionary();
+                arrA.Elements.Add(arrAitem);
 
-                arrAitem0.Elements.Add("/C", new PdfInteger(1));
-                arrAitem0.Elements.Add("/U", new PdfString(" "));
+                arrAitem.Elements.Add("/C", new PdfInteger(1));
+                arrAitem.Elements.Add("/U", new PdfString(" "));
                 #endregion
 
                 #region /D
-                PdfArray arrD0 = new PdfArray();
-                dicMeasure0.Elements.Add("/D", arrD0);
+                PdfArray arrD = new PdfArray();
+                dicMeasure.Elements.Add("/D", arrD);
 
-                PdfDictionary arrDitem0 = new PdfDictionary();
-                arrD0.Elements.Add(arrDitem0);
+                PdfDictionary arrDitem = new PdfDictionary();
+                arrD.Elements.Add(arrDitem);
 
-                arrDitem0.Elements.Add("/C", new PdfInteger(1));
-                arrDitem0.Elements.Add("/U", new PdfString(" "));
+                arrDitem.Elements.Add("/C", new PdfInteger(1));
+                arrDitem.Elements.Add("/U", new PdfString(" "));
 
                 #endregion
 
                 #region /R
-                PdfString strR0 = new PdfString(" ");
-                dicMeasure0.Elements.Add("/R", strR0);
+                PdfString strR = new PdfString(" ");
+                dicMeasure.Elements.Add("/R", strR);
 
                 #endregion
 
                 #region /Subtype
-                PdfName nameSubtype0 = new PdfName("/RL");
-                dicMeasure0.Elements.Add("/Subtype", nameSubtype0);
+                PdfName nameSubtype = new PdfName("/RL");
+                dicMeasure.Elements.Add("/Subtype", nameSubtype);
 
                 #endregion
 
                 #region  /Type
-                PdfName nameType0 = new PdfName("/Measure");
-                dicMeasure0.Elements.Add("/Type", nameType0);
+                PdfName nameType = new PdfName("/Measure");
+                dicMeasure.Elements.Add("/Type", nameType);
 
                 #endregion
 
                 #region  /X
-                PdfArray arrX0 = new PdfArray();
-                dicMeasure0.Elements.Add("/X", arrX0);
+                PdfArray arrX = new PdfArray();
+                dicMeasure.Elements.Add("/X", arrX);
 
-                PdfDictionary dicXitem0 = new PdfDictionary();
-                arrX0.Elements.Add(dicXitem0);
+                PdfDictionary dicXitem = new PdfDictionary();
+                arrX.Elements.Add(dicXitem);
 
-                dicXitem0.Elements.Add("/C", new PdfReal(Scalefactor));//0.35278
-                dicXitem0.Elements.Add("/U", new PdfString(" "));
+                dicXitem.Elements.Add("/C", new PdfReal(Scalefactor));//.35278
+                dicXitem.Elements.Add("/U", new PdfString(" "));
 
                 #endregion
 
                 #endregion
 
                 #region  Type
-                PdfName dicType0 = new PdfName("/Viewport");
-                dicVPitem0.Elements.Add("/Type", dicType0);
+                PdfName dicType = new PdfName("/Viewport");
+                dicVPitem.Elements.Add("/Type", dicType);
                 #endregion
 
                 #endregion
+                return true;
             }
             catch (Exception ex)
             {
-                _exept = ex.Message;
+                _mesag = ex.Message;
+                _isErr = true;
                 return false;
             }
-            return true;
-
-            #region Example Get VP sf
-#if DEBUG
-            //GetSF(pdfDoc);
-#endif
-            #endregion
         }
 
-        public string Exept => _exept;
+        public PdfPage Page => _page;
 
-        double Scalefactor => _scalefactor;
+        public PdfArray ArrVP => _arrVP;
+        public string Mesag => _mesag;
 
-        string _exept;
+        public bool IsChanged => _isChanged;
+        public bool IsErr => _isErr;
+
+        public double Scalefactor => _scalefactor;
+
+        PdfPage _page;
+        PdfArray _arrVP;
+        bool _isChanged;
+        bool _isErr;
+        string _mesag;
         double _scalefactor;
 
     }

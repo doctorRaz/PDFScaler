@@ -20,7 +20,7 @@ namespace drz.PdfSharp.Pdf
         Logger logItem;
 
         List<ILogger> Logger;
-        public PDFSave(PdfDocument PdfDoc)
+        public PDFSave(PdfDocument PdfDoc)//todo add one Class Filer
         {
             Logger = Program.Logger;
 

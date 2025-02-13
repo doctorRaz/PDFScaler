@@ -1,7 +1,6 @@
 ﻿
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 using drz.Abstractions.Interfaces;
 using drz.PDFScaler;
@@ -66,18 +65,17 @@ namespace drz.PdfSharp.Pdf
         public PdfScaler(WinGraphicsUnit convertUnit)
         {
             Logger = Program.Logger;
-            WinConvertUnit =  convertUnit;
+            WinConvertUnit = convertUnit;
         }
 
         /// <summary>
         /// PDFs обработка.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="PdfFiles">The PDF files.</param>
         public void PdfRun(string[] PdfFiles)
         {
-
             //инит передаем желаемые единицы
-            DocConversion Conversion = new DocConversion                (ConvertUnit, Logger);
+            DocConversion Conversion = new DocConversion(Logger);
 
             //по списку документов
             foreach (string pdffile in PdfFiles)
@@ -90,7 +88,7 @@ namespace drz.PdfSharp.Pdf
                     continue;
                 }
 
-                if (Conversion.DocRun(OpenDoc.PdfDoc))// если хоть один VP добавлен
+                if (Conversion.DocRun(OpenDoc.PdfDoc, ConvertUnit))// если хоть один VP добавлен
                 {
                     PDFSave savePDF = new PDFSave(OpenDoc.PdfDoc);
                 }

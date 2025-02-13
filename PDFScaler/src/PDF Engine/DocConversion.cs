@@ -5,12 +5,10 @@ using drz.Servise;
 using drz.Abstractions.Interfaces;
 
 #if CONSOLE
-using drz.PDFScaler;
 #endif
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using System;
 
 namespace drz.PdfSharp.Pdf
 {
@@ -21,13 +19,10 @@ namespace drz.PdfSharp.Pdf
         /// <summary>
         /// Настройка конвертора VP
         /// </summary>
-        /// <param name="convertUnit">Единицы в которые преобразуем</param>
-        public DocConversion(XGraphicsUnit convertUnit, List<ILogger> logger)
+        /// <param name="logger">The logger.</param>
+        public DocConversion(List<ILogger> logger)
         {
-            _convertUnit = convertUnit;
-
-            Logger = logger;         
-
+            Logger = logger;
         }
         #endregion
 
@@ -35,9 +30,17 @@ namespace drz.PdfSharp.Pdf
         /// Обработка документаn.
         /// </summary>
         /// <param name="PdfDoc">PDF document.</param>
-        /// <returns>успех</returns>
-        public bool DocRun(PdfDocument PdfDoc)
+        /// <param name="convertUnit">The convert unit.</param>
+        /// <param name="changeVpPage">if set to <c>true</c> [change vp page].</param>
+        /// <returns>
+        /// успех
+        /// </returns>
+        public bool DocRun(PdfDocument PdfDoc,
+                           XGraphicsUnit convertUnit,
+                           bool changeVpPage = false)
         {
+            _convertUnit = convertUnit;
+
             _isModified = false;
 
             int pageNum = 0;//номер стр для логера
@@ -45,29 +48,25 @@ namespace drz.PdfSharp.Pdf
             //перебор страниц
             foreach (PdfPage page in PdfDoc.Pages)
             {
-                //get VP
-                PdfArray arrBBox = page.Elements.GetObject("/VP") as PdfArray;
-
-                if (arrBBox == null)//если VP нет
+                //get Page
+                VPtoPage vPtoPage = new VPtoPage(page, ConvertUnit);
+                if (vPtoPage.IsChanged)//Page chang
                 {
-                    if (PdfSf(page))
-                    {
-                        _isModified = true;//если меняли хоть один лист
-                        _logItem = new Logger($"\tVP добавлен в Page:{++pageNum}", MesagType.Ok);
-                    }
-                    else
+                    _isModified = true;//если меняли хоть один лист
+                    _logItem = new Logger($"\t{vPtoPage.Mesag} Page:{++pageNum}", MesagType.Ok);
+                }
+                else//Page not chang
+                {
+                    if (vPtoPage.IsErr)//Page not chang exept
                     {
                         _isModified = false;
-                        _logItem = new Logger($"\tVP сбой в Page:{++pageNum} {Exept}", MesagType.Error);
-
+                        _logItem = new Logger($"\tVP сбой в Page:{++pageNum} {vPtoPage.Mesag}", MesagType.Error);
                     }
-                    //Logger.Add(_logItem);
-                }
-                else
-                {
-                    _isModified = false;
-                    _logItem = new Logger($"\tVP существует в Page:{++pageNum}", MesagType.Info);
-                    //Logger.Add(_logItem);
+                    else//Page not chang exist
+                    {
+                        _isModified = false;
+                        _logItem = new Logger($"\t{vPtoPage.Mesag} Page:{++pageNum}", MesagType.Info);
+                    }
                 }
                 Logger.Add(_logItem);
             }
@@ -80,7 +79,7 @@ namespace drz.PdfSharp.Pdf
                 return false;
             }
         }
-             
+
 
         #region ПОЛЯ СВОЙСТВА
 

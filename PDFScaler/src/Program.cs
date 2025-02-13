@@ -30,8 +30,9 @@ namespace drz.PDFScaler
         [STAThread]
         static void Main(string[] args)
         {
+           
             //загрузчик dll
-            ReflectionLoader cmd = new ReflectionLoader();
+            new ReflectionLoader();
             Prog(args);
         }
         static void Prog(string[] args)
@@ -158,7 +159,7 @@ namespace drz.PDFScaler
                 {
                     PS.PdfRun(GF.PdfFiles);
                 }
-                foreach (Logger logger in Logger)
+                foreach (Logger logger in Logger.Cast<Logger>())
                 {
 #if DEBUG
                     CS.ConsoleWriteLine($"{logger.DateTimeStamp}: {logger.CallerName} {logger.Messag}", logger.MesagType);

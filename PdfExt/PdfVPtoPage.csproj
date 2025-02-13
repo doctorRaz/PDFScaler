@@ -7,8 +7,8 @@
     <ProjectGuid>{51C6EBD6-3C9C-470D-9B55-988533B029F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PdfExt</RootNamespace>
-    <AssemblyName>PdfExt</AssemblyName>
+    <RootNamespace>drz</RootNamespace>
+    <AssemblyName>PdfVPtoPage</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -17,18 +17,24 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Debug\PdfVPtoPage.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\PdfVPtoPage.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PdfSharp">
@@ -50,10 +56,19 @@
     <Compile Include="..\PDFScaler\src\Abstractions\Interfaces\ILogger.cs">
       <Link>src\ILogger.cs</Link>
     </Compile>
-    <Compile Include="..\PDFScaler\src\PDF Engine\PdfVPsf.cs">
-      <Link>src\PdfVPsf.cs</Link>
+    <Compile Include="..\PDFScaler\src\PDF Engine\DocConversion.cs">
+      <Link>src\DocConversion.cs</Link>
+    </Compile>
+    <Compile Include="..\PDFScaler\src\PDF Engine\VPtoPage.cs">
+      <Link>src\VPtoPage.cs</Link>
+    </Compile>
+    <Compile Include="..\PDFScaler\src\Servise\Logger.cs">
+      <Link>src\Logger.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="share.te.ua.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

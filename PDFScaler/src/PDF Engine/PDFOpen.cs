@@ -15,7 +15,7 @@ namespace drz.PdfSharp.Pdf
     /// <summary>
     /// Открываем PDF
     /// </summary>
-    internal class PDFOpen
+    internal class PDFOpen//todo add one Class Filer
     {
         PdfDocument _pdfDoc;
         /// <summary>
