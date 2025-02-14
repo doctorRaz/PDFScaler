@@ -111,9 +111,9 @@ namespace drz.Servise
                                             ? SearchOption.AllDirectories
                                             : SearchOption.TopDirectoryOnly));
             }
-            catch (System.Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return new string[0];
             }
         }

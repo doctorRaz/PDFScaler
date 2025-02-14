@@ -53,7 +53,7 @@ namespace drz.PdfSharp.Pdf
         /// </summary>
         /// <param name="pdfDoc">The PDF document.</param>
         /// <returns></returns>
-        public bool PdfSave(PdfDocument pdfDoc)//todo add one Class Filer
+        public bool PdfSave(PdfDocument pdfDoc)
         {
             string sPDFfile = string.Empty;
             try
