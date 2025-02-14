@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 
-using drz.PDFScaler.PdfVpMod.Servise;
 using drz.PdfVpMod.Abstractions.Interfaces;
 using drz.PdfVpMod.Enum;
 using drz.PdfVpMod.Servise;
@@ -10,7 +9,7 @@ using drz.PdfVpMod.Servise;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
-namespace drz.PdfVpMod.PdfSharp.Pdf
+namespace drz.PdfVpMod.PdfSharp
 {
     /// <summary>
     /// Open Save PDF doc

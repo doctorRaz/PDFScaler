@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 
-using drz.PDFScaler.PdfVpMod.Servise;
-
 
 namespace drz.PDFScaler.Servise
 {

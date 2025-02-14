@@ -9,7 +9,7 @@ using drz.PdfVpMod.Servise;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace drz.PdfVpMod.PdfSharp.Pdf
+namespace drz.PdfVpMod.PdfSharp
 {
     /// <summary>
     /// Движок

@@ -51,9 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\PDFScaler\src\Servise\UtilitesWorkFil.cs">
-      <Link>src\Servise\UtilitesWorkFil.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Abstractions\Interfaces\ILoger.cs" />
     <Compile Include="src\Enum\Enum.MesagType.cs" />
@@ -64,6 +61,7 @@
     <Compile Include="src\PDF Engine\PdfFiler.cs" />
     <Compile Include="src\PDF Engine\PdfManager.cs" />
     <Compile Include="src\Servise\Loger.cs" />
+    <Compile Include="src\Servise\UtilitesWorkFil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="share.te.ua.ico" />

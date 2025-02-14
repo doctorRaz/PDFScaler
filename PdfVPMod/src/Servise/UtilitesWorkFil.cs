@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 
-namespace drz.PDFScaler.Servise
+namespace drz.PdfVpMod.Servise
 {
-    internal class UtilitesWorkFil
+    class UtilitesWorkFil
     {
 
         /// <summary>
