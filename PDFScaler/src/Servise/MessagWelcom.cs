@@ -1,4 +1,4 @@
-﻿namespace drz.Servise
+﻿namespace drz.PDFScaler.Servise
 {
     internal static class MessagWelcom
     {

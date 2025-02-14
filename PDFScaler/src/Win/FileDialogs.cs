@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-using drz.Servise;
+using drz.PdfVpMod.Servise;
 
 using Microsoft.WindowsAPICodePack.Dialogs;
 

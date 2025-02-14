@@ -2,18 +2,18 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using drz.Abstractions.Interfaces;
-using drz.Enum;
-using drz.Servise;
+using drz.PDFScaler.Abstractions.Interfaces;
+using drz.PDFScaler.Servise;
+using drz.PdfVpMod.Enum;
 
 
 
-namespace drz.Infrastructure
+namespace drz.PDFScaler.Infrastructure
 {
     /// <summary>
     /// Реализация сообщений в консоль
     /// </summary>
-    /// <seealso cref="drz.Abstractions.Interfaces.IConsoleService" />
+    /// <seealso cref="drz.PDFScaler.Abstractions.Interfaces.IConsoleService" />
     internal class ConsoleService :/* MessageService,*/ IConsoleService
     {
         /// <summary>

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-using drz.Abstractions.Interfaces;
-using drz.Enum;
+using drz.PdfVpMod.Abstractions.Interfaces;
+using drz.PdfVpMod.Enum;
 
-namespace drz.Servise
+namespace drz.PdfVpMod.Servise
 {
     /// <summary>
     /// Сервис сохранения сообщений
     /// </summary>
     [Serializable]
-    internal class Loger : ILoger
+    public class Loger : ILoger
     {
         /// <summary>
         /// Gets the name of the caller.
@@ -63,7 +63,7 @@ namespace drz.Servise
             _mesagType = mesagType;
         }
 
-       
+
         DateTime _dateTimeStamp;
         string _callerName;
         string _messag;

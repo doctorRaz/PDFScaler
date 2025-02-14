@@ -1,9 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
 
-using drz.Enum;
+using drz.PdfVpMod.Enum;
 
 
-namespace drz.Abstractions.Interfaces
+namespace drz.PDFScaler.Abstractions.Interfaces
 {
     /// <summary>
     /// Интерфейс сообщений консоли
@@ -50,10 +50,4 @@ namespace drz.Abstractions.Interfaces
                      [CallerMemberName] string CallerName = null);
     }
 
-
-   
-
-    
-
-    
 }

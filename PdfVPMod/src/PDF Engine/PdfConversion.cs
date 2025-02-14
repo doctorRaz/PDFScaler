@@ -1,17 +1,14 @@
 ﻿
 using System.Collections.Generic;
 
-using drz.Servise;
-using drz.Abstractions.Interfaces;
-
-#if CONSOLE
-#endif
+using drz.PdfVpMod.Abstractions.Interfaces;
+using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Servise;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using drz.Enum;
 
-namespace drz.PdfSharp.Pdf
+namespace drz.PdfVpMod.PdfSharp.Pdf
 {
     internal class PdfConversion
     {
@@ -36,7 +33,7 @@ namespace drz.PdfSharp.Pdf
         /// <returns>
         /// успех
         /// </returns>
-        public bool DocRun(PdfDocument PdfDoc,
+        public bool ConversionRun(PdfDocument PdfDoc,
                            XGraphicsUnit convertUnit,
                            ModeChangVp changeVpPage = ModeChangVp.Add)
         {
@@ -98,7 +95,7 @@ namespace drz.PdfSharp.Pdf
                         }
                     }
                 }
-                    Loger.Add(_logItem);
+                Loger.Add(_logItem);
             }
             if (IsModified)
             {

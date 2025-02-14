@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-
-using drz.Abstractions.Interfaces;
-using drz.Servise;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace drz.PdfSharp.Pdf
+namespace drz.PdfVpMod.PdfSharp.Pdf
 {
     /// <summary>
     /// Добавляет удаляет VP с масштабом вида

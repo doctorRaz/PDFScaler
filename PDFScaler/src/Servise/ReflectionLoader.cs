@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
 
+using drz.PDFScaler.PdfVpMod.Servise;
 
-namespace drz.Servise
+
+namespace drz.PDFScaler.Servise
 {
     /// <summary> Подгрузка библиотек </summary>
     partial class ReflectionLoader
@@ -17,7 +19,7 @@ namespace drz.Servise
         #region System.Reflection            
         private System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            string sPath ;
+            string sPath;
 
             if (args.Name.IndexOf(",") > -1)
             {
@@ -82,7 +84,7 @@ namespace drz.Servise
         }
         #endregion
 
-      
- 
+
+
     }
 }

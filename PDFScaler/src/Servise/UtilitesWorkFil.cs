@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
 
-using drz.Abstractions.Interfaces;
-using drz.Enum;
-
-namespace drz.Servise
+namespace drz.PDFScaler.PdfVpMod.Servise
 {
     internal class UtilitesWorkFil
     {

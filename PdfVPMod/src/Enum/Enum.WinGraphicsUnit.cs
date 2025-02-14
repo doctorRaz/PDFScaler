@@ -1,4 +1,4 @@
-﻿namespace drz.Enum
+﻿namespace drz.PdfVpMod.Enum
 {
     /// <summary>
     /// Specifies the unit of measure.

@@ -42,10 +42,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="PdfSharp">
-      <HintPath>..\lib\pdfsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -59,33 +55,29 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Abstractions\Interfaces\IConsoleService.cs" />
-    <Compile Include="src\Enum\Enum.ModeChangVp.cs" />
     <Compile Include="src\Enum\Enum.FB.cs" />
     <Compile Include="src\Enum\Enum.WConsoleColor.cs" />
-    <Compile Include="src\PDF Engine\PdfFiler.cs" />
-    <Compile Include="src\PDF Engine\PageVpMod.cs" />
     <Compile Include="src\Servise\ConsoleFocus.cs" />
     <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
-    <Compile Include="src\PDF Engine\PdfManager.cs" />
     <Compile Include="src\Infrastructure\ConsoleService.cs" />
-    <Compile Include="src\Abstractions\Interfaces\ILoger.cs" />
     <Compile Include="src\Servise\ReflectionLoader.cs" />
-    <Compile Include="src\Servise\Loger.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />
-    <Compile Include="src\Enum\Enum.WinGraphicsUnit.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
     <Compile Include="src\Program.cs" />
-    <Compile Include="src\PDF Engine\PdfConversion.cs" />
     <Compile Include="src\Servise\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="share.te.ua.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\PDF Engine\" />
     <Folder Include="src\UI\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Enum\Enum.MesagType.cs" />
+    <ProjectReference Include="..\PdfVPMod\PdfVPMod.csproj">
+      <Project>{51c6ebd6-3c9c-470d-9b55-988533b029f7}</Project>
+      <Name>PdfVPMod</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

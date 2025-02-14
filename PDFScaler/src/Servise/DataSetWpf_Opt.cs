@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 
 
-namespace drz.Servise
+namespace drz.PDFScaler.Servise
 {
     /// <summary> Пути разделители и пр.</summary>
     public class DataSetWpfOpt
@@ -12,7 +12,7 @@ namespace drz.Servise
         #region Служебные
         /// <summary>Домен машины</summary>
         internal static string Userdomain = System.Environment.GetEnvironmentVariable("USERDOMAIN");
-                
+
         #endregion
         #region ВЕРСИЯ ПРОГРАММЫ
         /// <summary>Версия программы</summary>
@@ -174,7 +174,7 @@ namespace drz.Servise
         public static string sMachineName => Environment.MachineName;
 
         //public static string sTemp=>Path.GetTempPath();
- 
+
 
         #endregion
 

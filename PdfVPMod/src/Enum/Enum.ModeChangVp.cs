@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace drz.Abstractions.Interfaces
+﻿namespace drz.PdfVpMod.Enum
 {
     /// <summary>
     /// Режим изменения VP PDF
     /// </summary>
-    enum ModeChangVp
+    public enum ModeChangVp
     {
         /// <summary>
         /// Добавить, не менять существующий

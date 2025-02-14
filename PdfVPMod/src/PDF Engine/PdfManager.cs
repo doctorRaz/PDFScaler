@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-using drz.Abstractions.Interfaces;
-using drz.Enum;
-
-using drz.Servise;
+using drz.PdfVpMod.Abstractions.Interfaces;
+using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Servise;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace drz.PdfSharp.Pdf
+namespace drz.PdfVpMod.PdfSharp.Pdf
 {
     /// <summary>
     /// Движок
     /// </summary>
-    internal class PdfManager
+    public class PdfManager
     {
         #region INIT
 
@@ -31,20 +30,20 @@ namespace drz.PdfSharp.Pdf
             ChangeVpPage = ModeChangVp.Add;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PdfManager" /> class.
-        /// </summary>
-        /// <param name="loger">The loger.</param>
-        /// <param name="convertUnit">The convert unit.</param>
-        /// <param name="changeVpPage"></param>
-        public PdfManager(List<ILoger> loger,
-                          XGraphicsUnit convertUnit,
-                          ModeChangVp changeVpPage = ModeChangVp.Add)
-        {
-            Loger = loger;
-            _convertUnit = convertUnit;
-            ChangeVpPage = changeVpPage;
-        }
+        ///// <summary>
+        ///// Initializes a new instance of the <see cref="PdfManager" /> class.
+        ///// </summary>
+        ///// <param name="loger">The loger.</param>
+        ///// <param name="convertUnit">The convert unit.</param>
+        ///// <param name="changeVpPage"></param>
+        //public PdfManager(List<ILoger> loger,
+        //                  XGraphicsUnit convertUnit,
+        //                  ModeChangVp changeVpPage = ModeChangVp.Add)
+        //{
+        //    Loger = loger;
+        //    _convertUnit = convertUnit;
+        //    ChangeVpPage = changeVpPage;
+        //}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PdfManager" /> class.
@@ -85,7 +84,7 @@ namespace drz.PdfSharp.Pdf
 
                 PdfDocument pdfDoc = Filer.PdfDoc;
 
-                if (Conv.DocRun(Filer.PdfDoc,//PDF doc
+                if (Conv.ConversionRun(Filer.PdfDoc,//PDF doc
                                       ConvertUnit,//единицы
                                       ChangeVpPage)//режим только добавление VP
                     )// если хоть один VP добавлен

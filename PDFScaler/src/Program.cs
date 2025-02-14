@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using drz.Abstractions.Interfaces;
-using drz.Infrastructure;
-using drz.Servise;
-
-using drz.PdfSharp.Pdf;
 using System.Linq;
-using drz.Enum;
+
+using drz.PDFScaler.Abstractions.Interfaces;
+using drz.PDFScaler.Infrastructure;
+using drz.PDFScaler.Servise;
+using drz.PdfVpMod.Abstractions.Interfaces;
+using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.PdfSharp.Pdf;
+using drz.PdfVpMod.Servise;
 
 
-namespace drz.PDFScaler
+namespace drz.PDFScaler.PDFScaler
 {
     /*PDF documents, such as those created by CAD software, may contain graphics that are intended to represent
      * real-world objects. Users of such documents often require information about the scale and units of

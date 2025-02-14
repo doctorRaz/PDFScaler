@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
-using drz.Abstractions.Interfaces;
-using drz.Enum;
-using drz.PDFScaler;
+using drz.PDFScaler.PDFScaler;
+using drz.PdfVpMod.Abstractions.Interfaces;
+using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Servise;
 
-namespace drz.Servise
+namespace drz.PDFScaler.Servise
 {
     /// <summary>
     /// Сервис получения файлов
@@ -33,7 +34,7 @@ namespace drz.Servise
             Loger = Program.Loger;
         }
 
-        public  bool GetPDFfiles()
+        public bool GetPDFfiles()
         {
             OpenFileDialog OFD = new OpenFileDialog
             {
