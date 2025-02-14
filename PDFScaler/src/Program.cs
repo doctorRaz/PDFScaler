@@ -7,11 +7,11 @@ using drz.PDFScaler.Infrastructure;
 using drz.PDFScaler.Servise;
 using drz.PdfVpMod.Abstractions.Interfaces;
 using drz.PdfVpMod.Enum;
-using drz.PdfVpMod.PdfSharp.Pdf;
+using drz.PdfVpMod.PdfSharp;
 using drz.PdfVpMod.Servise;
 
 
-namespace drz.PDFScaler.PDFScaler
+namespace drz.PDFScaler
 {
     /*PDF documents, such as those created by CAD software, may contain graphics that are intended to represent
      * real-world objects. Users of such documents often require information about the scale and units of
@@ -47,95 +47,16 @@ namespace drz.PDFScaler.PDFScaler
             //loger сообщения
             Loger = new List<ILoger>();
 
-            //todo в отдельный класс
-            #region UINSI
-            /*
-            List<string> argsL = args.ToList();
-            List<string> Files = new List<string>();
+            Repository GF = new Repository(Loger);
 
-            for (int i = 0; i < argsL.Count; i++)
+            if(GF.GetPDFfiles(args))//в ком строке что то есть
             {
-                if (File.Exists(argsL[i]))
-                {
-                    if (Path.GetExtension(argsL[i]).ToLower() == ".pdf")
-                    {
-                        Files.Add(argsL[i]);
-                    }
-                    else if (Path.GetExtension(argsL[i]).ToLower() == ".png" || Path.GetExtension(argsL[i]).ToLower() == ".jpg" || Path.GetExtension(argsL[i]).ToLower() == ".jpeg")
-                    {
-                        Images.Add(argsL[i]);
-                    }
-                    else
-                    {
-                        LogHelper.Log($"The selected file is not a PDF or valid immage format (.png | .jpg | .jpeg), and will be excluded. {argsL[i]}", LogType.Warning);
-                    }
-                }
-                else if (Directory.Exists(argsL[i]))
-                {
-                    foreach (var item in Directory.EnumerateFiles(argsL[i]))
-                    {
-                        argsL.Add(item);
-                    }
-                }
-                else
-                {
-                    switch (argsL[i].ToLower())
-                    {
-                        case "-np":
 
-                            if (argsL.Count() > i + 1)
-                            {
-                                createNewPageFormat = argsL[i + 1];
-                                i++;
-                            }
-                            else
-                            {
-                                createNewPageFormat = "A4";
-                            }
-
-                            Config.ExitConfirmation = 0;
-
-                            break;
-
-                        case "-o":
-                            autoOpenFile = true;
-                            break;
-
-                        case "-b":
-                            PDFInterface.Bookmarks = 1;
-                            break;
-
-                        case "-s":
-                            splitAll = true;
-                            break;
-
-                        case "-flat":
-                            flat = true;
-                            break;
-
-                        case "-singlepagesplit":
-                            if (argsL.Count() >= i + 1)
-                            {
-                                bool r = Int32.TryParse(argsL[i + 1].ToLower(), out singlePageSplit);
-                                if (!r)
-                                {
-                                    singlePageSplit = 0;
-                                    break;
-                                }
-                            }
-                            i++;
-                            break;
-
-                        default:
-                            LogHelper.Log($"The argument option does not exist will be excluded. {argsL[i]}", LogType.Error);
-                            break;
-                    }
-                }
             }
+            else//ком строка пустая
+            {
 
-            */
-            #endregion
-
+            }
             //приветственные сообщения
             CS.ConsoleWrite(MessagWelcom.Header, MesagType.Warning);
             foreach (string item in MessagWelcom.Welcom)
@@ -159,10 +80,10 @@ namespace drz.PDFScaler.PDFScaler
             PdfManager PS = new PdfManager(Loger,
                                             unit,
                                             mode);
-            Repository GF = new Repository();
+            
             do
             {
-                if (GF.GetPDFfiles())
+                if (GF.GetPDFfilesWin())
                 {
                     PS.PdfRun(GF.PdfFiles);
                 }

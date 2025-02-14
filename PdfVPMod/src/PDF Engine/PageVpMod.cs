@@ -4,7 +4,7 @@ using System.Linq;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace drz.PdfVpMod.PdfSharp.Pdf
+namespace drz.PdfVpMod.PdfSharp
 {
     /// <summary>
     /// Добавляет удаляет VP с масштабом вида
