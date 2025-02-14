@@ -17,7 +17,7 @@ namespace drz.Servise
         #region System.Reflection            
         private System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            string sPath = string.Empty;
+            string sPath ;
 
             if (args.Name.IndexOf(",") > -1)
             {
@@ -44,7 +44,7 @@ namespace drz.Servise
         string AssemblFulNameDll(string sDllName)
         {
             string asmPath = String.Empty;
-            string sAsmFileFullName = DataSetWpfOpt.sAsmFulPath;//каталог DLL
+            string sAsmFileFullName = DataSetWpfOpt.AsmFulPath;//каталог DLL
             // string sAsmFileFullName = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
             string sPath = Directory.GetParent(sAsmFileFullName).FullName;
 

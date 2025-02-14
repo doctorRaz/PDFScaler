@@ -1,14 +1,14 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 
 using drz.Abstractions.Interfaces;
+using drz.Enum;
 using drz.PDFScaler;
 using drz.Servise;
 
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
-
-
 
 namespace drz.PdfSharp.Pdf
 {

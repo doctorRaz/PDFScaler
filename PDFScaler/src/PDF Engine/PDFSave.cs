@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using drz.Abstractions.Interfaces;
+using drz.Enum;
 using drz.PDFScaler;
 using drz.Servise;
 

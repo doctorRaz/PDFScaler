@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 
 using drz.Abstractions.Interfaces;
+using drz.Enum;
 using drz.PDFScaler;
 
 namespace drz.Servise
@@ -9,7 +10,7 @@ namespace drz.Servise
     /// <summary>
     /// Сервис получения файлов
     /// </summary>
-    internal class GetFiles
+    internal class Repository
     {
         string[] _pdfFiles;
 
@@ -22,14 +23,14 @@ namespace drz.Servise
         public string[] PdfFiles => _pdfFiles;
 
 
-        Logger logItem;
+        Loger logItem;
 
-        List<ILogger> Logger;
+        List<ILoger> Loger;
 
 
-        public GetFiles()
+        public Repository()
         {
-            Logger = Program.Logger;
+            Loger = Program.Loger;
         }
 
         public  bool GetPDFfiles()
@@ -46,20 +47,20 @@ namespace drz.Servise
                 RestoreDirectory = true,
                 Multiselect = true,
                 ReadOnlyChecked = false,
-                //OFD.ShowReadOnly = true;
+
             };
             if (OFD.ShowDialog(new Form() { TopMost = true/*, TopLevel =true*/ }) == DialogResult.OK)
             {
                 _pdfFiles = OFD.FileNames;
-                ConsoleFocus.FocusProcess(DataSetWpfOpt.sAsmFileNameWithoutExtension);
+                ConsoleFocus.FocusProcess(DataSetWpfOpt.AsmFileNameWithoutExtension);
                 return true;
             }
             else
             {
-                logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
-                Logger.Add(logItem);
+                logItem = new Loger("Файлы PDF не выбраны", MesagType.Info);
+                Loger.Add(logItem);
 
-                ConsoleFocus.FocusProcess(DataSetWpfOpt.sAsmFileNameWithoutExtension);
+                ConsoleFocus.FocusProcess(DataSetWpfOpt.AsmFileNameWithoutExtension);
                 return false;
             }
         }
