@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+
+using drz.Abstractions.Interfaces;
+using drz.Servise;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -6,30 +10,72 @@ using PdfSharp.Pdf;
 namespace drz.PdfSharp.Pdf
 {
     /// <summary>
-    /// Добавляет VP с масштабом вида
+    /// Добавляет удаляет VP с масштабом вида
     /// </summary>
-    public class VPtoPage
+    internal class PageVpMod
     {
+
+        public PageVpMod()
+        {
+
+        }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="VPtoPage"/> class.
+        /// Pages the vp mod delete.
+        /// </summary>
+        /// <param name="page">The page.</param>
+        /// <returns>Успех</returns>
+        public bool PageVpModDel(PdfPage page)
+        {
+            _isErr = false;
+            _page = page;
+            _arrVP = Page.Elements.GetObject("/VP") as PdfArray;
+
+            if (ArrVP != null)//VP yes
+            {
+                try
+                {
+                    Page.Elements.Remove("/VP");
+                    _mesag = "VP удален";
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    _mesag = ex.Message;
+                    _isErr = true;
+                    return false;
+                }
+            }
+            else
+            {
+                _mesag = "VP отсутствует";
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PageVpMod"/> class.
         /// </summary>
         /// <param name="page">The page.</param>
         /// <param name="convertUnit">The convert unit.</param>
-        /// <param name="changeVpPage">if set to <c>true</c> [change view port page].</param>
-        public VPtoPage(PdfPage page,
+        /// <param name="isModified">true - Add or Modifi<br>false - only Add</br> </param>           
+        public bool PageVpModAdd(PdfPage page,
                         XGraphicsUnit convertUnit = XGraphicsUnit.Millimeter,
-                        bool changeVpPage = false)
+                        bool isModified = false)
         {
             _page = page;
 
             XUnit unit = new XUnit(1, convertUnit);
 
             _scalefactor = 1 / unit.Point;//пересчет единиц в точку
-
+            //todo обработка режимов isModified
             try
             {
                 #region Check VP Page
                 _arrVP = Page.Elements.GetObject("/VP") as PdfArray;
+
                 if (ArrVP == null)//если VP нет
                 {
                     #region VP NEW
@@ -40,70 +86,89 @@ namespace drz.PdfSharp.Pdf
                     if (AddArrVP())
                     {
                         _mesag = "VP добавлен в";
-                        _isChanged = true;
+                        return true;
                     }
                     else
                     {
-                        _isChanged = false;
+                        return false;
                     }
                 }
-                else if (changeVpPage)//заказано изменить VP scale factor
+                else if (isModified)//заказано изменить VP scale factor
                 {
-                    if(ModArrVP())
+                    if (ModArrVP())
                     {
-                    _mesag = "VP изменен в";
-                    
-                    _isChanged = true;
+                        _mesag = "VP изменен в";
+
+                        return true;
+                    }
+                    else
+                    {
+                        _mesag = "VP не удалось изменить";
+
+                        return false;
                     }
                 }
                 else
                 {
                     _mesag = "VP существует в";
-                    _isChanged = false;
+                    return false;
                 }
-                #endregion
-
-
+                #endregion 
             }
             catch (Exception ex)
             {
                 _mesag = ex.Message;
                 _isErr = true;
-                _isChanged = false;
+                return false;
             }
         }
 
-         bool ModArrVP()
+        bool ModArrVP()
         {
-            //todo добавить изменение scale factor
-            throw new NotImplementedException();
             //PdfPage page = pdfDoc.Pages[0];
 
             //PdfArray arrVP = page.Elements.GetObject("/VP") as PdfArray;
-            PdfDictionary dicVPitem = ArrVP.Elements.Items[0] as PdfDictionary;
+            PdfDictionary dicVPitem = null;
+            foreach (PdfDictionary item in ArrVP.Elements)
+            {
+                dicVPitem = item.Elements.GetObject("/Measure1") as PdfDictionary; ;
+                if (dicVPitem is PdfDictionary)
+                {
+                    break;
+                }
+            }
 
-            PdfArray dicBBox = dicVPitem.Elements.GetValue("/BBox") as PdfArray;
+            //dicVPitem = ArrVP.Elements.Items[0] as PdfDictionary;
+
+
+            //PdfArray dicBBox = dicVPitem.Elements.GetValue("/BBox") as PdfArray;
 
             PdfDictionary dicMeasure = dicVPitem.Elements.GetObject("/Measure") as PdfDictionary;
 
-            PdfArray arrA = dicMeasure.Elements.GetValue("/A") as PdfArray;
+            //PdfArray arrA = dicMeasure.Elements.GetValue("/A") as PdfArray;
 
-            PdfArray arrD = dicMeasure.Elements.GetValue("/D") as PdfArray;
+            //PdfArray arrD = dicMeasure.Elements.GetValue("/D") as PdfArray;
 
-            PdfString arrR = dicMeasure.Elements.GetValue("/R") as PdfString;
+            //PdfString arrR = dicMeasure.Elements.GetValue("/R") as PdfString;
 
-            PdfName nameSubtype = dicMeasure.Elements.GetValue("/Subtype") as PdfName;
+            //PdfName nameSubtype = dicMeasure.Elements.GetValue("/Subtype") as PdfName;
 
-            PdfName nameType = dicMeasure.Elements.GetValue("/Type") as PdfName;
+            //PdfName nameType = dicMeasure.Elements.GetValue("/Type") as PdfName;
 
             PdfArray arrX = dicMeasure.Elements.GetValue("/X") as PdfArray;
 
+
+
             PdfDictionary dicC = arrX.Elements.Items[0] as PdfDictionary;
 
-            PdfReal ConversionFactor = dicC.Elements.GetValue("/C") as PdfReal;//(0.35278) собственно искомое
+            //PdfReal ConversionFactor = dicC.Elements.GetValue("/C") as PdfReal;//(0.35278) собственно искомое
 
-            PdfName dicType = dicVPitem.Elements.GetValue("/Type") as PdfName;
+            //ставим желаемое значение
+            dicC.Elements.SetValue("/C", new PdfReal(Scalefactor));
 
+            //PdfName dicType = dicVPitem.Elements.GetValue("/Type") as PdfName;
+
+            return true;
         }
 
         bool AddArrVP()
@@ -229,14 +294,6 @@ namespace drz.PdfSharp.Pdf
 
 
         /// <summary>
-        /// Gets a value indicating whether this instance is changed.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is changed; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsChanged => _isChanged;
-
-        /// <summary>
         /// Gets a value indicating whether this instance is error.
         /// </summary>
         /// <value>
@@ -252,9 +309,11 @@ namespace drz.PdfSharp.Pdf
         /// </value>
         public double Scalefactor => _scalefactor;
 
+
+
         PdfPage _page;
         PdfArray _arrVP;
-        bool _isChanged;
+        //bool _isChanged;
         bool _isErr;
         string _mesag;
         double _scalefactor;

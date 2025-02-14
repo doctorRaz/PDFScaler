@@ -10,7 +10,7 @@ namespace drz.Servise
     /// <summary>
     /// Сервис получения файлов
     /// </summary>
-    internal class GetFiles
+    internal class Repository
     {
         string[] _pdfFiles;
 
@@ -23,14 +23,14 @@ namespace drz.Servise
         public string[] PdfFiles => _pdfFiles;
 
 
-        Logger logItem;
+        Loger logItem;
 
-        List<ILogger> Logger;
+        List<ILoger> Loger;
 
 
-        public GetFiles()
+        public Repository()
         {
-            Logger = Program.Logger;
+            Loger = Program.Loger;
         }
 
         public  bool GetPDFfiles()
@@ -57,8 +57,8 @@ namespace drz.Servise
             }
             else
             {
-                logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
-                Logger.Add(logItem);
+                logItem = new Loger("Файлы PDF не выбраны", MesagType.Info);
+                Loger.Add(logItem);
 
                 ConsoleFocus.FocusProcess(DataSetWpfOpt.AsmFileNameWithoutExtension);
                 return false;

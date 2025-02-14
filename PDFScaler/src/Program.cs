@@ -26,12 +26,12 @@ namespace drz.PDFScaler
         /// <summary>
         /// логгер событий
         /// </summary>
-        public static List<ILogger> Logger;
+        public static List<ILoger> Loger;
 
         [STAThread]
         static void Main(string[] args)
         {
-           
+
             //загрузчик dll
             new ReflectionLoader();
             Prog(args);
@@ -43,8 +43,8 @@ namespace drz.PDFScaler
             //цветная консоль
             IConsoleService CS = new ConsoleService();
 
-            //logger сообщения
-            Logger = new List<ILogger>();
+            //loger сообщения
+            Loger = new List<ILoger>();
 
             //todo в отдельный класс
             #region UINSI
@@ -151,32 +151,36 @@ namespace drz.PDFScaler
                 return;
             }
 
-            //движок PdfScaler
-            PdfScaler PS = new PdfScaler(Logger,WinGraphicsUnit.Millimeter);
-            GetFiles GF = new GetFiles();
+            WinGraphicsUnit unit = WinGraphicsUnit.Millimeter;
+            ModeChangVp mode = ModeChangVp.AddOrMod;
+
+            //Manager 
+            PdfManager PS = new PdfManager(Loger,
+                                            unit,
+                                            mode);
+            Repository GF = new Repository();
             do
             {
                 if (GF.GetPDFfiles())
                 {
                     PS.PdfRun(GF.PdfFiles);
                 }
-                foreach (Logger logger in Logger.Cast<Logger>())
+                foreach (Loger loger in Loger.Cast<Loger>())
                 {
 #if DEBUG
-                    CS.ConsoleWriteLine($"{logger.DateTimeStamp}: {logger.CallerName} {logger.Messag}", logger.MesagType);
+                    CS.ConsoleWriteLine($"{loger.DateTimeStamp}: {loger.CallerName} {loger.Messag}", loger.MesagType);
 #else
-                    CS.ConsoleWriteLine($"{logger.Messag}", logger.MesagType);
+                    CS.ConsoleWriteLine($"{loger.Messag}", loger.MesagType);
 #endif
                 }
-                //}
 
                 CS.ConsoleWrite(MessagWelcom.MesagReplase);
                 response = Console.ReadKey(/*false*/).Key;
                 if (response == ConsoleKey.Y)
                 {
                     CS.ConsoleWriteLine("");
-                    //logger
-                    Logger = new List<ILogger>();
+                    //loger
+                    //Loger.Clear();
                     //Console.Clear();
                 }
             } while (response == ConsoleKey.Y);

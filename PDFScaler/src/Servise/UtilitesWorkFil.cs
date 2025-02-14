@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 
+using drz.Abstractions.Interfaces;
 using drz.Enum;
 
 namespace drz.Servise
@@ -112,8 +113,7 @@ namespace drz.Servise
             }
             catch (System.Exception ex)
             {
-                //Logger logItem = new Logger(ex.Message, MesagType.Error);
-                //Program.Logger.Add(logItem);
+                Console.WriteLine(ex.Message);
                 return new string[0];
             }
         }

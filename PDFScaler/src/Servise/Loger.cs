@@ -10,7 +10,7 @@ namespace drz.Servise
     /// Сервис сохранения сообщений
     /// </summary>
     [Serializable]
-    internal class Logger : ILogger
+    internal class Loger : ILoger
     {
         /// <summary>
         /// Gets the name of the caller.
@@ -45,12 +45,12 @@ namespace drz.Servise
         public MesagType MesagType => _mesagType;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Logger"/> class.
+        /// Initializes a new instance of the <see cref="Loger"/> class.
         /// </summary>
         /// <param name="messag">The messag.</param>
         /// <param name="mesagType">Type of the mesag.</param>
         /// <param name="CallerName">Name of the caller.</param>
-        public Logger(string messag,
+        public Loger(string messag,
                       MesagType mesagType = MesagType.None,
                       [CallerMemberName] string CallerName = null)
         {

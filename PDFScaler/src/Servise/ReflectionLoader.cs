@@ -17,7 +17,7 @@ namespace drz.Servise
         #region System.Reflection            
         private System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            string sPath = string.Empty;
+            string sPath ;
 
             if (args.Name.IndexOf(",") > -1)
             {
