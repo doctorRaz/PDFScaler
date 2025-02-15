@@ -19,10 +19,10 @@ namespace drz.PdfVpMod.PdfSharp
         /// <summary>
         /// Initializes a new instance of the <see cref="PdfFiler"/> class.
         /// </summary>
-        /// <param name="loger">The loger.</param>
-        public PdfFiler(List<ILoger> loger)
+        /// <param name="logger">The logger.</param>
+        public PdfFiler(List<ILogger> logger)
         {
-            Loger = loger;
+            Logger = logger;
         }
 
         /// <summary>
@@ -36,14 +36,14 @@ namespace drz.PdfVpMod.PdfSharp
             try
             {
                 _pdfDoc = PdfReader.Open(pdffile, PdfDocumentOpenMode.Modify);
-                logItem = new Loger($"Open: {pdffile}", MesagType.Info);
-                Loger.Add(logItem);
+                logItem = new Logger($"Open: {pdffile}", MesagType.Info);
+                Logger.Add(logItem);
                 return true;
             }
             catch (Exception ex)
             {
-                logItem = new Loger($"{ex.Message}: {pdffile}", MesagType.Error);
-                Loger.Add(logItem);
+                logItem = new Logger($"{ex.Message}: {pdffile}", MesagType.Error);
+                Logger.Add(logItem);
                 return false;
             }
         }
@@ -78,14 +78,14 @@ namespace drz.PdfVpMod.PdfSharp
                 //перекидываем из темп новый файл на место существующего
                 File.Move(sTempFile, sPDFfile);
 
-                logItem = new Loger($"Файл сохранен: {sPDFfile}", MesagType.Ok);
-                Loger.Add(logItem);
+                logItem = new Logger($"Файл сохранен: {sPDFfile}", MesagType.Ok);
+                Logger.Add(logItem);
                 return true;
             }
             catch (Exception ex)
             {
-                logItem = new Loger($"{ex.Message} Не удалось сохранить: {sPDFfile}", MesagType.Error);
-                Loger.Add(logItem);
+                logItem = new Logger($"{ex.Message} Не удалось сохранить: {sPDFfile}", MesagType.Error);
+                Logger.Add(logItem);
                 return false;
             }
         }
@@ -103,9 +103,9 @@ namespace drz.PdfVpMod.PdfSharp
         //public bool IsSavedPdf => _isSavedPdf;
 
 
-        List<ILoger> Loger { get; set; }
+        List<ILogger> Logger { get; set; }
 
-        ILoger logItem;
+        ILogger logItem;
 
         //bool _isOpenedPdf;
         PdfDocument _pdfDoc;

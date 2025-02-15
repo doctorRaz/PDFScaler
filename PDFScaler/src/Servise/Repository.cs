@@ -26,14 +26,14 @@ namespace drz.PDFScaler.Servise
 
          
 
-        Loger logItem;
+        Logger logItem;
 
-        List<ILoger> Loger;
+        List<ILogger> Logger;
 
 
-        public Repository(List<ILoger> loger)
+        public Repository(List<ILogger> logger)
         {
-            Loger = loger;
+            Logger = logger;
         }
 
         public bool GetPDFfilesWin()
@@ -60,8 +60,8 @@ namespace drz.PDFScaler.Servise
             }
             else
             {
-                logItem = new Loger("Файлы PDF не выбраны", MesagType.Info);
-                Loger.Add(logItem);
+                logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
+                Logger.Add(logItem);
 
                 ConsoleFocus.FocusProcess(DataSetWpfOpt.AsmFileNameWithoutExtension);
                 return false;
@@ -71,6 +71,7 @@ namespace drz.PDFScaler.Servise
         public bool GetPDFfiles(string[] args)
         {
             //todo в отдельный класс
+            /*
             #region UINSI
          
             List<string> argsL = args.ToList();
@@ -158,6 +159,7 @@ namespace drz.PDFScaler.Servise
 
             
             #endregion
+            */
             return true;
         }
 

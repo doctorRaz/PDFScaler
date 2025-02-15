@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using drz.PDFScaler.Abstractions.Interfaces;
-using drz.PDFScaler.Infrastructure;
 using drz.PDFScaler.Servise;
 using drz.PdfVpMod.Abstractions.Interfaces;
 using drz.PdfVpMod.Enum;
@@ -27,7 +26,7 @@ namespace drz.PDFScaler
         /// <summary>
         /// логгер событий
         /// </summary>
-        public static List<ILoger> Loger;
+        public static List<ILogger> Logger;
 
         [STAThread]
         static void Main(string[] args)
@@ -44,10 +43,10 @@ namespace drz.PDFScaler
             //цветная консоль
             IConsoleService CS = new ConsoleService();
 
-            //loger сообщения
-            Loger = new List<ILoger>();
+            //logger сообщения
+            Logger = new List<ILogger>();
 
-            Repository GF = new Repository(Loger);
+            Repository GF = new Repository(Logger);
 
             if(GF.GetPDFfiles(args))//в ком строке что то есть
             {
@@ -77,7 +76,7 @@ namespace drz.PDFScaler
             ModeChangVp mode = ModeChangVp.AddOrMod;
 
             //Manager 
-            PdfManager PS = new PdfManager(Loger,
+            PdfManager PS = new PdfManager(Logger,
                                             unit,
                                             mode);
             
@@ -87,12 +86,12 @@ namespace drz.PDFScaler
                 {
                     PS.PdfRun(GF.PdfFiles);
                 }
-                foreach (Loger loger in Loger.Cast<Loger>())
+                foreach (Logger logger in Logger.Cast<Logger>())
                 {
 #if DEBUG
-                    CS.ConsoleWriteLine($"{loger.DateTimeStamp}: {loger.CallerName} {loger.Messag}", loger.MesagType);
+                    CS.ConsoleWriteLine($"{logger.DateTimeStamp}: {logger.CallerName} {logger.Messag}", logger.MesagType);
 #else
-                    CS.ConsoleWriteLine($"{loger.Messag}", loger.MesagType);
+                    CS.ConsoleWriteLine($"{logger.Messag}", logger.MesagType);
 #endif
                 }
 
@@ -101,8 +100,8 @@ namespace drz.PDFScaler
                 if (response == ConsoleKey.Y)
                 {
                     CS.ConsoleWriteLine("");
-                    //loger
-                    //Loger.Clear();
+                    //logger
+                    //Logger.Clear();
                     //Console.Clear();
                 }
             } while (response == ConsoleKey.Y);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 using drz.PdfVpMod.Abstractions.Interfaces;
@@ -10,7 +11,7 @@ namespace drz.PdfVpMod.Servise
     /// Сервис сохранения сообщений
     /// </summary>
     [Serializable]
-    public class Loger : ILoger
+    public class Logger : ILogger
     {
         /// <summary>
         /// Gets the name of the caller.
@@ -45,12 +46,12 @@ namespace drz.PdfVpMod.Servise
         public MesagType MesagType => _mesagType;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Loger"/> class.
+        /// Initializes a new instance of the <see cref="Logger"/> class.
         /// </summary>
         /// <param name="messag">The messag.</param>
         /// <param name="mesagType">Type of the mesag.</param>
         /// <param name="CallerName">Name of the caller.</param>
-        public Loger(string messag,
+        public Logger(string messag,
                       MesagType mesagType = MesagType.None,
                       [CallerMemberName] string CallerName = null)
         {
@@ -63,6 +64,10 @@ namespace drz.PdfVpMod.Servise
             _mesagType = mesagType;
         }
 
+        /// <summary>
+        /// The loggers
+        /// </summary>
+        public static List<ILogger> Loggers;
 
         DateTime _dateTimeStamp;
         string _callerName;

@@ -3,11 +3,14 @@ using System.IO;
 
 namespace drz.PdfVpMod.Servise
 {
-    class UtilitesWorkFil
+    /// <summary>
+    /// утилиты для работы с файлами
+    /// </summary>
+    internal class UtilitesWorkFil
     {
 
         /// <summary>
-        /// Копирует файл в назначенную дирректорию
+        /// Копирует файл в назначенную директорию
         /// </summary>
         /// <param name="sFulPathFileCopiedFil">Полный путь копируемого файла</param>
         /// <param name="sPathDestination">Каталог куда копировать</param>
@@ -15,7 +18,7 @@ namespace drz.PdfVpMod.Servise
         /// <br>Неудача - Описание ошибки</br>
         /// </param>
         /// <returns>Успех</returns>
-        public static bool tryCopyTo(string sFulPathFileCopiedFil, string sPathDestination, out string sOut)
+        public static bool TryCopyTo(string sFulPathFileCopiedFil, string sPathDestination, out string sOut)
         {
             try
             {
@@ -98,7 +101,7 @@ namespace drz.PdfVpMod.Servise
         /// <param name="WithSubfolders">Учитывать поддиректории</param>
         /// <param name="sSerchPatern">Маска поиска</param>
         /// <returns>Пути к файлам</returns>
-        internal static string[] GetFilesOfDir(string sPath, bool WithSubfolders, string sSerchPatern = "*.pdf")
+         static string[] GetFilesOfDir(string sPath, bool WithSubfolders, string sSerchPatern = "*.pdf")
         {
             try
             {

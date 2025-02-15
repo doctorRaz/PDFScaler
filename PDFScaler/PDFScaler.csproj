@@ -59,17 +59,18 @@
     <Compile Include="src\Enum\Enum.WConsoleColor.cs" />
     <Compile Include="src\Servise\ConsoleFocus.cs" />
     <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
-    <Compile Include="src\Infrastructure\ConsoleService.cs" />
+    <Compile Include="src\Servise\ConsoleService.cs" />
     <Compile Include="src\Servise\ReflectionLoader.cs" />
     <Compile Include="src\Servise\MessagWelcom.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="src\Servise\Repository.cs" />
-    <Compile Include="src\Servise\UtilitesWorkFil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="share.te.ua.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\Infrastructure\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PdfVPMod\PdfVPMod.csproj">
       <Project>{51c6ebd6-3c9c-470d-9b55-988533b029f7}</Project>

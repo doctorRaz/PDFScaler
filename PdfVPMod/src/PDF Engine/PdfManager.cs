@@ -22,10 +22,10 @@ namespace drz.PdfVpMod.PdfSharp
         /// Initializes a new instance of the <see cref="PdfManager" /> class.
         /// <br>Default unit Millimeter <see cref="XGraphicsUnit.Millimeter" /></br>
         /// </summary>
-        /// <param name="loger">The loger.</param>
-        public PdfManager(List<ILoger> loger)
+        /// <param name="logger">The logger.</param>
+        public PdfManager(List<ILogger> logger)
         {
-            Loger = loger;
+            Logger = logger;
             _convertUnit = XGraphicsUnit.Millimeter;
             ChangeVpPage = ModeChangVp.Add;
         }
@@ -33,14 +33,14 @@ namespace drz.PdfVpMod.PdfSharp
         ///// <summary>
         ///// Initializes a new instance of the <see cref="PdfManager" /> class.
         ///// </summary>
-        ///// <param name="loger">The loger.</param>
+        ///// <param name="logger">The logger.</param>
         ///// <param name="convertUnit">The convert unit.</param>
         ///// <param name="changeVpPage"></param>
-        //public PdfManager(List<ILoger> loger,
+        //public PdfManager(List<ILogger> logger,
         //                  XGraphicsUnit convertUnit,
         //                  ModeChangVp changeVpPage = ModeChangVp.Add)
         //{
-        //    Loger = loger;
+        //    Logger = logger;
         //    _convertUnit = convertUnit;
         //    ChangeVpPage = changeVpPage;
         //}
@@ -48,14 +48,14 @@ namespace drz.PdfVpMod.PdfSharp
         /// <summary>
         /// Initializes a new instance of the <see cref="PdfManager" /> class.
         /// </summary>
-        /// <param name="loger">The loger.</param>
+        /// <param name="logger">The logger.</param>
         /// <param name="convertUnit">The convert unit.</param>
         /// <param name="changeVpPage"></param>
-        public PdfManager(List<ILoger> loger,
+        public PdfManager(List<ILogger> logger,
                           WinGraphicsUnit convertUnit,
                           ModeChangVp changeVpPage = ModeChangVp.Add)
         {
-            Loger = loger;
+            Logger = logger;
             WinConvertUnit = convertUnit;
             ChangeVpPage = changeVpPage;
         }
@@ -68,10 +68,10 @@ namespace drz.PdfVpMod.PdfSharp
         public void PdfRun(string[] PdfFiles)
         {
             //новый филер документов
-            PdfFiler Filer = new PdfFiler(Loger);
+            PdfFiler Filer = new PdfFiler(Logger);
 
             //новый конвертер
-            PdfConversion Conv = new PdfConversion(Loger);
+            PdfConversion Conv = new PdfConversion(Logger);
 
             //по списку файлов
             foreach (string pdffile in PdfFiles)
@@ -93,8 +93,8 @@ namespace drz.PdfVpMod.PdfSharp
                 }
                 else//ни один VP не добавлен, сохранять не надо
                 {
-                    logItem = new Loger($"Изменений нет. Файл не сохранен: {pdffile}", MesagType.Info);
-                    Loger.Add(logItem);
+                    logItem = new Logger($"Изменений нет. Файл не сохранен: {pdffile}", MesagType.Info);
+                    Logger.Add(logItem);
                 }
             }
         }
@@ -103,9 +103,9 @@ namespace drz.PdfVpMod.PdfSharp
 
         ModeChangVp ChangeVpPage;
 
-        ILoger logItem;
+        ILogger logItem;
 
-        List<ILoger> Loger;
+        List<ILogger> Logger;
 
         XGraphicsUnit _convertUnit;
         XGraphicsUnit ConvertUnit => _convertUnit;

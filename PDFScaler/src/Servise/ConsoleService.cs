@@ -8,7 +8,7 @@ using drz.PdfVpMod.Enum;
 
 
 
-namespace drz.PDFScaler.Infrastructure
+namespace drz.PDFScaler.Servise
 {
     /// <summary>
     /// Реализация сообщений в консоль

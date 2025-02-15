@@ -8,9 +8,9 @@ namespace drz.PdfVpMod.Abstractions.Interfaces
 
 {
     /// <summary>
-    /// Loger
+    /// Logger
     /// </summary>
-    public interface ILoger
+    public interface ILogger
     {
         /// <summary>
         /// Gets the date time stamp.

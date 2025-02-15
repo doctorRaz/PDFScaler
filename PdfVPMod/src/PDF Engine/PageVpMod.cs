@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Linq;
 
 using PdfSharp.Drawing;
@@ -20,7 +21,7 @@ namespace drz.PdfVpMod.PdfSharp
         }
 
         /// <summary>
-        /// Pages the vp mod delete.
+        /// Pages the VP mod delete.
         /// </summary>
         /// <param name="page">The page.</param>
         /// <returns>Успех</returns>
@@ -59,7 +60,7 @@ namespace drz.PdfVpMod.PdfSharp
         /// </summary>
         /// <param name="page">The page.</param>
         /// <param name="convertUnit">The convert unit.</param>
-        /// <param name="isModified">true - Add or Modifi<br>false - only Add</br> </param>           
+        /// <param name="isModified">true - Add or Modify<br>false - only Add</br> </param>           
         public bool PageVpModAdd(PdfPage page,
                         XGraphicsUnit convertUnit = XGraphicsUnit.Millimeter,
                         bool isModified = false)
@@ -102,7 +103,7 @@ namespace drz.PdfVpMod.PdfSharp
                     }
                     else
                     {
-                        _mesag = "VP не удалось изменить";
+                        _mesag = "VP не изменен в";
 
                         return false;
                     }
@@ -123,11 +124,12 @@ namespace drz.PdfVpMod.PdfSharp
         }
 
         /// <summary>
-        /// Modifes the scale vp.
+        /// Modifies the scale VP.
         /// </summary>
         /// <returns>Успех</returns>
         bool ModArrVP()
         {
+            bool isMod=false;
             try
             {
                 PdfDictionary dicMeasure = null;
@@ -147,11 +149,23 @@ namespace drz.PdfVpMod.PdfSharp
                     PdfReal ConversionFactor = item.Elements.GetValue("/C") as PdfReal;
                     if (ConversionFactor is PdfReal)
                     {
-                        item.Elements.SetValue("/C", new PdfReal(Scalefactor));
-                        break;
+                        var dd = ConversionFactor.Value;
+                        var dr = Math.Round(dd, 5);
+                        var sr = Math.Round(Scalefactor, 5);
+                        if (dr != sr)
+                        {
+                            item.Elements.SetValue("/C", new PdfReal(Scalefactor));
+                            isMod= true;
+                            break;
+                        }
+                        else
+                        {
+                            isMod= false;
+                            break;
+                        }
                     }
                 }
-                return true;
+                return isMod;
             }
             catch (Exception ex)
             {

@@ -8,7 +8,7 @@ namespace drz.PDFScaler.Servise
     partial class ReflectionLoader
 
     {
-        public ReflectionLoader()
+        internal ReflectionLoader()
         {
             AsmEventAdd();//add  event Assembly resolve                   
 
@@ -49,7 +49,7 @@ namespace drz.PDFScaler.Servise
             string sPath = Directory.GetParent(sAsmFileFullName).FullName;
 
 
-            string[] asmPaths = UtilitesWorkFil.GetFilesOfDir(sPath, true, sDllName);
+            string[] asmPaths = GetFilesOfDir(sPath, true, sDllName);
             if (asmPaths.Length > 0)
             {
                 string asmPathTmp = asmPaths[0];//хватаем первую в списке
@@ -82,7 +82,29 @@ namespace drz.PDFScaler.Servise
         }
         #endregion
 
-
+        #region Utilities Files
+        /// <summary>Получить список путей фалов в директории</summary>
+        /// <param name="sPath">Директория с файлами</param>
+        /// <param name="WithSubfolders">Учитывать поддиректории</param>
+        /// <param name="sSerchPatern">Маска поиска</param>
+        /// <returns>Пути к файлам</returns>
+          static string[] GetFilesOfDir(string sPath, bool WithSubfolders, string sSerchPatern = "*.pdf")
+        {
+            try
+            {
+                return Directory.GetFiles(sPath,
+                                            sSerchPatern,
+                                            (WithSubfolders
+                                            ? SearchOption.AllDirectories
+                                            : SearchOption.TopDirectoryOnly));
+            }
+            catch
+            {
+                //Console.WriteLine(ex.Message);
+                return new string[0];
+            }
+        }
+        #endregion
 
     }
 }

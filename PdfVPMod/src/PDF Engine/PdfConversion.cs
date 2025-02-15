@@ -17,10 +17,10 @@ namespace drz.PdfVpMod.PdfSharp
         /// <summary>
         /// Настройка конвертора VP
         /// </summary>
-        /// <param name="loger">The loger.</param>
-        public PdfConversion(List<ILoger> loger)
+        /// <param name="logger">The logger.</param>
+        public PdfConversion(List<ILogger> logger)
         {
-            Loger = loger;
+            Logger = logger;
         }
         #endregion
 
@@ -52,19 +52,19 @@ namespace drz.PdfVpMod.PdfSharp
                     if (PVM.PageVpModDel(page))
                     {
                         _isModified = true;//если меняли хоть один лист
-                        _logItem = new Loger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Ok);
+                        _logItem = new Logger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Ok);
                     }
                     else
                     {
                         if (PVM.IsErr)//Page not chang exept
                         {
                             _isModified = false;
-                            _logItem = new Loger($"\tVP сбой в Page:{++pageNum} {PVM.Mesag}", MesagType.Error);
+                            _logItem = new Logger($"\tVP сбой в Page:{++pageNum} {PVM.Mesag}", MesagType.Error);
                         }
                         else//Page not chang exist
                         {
                             _isModified = false;
-                            _logItem = new Loger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Info);
+                            _logItem = new Logger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Info);
                         }
                     }
                 }
@@ -79,23 +79,23 @@ namespace drz.PdfVpMod.PdfSharp
                     if (IsChanged)//Page chang
                     {
                         _isModified = true;//если меняли хоть один лист
-                        _logItem = new Loger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Ok);
+                        _logItem = new Logger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Ok);
                     }
                     else//Page not chang
                     {
                         if (PVM.IsErr)//Page not chang exept
                         {
                             _isModified = false;
-                            _logItem = new Loger($"\tVP сбой в Page:{++pageNum} {PVM.Mesag}", MesagType.Error);
+                            _logItem = new Logger($"\tVP сбой в Page:{++pageNum} {PVM.Mesag}", MesagType.Error);
                         }
                         else//Page not chang exist
                         {
                             _isModified = false;
-                            _logItem = new Loger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Info);
+                            _logItem = new Logger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Info);
                         }
                     }
                 }
-                Loger.Add(_logItem);
+                Logger.Add(_logItem);
             }
             if (IsModified)
             {
@@ -112,12 +112,12 @@ namespace drz.PdfVpMod.PdfSharp
 
         #region Servise
 
-        ILoger _logItem;
+        ILogger _logItem;
 
         /// <summary>
-        /// The loger
+        /// The logger
         /// </summary>
-        public List<ILoger> Loger;
+        public List<ILogger> Logger;
 
         ModeChangVp ChangeVpPage;
 
