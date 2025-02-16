@@ -85,7 +85,7 @@ namespace drz.PDFScaler
                     using (FileStream fs = new FileStream(XMLpatch, FileMode.Open, FileAccess.Read))
                     {
                         //_lFieldsFrmts = new List<FieldsFrmt>();
-                        Set = FormatterXML.Deserialize(fs) as Setting;
+                       Setting Set0 = FormatterXML.Deserialize(fs) as Setting;
                     }
                     return true;
                 }
@@ -110,7 +110,7 @@ namespace drz.PDFScaler
 
 
 
-        static XDocument config = null;
+        //static XDocument config = null;
 
         static int _ExitConfirmation = 0;
         public static int ExitConfirmation
@@ -128,51 +128,51 @@ namespace drz.PDFScaler
             }
         }
 
-        public static void ReadXML()
-        {
-            try
-            {
-                config = XDocument.Load(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml");
-                System.Console.WriteLine("The configuration file has been read correctly");
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                /*
-                config = new XDocument(
-                    new XComment("PDFUnisci config"),
-                    new XElement("config",
-                        new XComment("It indicates the number of digits when you divide a PDF"),
-                        new XElement($"{nameof(PDFInterface.DefaultDigit)}", PDFInterface.DefaultDigit),
-                        new XComment("The program will remain open until you press any key"),
-                        new XElement($"{nameof(ExitConfirmation)}", ExitConfirmation),
-                        new XComment("If set to zero disables the function to replace the cover"),
-                        new XElement($"{nameof(PDFInterface.CoverFunction)}", PDFInterface.CoverFunction),
-                        new XComment("If set to zero disables the function to add Bookmarks when merge PDF"),
-                        new XElement($"{nameof(PDFInterface.Bookmarks)}", PDFInterface.Bookmarks),
-                        new XComment("If set to one flat only first page of the PDF"),
-                        new XElement($"{nameof(PDFInterface.FlatOnlyFirstPage)}", PDFInterface.FlatOnlyFirstPage)));
-                config.Declaration = new XDeclaration("1.0", "utf-8", "true");
-                config.Save(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml");
+        //public static void ReadXML()
+        //{
+        //    try
+        //    {
+        //        config = XDocument.Load(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml");
+        //        System.Console.WriteLine("The configuration file has been read correctly");
+        //    }
+        //    catch (System.IO.FileNotFoundException)
+        //    {
+        /*
+        config = new XDocument(
+            new XComment("PDFUnisci config"),
+            new XElement("config",
+                new XComment("It indicates the number of digits when you divide a PDF"),
+                new XElement($"{nameof(PDFInterface.DefaultDigit)}", PDFInterface.DefaultDigit),
+                new XComment("The program will remain open until you press any key"),
+                new XElement($"{nameof(ExitConfirmation)}", ExitConfirmation),
+                new XComment("If set to zero disables the function to replace the cover"),
+                new XElement($"{nameof(PDFInterface.CoverFunction)}", PDFInterface.CoverFunction),
+                new XComment("If set to zero disables the function to add Bookmarks when merge PDF"),
+                new XElement($"{nameof(PDFInterface.Bookmarks)}", PDFInterface.Bookmarks),
+                new XComment("If set to one flat only first page of the PDF"),
+                new XElement($"{nameof(PDFInterface.FlatOnlyFirstPage)}", PDFInterface.FlatOnlyFirstPage)));
+        config.Declaration = new XDeclaration("1.0", "utf-8", "true");
+        config.Save(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml");
 
-                System.Console.WriteLine("The config.xml file is not found, it will create");
-                */
-            }
+        System.Console.WriteLine("The config.xml file is not found, it will create");
+        */
+        //        }
 
-            /*
-            //Leggo il file xml
-            PDFInterface.DefaultDigit = ReadConfig(PDFInterface.DefaultDigit, nameof(PDFInterface.DefaultDigit));
-            ExitConfirmation = ReadConfig(ExitConfirmation, nameof(ExitConfirmation));
-            PDFInterface.CoverFunction = ReadConfig(PDFInterface.CoverFunction, nameof(PDFInterface.CoverFunction));
-            PDFInterface.Bookmarks = ReadConfig(PDFInterface.Bookmarks, nameof(PDFInterface.Bookmarks));
-            PDFInterface.FlatOnlyFirstPage = ReadConfig(PDFInterface.FlatOnlyFirstPage, nameof(PDFInterface.FlatOnlyFirstPage));
-            */
-        }
+        //        /*
+        //        //Leggo il file xml
+        //        PDFInterface.DefaultDigit = ReadConfig(PDFInterface.DefaultDigit, nameof(PDFInterface.DefaultDigit));
+        //        ExitConfirmation = ReadConfig(ExitConfirmation, nameof(ExitConfirmation));
+        //        PDFInterface.CoverFunction = ReadConfig(PDFInterface.CoverFunction, nameof(PDFInterface.CoverFunction));
+        //        PDFInterface.Bookmarks = ReadConfig(PDFInterface.Bookmarks, nameof(PDFInterface.Bookmarks));
+        //        PDFInterface.FlatOnlyFirstPage = ReadConfig(PDFInterface.FlatOnlyFirstPage, nameof(PDFInterface.FlatOnlyFirstPage));
+        //        */
+        //    }
 
-        static int ReadConfig(int option, string nameof)
-        {
-            int i;
-            if (int.TryParse(config.Elements("config").Select(o => o.Element($"{nameof}").Value).First(), out i)) return i;
-            else return option;
-        }
+        //    static int ReadConfig(int option, string nameof)
+        //    {
+        //        int i;
+        //        if (int.TryParse(config.Elements("config").Select(o => o.Element($"{nameof}").Value).First(), out i)) return i;
+        //        else return option;
+        //    }
     }
 }
