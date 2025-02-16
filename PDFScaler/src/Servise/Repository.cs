@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-using drz.PdfVpMod.Abstractions.Interfaces;
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Interfaces;
 using drz.PdfVpMod.Servise;
 
 using PDFUnisci;

@@ -1,4 +1,4 @@
-﻿namespace drz.PDFScaler.Abstractions.Interfaces
+﻿namespace drz.PDFScaler.Interfaces
 {
     /// <summary>
     ///Цвет раскраски текста или фона

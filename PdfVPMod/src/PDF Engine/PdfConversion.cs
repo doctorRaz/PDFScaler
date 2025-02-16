@@ -1,8 +1,8 @@
 ﻿
 using System.Collections.Generic;
 
-using drz.PdfVpMod.Abstractions.Interfaces;
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Interfaces;
 using drz.PdfVpMod.Servise;
 
 using PdfSharp.Drawing;

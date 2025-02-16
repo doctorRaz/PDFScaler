@@ -3,7 +3,7 @@
 using drz.PdfVpMod.Enum;
 
 
-namespace drz.PDFScaler.Abstractions.Interfaces
+namespace drz.PDFScaler.Interfaces
 {
     /// <summary>
     /// Интерфейс сообщений консоли

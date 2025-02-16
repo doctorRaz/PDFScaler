@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-using drz.PdfVpMod.Abstractions.Interfaces;
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Interfaces;
 using drz.PdfVpMod.Servise;
 
 using PdfSharp.Drawing;
@@ -29,21 +29,7 @@ namespace drz.PdfVpMod.PdfSharp
             _convertUnit = XGraphicsUnit.Millimeter;
             ChangeVpPage = ModeChangVp.Add;
         }
-
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="PdfManager" /> class.
-        ///// </summary>
-        ///// <param name="logger">The logger.</param>
-        ///// <param name="convertUnit">The convert unit.</param>
-        ///// <param name="changeVpPage"></param>
-        //public PdfManager(List<ILogger> logger,
-        //                  XGraphicsUnit convertUnit,
-        //                  ModeChangVp changeVpPage = ModeChangVp.Add)
-        //{
-        //    Logger = logger;
-        //    _convertUnit = convertUnit;
-        //    ChangeVpPage = changeVpPage;
-        //}
+               
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PdfManager" /> class.
@@ -65,7 +51,8 @@ namespace drz.PdfVpMod.PdfSharp
         /// PDFs обработка.
         /// </summary>
         /// <param name="PdfFiles">The PDF files.</param>
-        public void PdfRun(List<string> PdfFiles)
+        /// <param name="addBak">сохранять оригинал</param>
+        public void PdfRun(List<string> PdfFiles,bool addBak)
         {
             //новый филер документов
             PdfFiler Filer = new PdfFiler(Logger);
@@ -89,7 +76,7 @@ namespace drz.PdfVpMod.PdfSharp
                                       ChangeVpPage)//режим только добавление VP
                     )// если хоть один VP добавлен
                 {
-                    Filer.PdfSave(pdfDoc);//сохраняем                   
+                    Filer.PdfSave(pdfDoc,addBak);//сохраняем                   
                 }
                 else//ни один VP не добавлен, сохранять не надо
                 {

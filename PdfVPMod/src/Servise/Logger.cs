@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-using drz.PdfVpMod.Abstractions.Interfaces;
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Interfaces;
 
 namespace drz.PdfVpMod.Servise
 {

@@ -8,13 +8,21 @@ using drz.PdfVpMod.Enum;
 
 namespace drz.PDFScaler
 {
+    /// <summary>
+    /// настройки программы
+    /// </summary>
     [Serializable]
     public class Setting
     {
         //todo вынести в settings
         WinGraphicsUnit _unit = WinGraphicsUnit.Millimeter;
 
-    
+        /// <summary>
+        /// Gets or sets the unit.
+        /// </summary>
+        /// <value>
+        /// The unit.
+        /// </value>
         public WinGraphicsUnit Unit
         {
             get

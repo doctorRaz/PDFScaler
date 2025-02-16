@@ -2,8 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using drz.PDFScaler.Abstractions.Interfaces;
-using drz.PDFScaler.Servise;
+using drz.PDFScaler.Interfaces;
 using drz.PdfVpMod.Enum;
 
 
@@ -13,7 +12,7 @@ namespace drz.PDFScaler.Servise
     /// <summary>
     /// Реализация сообщений в консоль
     /// </summary>
-    /// <seealso cref="drz.PDFScaler.Abstractions.Interfaces.IConsoleService" />
+    /// <seealso cref="drz.PDFScaler.Interfaces.IConsoleService" />
     internal class ConsoleService :/* MessageService,*/ IConsoleService
     {
         /// <summary>

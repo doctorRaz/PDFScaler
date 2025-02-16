@@ -4,8 +4,7 @@ using drz.PdfVpMod.Enum;
 
 
 
-namespace drz.PdfVpMod.Abstractions.Interfaces
-
+namespace drz.PdfVpMod.Interfaces
 {
     /// <summary>
     /// Logger

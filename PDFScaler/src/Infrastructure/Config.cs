@@ -7,8 +7,8 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 
 using drz.PDFScaler.Servise;
-using drz.PdfVpMod.Abstractions.Interfaces;
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Interfaces;
 using drz.PdfVpMod.Servise;
 
 using LogManager;
@@ -22,64 +22,79 @@ namespace drz.PDFScaler
         {
             Logger = logger;
             Set = new Setting();
-            Deserialize();
-            
+            if (Deserialize())
+            {
+                Logger logItem = new Logger($"Настройки прочитаны {XMLpatch}", MesagType.Info);
+                Logger.Add(logItem);
+            }
+            else
+            {
+                Logger logItem = new Logger($"Не удалось прочитать и сохранить настройки {XMLpatch}", MesagType.Error);
+                Logger.Add(logItem);
+            }
+
         }
 
         /// <summary> путь к XML </summary>
-        static string sXMLpatch => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"{DataSetWpfOpt.sAppProductName}.config");
+        static string XMLpatch => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"{DataSetWpfOpt.sAppProductName}.config");
 
-        static XmlSerializer formatterXML => new XmlSerializer(typeof(Setting));
+        static XmlSerializer FormatterXML => new XmlSerializer(typeof(Setting));
 
         public Setting Set;
 
         List<ILogger> Logger;
 
-        internal bool IsSetings;
-
-
+        /// <summary>
+        /// Serializes this instance.
+        /// </summary>
+        /// <returns></returns>
         internal bool Serialize()
         {
             try
             {
-                if (File.Exists(sXMLpatch))
+                if (File.Exists(XMLpatch))
                 {
-                    File.SetAttributes(sXMLpatch, FileAttributes.Normal);//прибить во избежание
+                    File.SetAttributes(XMLpatch, FileAttributes.Normal);//прибить во избежание
                 }
-                using (FileStream fs = new FileStream(sXMLpatch, FileMode.Create))
+                using (FileStream fs = new FileStream(XMLpatch, FileMode.Create))
                 {
-                    formatterXML.Serialize(fs, Set);
+                    FormatterXML.Serialize(fs, Set);
                 }
-                Logger logItem = new Logger($"Настройки сохранены {sXMLpatch}", MesagType.Info);
+                Logger logItem = new Logger($"Настройки сохранены {XMLpatch}", MesagType.Info);
                 Logger.Add(logItem);
                 return true;
             }
             catch (Exception e)
             {
-                Logger logItem = new Logger($"Невозможно сохранить настройки {sXMLpatch}\n{e.Message}", MesagType.Error);
+                Logger logItem = new Logger($"Невозможно сохранить настройки {XMLpatch}\n{e.Message}", MesagType.Error);
                 Logger.Add(logItem);
                 return false;
             }
         }
 
-        internal  bool  Deserialize()
+        /// <summary>
+        /// Deserializes this instance.
+        /// </summary>
+        /// <returns></returns>
+        internal bool Deserialize()
         {
-            if (File.Exists(sXMLpatch))
+            if (File.Exists(XMLpatch))
             {
                 try
                 {
-                    using (FileStream fs = new FileStream(sXMLpatch, FileMode.Open, FileAccess.Read))
+                    using (FileStream fs = new FileStream(XMLpatch, FileMode.Open, FileAccess.Read))
                     {
                         //_lFieldsFrmts = new List<FieldsFrmt>();
-                        Set = formatterXML.Deserialize(fs) as Setting;
+                        Set = FormatterXML.Deserialize(fs) as Setting;
                     }
                     return true;
                 }
                 catch (Exception e)
                 {
-                    Logger logItem = new Logger($"Не удалось прочитать {sXMLpatch}\n{e.Message}", MesagType.Error);
+                    Logger logItem = new Logger($"Не удалось прочитать {XMLpatch}\n{e.Message}", MesagType.Info);
                     Logger.Add(logItem);
-                    return Serialize();                }
+                    return Serialize();
+                }
             }
             else
             {

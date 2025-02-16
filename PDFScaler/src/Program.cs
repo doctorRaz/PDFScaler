@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using drz.PDFScaler.Abstractions.Interfaces;
+using drz.PDFScaler.Interfaces;
 using drz.PDFScaler.Servise;
-using drz.PdfVpMod.Abstractions.Interfaces;
-using drz.PdfVpMod.Enum;
+ using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Interfaces;
 using drz.PdfVpMod.PdfSharp;
 using drz.PdfVpMod.Servise;
 
@@ -49,7 +49,7 @@ namespace drz.PDFScaler
             //читаю файл конфигурации
             Config cfg = new Config(Logger);
 
-            Setting sets = cfg.Set;
+            Setting Sets = cfg.Set;
 
 
             Repository GF = new Repository(Logger);
@@ -81,20 +81,20 @@ namespace drz.PDFScaler
 
             //Manager 
             PdfManager PS = new PdfManager(Logger,
-                                            sets.Unit,
-                                           sets.Mode);
+                                            Sets.Unit,
+                                           Sets.Mode);
 
             do
             {
                 if (GF.GetPDFfilesWin())
                 {
-                    PS.PdfRun(GF.PdfFiles);
+                    PS.PdfRun(GF.PdfFiles,Sets.AddBak);
                 }
                 foreach (Logger logger in Logger.Cast<Logger>())
                 {
                     if (logger.MesagType == MesagType.Error)
                     {
-                        sets.ExitConfirmation = true;//не закрывать консоль
+                        Sets.ExitConfirmation = true;//не закрывать консоль
                     }
 #if DEBUG
                     CS.ConsoleWriteLine($"{logger.DateTimeStamp}: {logger.CallerName} {logger.Messag}", logger.MesagType);
@@ -102,7 +102,7 @@ namespace drz.PDFScaler
                     CS.ConsoleWriteLine($"{logger.Messag}", logger.MesagType);
 #endif
                 }
-                if (!sets.ExitConfirmation)
+                if (!Sets.ExitConfirmation)
                 {
                     return;
                 }
