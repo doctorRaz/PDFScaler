@@ -60,7 +60,7 @@
     <Compile Include="src\PDF Engine\PdfConversion.cs" />
     <Compile Include="src\PDF Engine\PdfFiler.cs" />
     <Compile Include="src\PDF Engine\PdfManager.cs" />
-    <Compile Include="src\Servise\Loger.cs" />
+    <Compile Include="src\Servise\Logger.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
   </ItemGroup>
   <ItemGroup>

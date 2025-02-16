@@ -65,7 +65,7 @@ namespace drz.PdfVpMod.PdfSharp
         /// PDFs обработка.
         /// </summary>
         /// <param name="PdfFiles">The PDF files.</param>
-        public void PdfRun(string[] PdfFiles)
+        public void PdfRun(List<string> PdfFiles)
         {
             //новый филер документов
             PdfFiler Filer = new PdfFiler(Logger);

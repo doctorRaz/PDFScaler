@@ -24,7 +24,7 @@ namespace drz.PDFScaler
     internal class Program
     {
         /// <summary>
-        /// логгер событий
+        /// логер событий
         /// </summary>
         public static List<ILogger> Logger;
 
@@ -46,9 +46,15 @@ namespace drz.PDFScaler
             //logger сообщения
             Logger = new List<ILogger>();
 
+            //читаю файл конфигурации
+            Config cfg = new Config(Logger);
+
+            Setting sets = cfg.Set;
+
+
             Repository GF = new Repository(Logger);
 
-            if(GF.GetPDFfiles(args))//в ком строке что то есть
+            if (GF.GetPDFfiles(args))//в ком строке что то есть
             {
 
             }
@@ -72,14 +78,12 @@ namespace drz.PDFScaler
                 return;
             }
 
-            WinGraphicsUnit unit = WinGraphicsUnit.Millimeter;
-            ModeChangVp mode = ModeChangVp.AddOrMod;
 
             //Manager 
             PdfManager PS = new PdfManager(Logger,
-                                            unit,
-                                            mode);
-            
+                                            sets.Unit,
+                                           sets.Mode);
+
             do
             {
                 if (GF.GetPDFfilesWin())
@@ -88,13 +92,20 @@ namespace drz.PDFScaler
                 }
                 foreach (Logger logger in Logger.Cast<Logger>())
                 {
+                    if (logger.MesagType == MesagType.Error)
+                    {
+                        sets.ExitConfirmation = true;//не закрывать консоль
+                    }
 #if DEBUG
                     CS.ConsoleWriteLine($"{logger.DateTimeStamp}: {logger.CallerName} {logger.Messag}", logger.MesagType);
 #else
                     CS.ConsoleWriteLine($"{logger.Messag}", logger.MesagType);
 #endif
                 }
-
+                if (!sets.ExitConfirmation)
+                {
+                    return;
+                }
                 CS.ConsoleWrite(MessagWelcom.MesagReplase);
                 response = Console.ReadKey(/*false*/).Key;
                 if (response == ConsoleKey.Y)

@@ -64,10 +64,7 @@ namespace drz.PdfVpMod.Servise
             _mesagType = mesagType;
         }
 
-        /// <summary>
-        /// The loggers
-        /// </summary>
-        public static List<ILogger> Loggers;
+    
 
         DateTime _dateTimeStamp;
         string _callerName;
