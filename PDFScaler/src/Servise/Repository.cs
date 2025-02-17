@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace drz.PDFScaler.Servise
     /// </summary>
     internal class Repository
     {
-        List<string> _pdfFiles;
+        //List<string> _pdfFiles = new List<string>();
 
         /// <summary>
         /// Gets the PDF files.
@@ -23,15 +24,17 @@ namespace drz.PDFScaler.Servise
         /// <value>
         /// The PDF files.
         /// </value>
-        public List<string> PdfFiles => _pdfFiles;
+        //public List<string> PdfFiles => _pdfFiles;
 
 
         List<ILogger> Logger;
 
+        Setting Sets;
 
-        public Repository(List<ILogger> logger)
+        public Repository(List<ILogger> logger, Setting sets)
         {
             Logger = logger;
+            Sets = sets;
         }
 
         public bool GetPDFfilesWin()
@@ -66,17 +69,98 @@ namespace drz.PDFScaler.Servise
             }
         }
 
-        public bool GetPDFfiles(string[] args)
+        public List<string> GetPDFfiles(string[] args)
         {
             //todo в отдельный класс
 
             #region UINSI
+            List<string> pdfFiles = new List<string>();
 
-            Uinsi.Uinsifiles(args);
+            List<string> argsL = args.ToList();
+
+            for (int i = 0; i < argsL.Count; i++)
+            {
+                if (File.Exists(argsL[i]))//если файл
+                {
+                    if (Path.GetExtension(argsL[i]).ToLower() == ".pdf")
+                    {
+                        pdfFiles.Add(argsL[i]);
+                    }
+                    else
+                    {
+                        Logger.Add(new Logger($"Выбранный файл не является PDF и будет исключен. {argsL[i]}", MesagType.Warning));
+                    }
+                }
+                else if (Directory.Exists(argsL[i]))//если директория
+                {
+                    IEnumerable<string> files = Directory.EnumerateFiles(argsL[i], "*.pdf");
+                    pdfFiles.AddRange(files/*.ToList()*/);
+
+                    //foreach (var item in Directory.EnumerateFiles(argsL[i], "*.pdf"))
+                    //{
+                    //    argsL.Add(item);
+                    //}
+                }
+                else//аргументы ком строки
+                {
+
+                    switch (argsL[i].ToLower())
+                    {
+                        case "-mm":
+                            Sets.Unit = WinGraphicsUnit.Millimeter;
+                            break;
+
+                        case "-in":
+                            Sets.Unit = WinGraphicsUnit.Inch;
+                            break;
+
+                        case "-pt":
+                            Sets.Unit = WinGraphicsUnit.Point;
+                            break;
+
+                        case "-cm":
+                            Sets.Unit = WinGraphicsUnit.Centimeter;
+                            break;
+
+                        case "-pr":
+                            Sets.Unit = WinGraphicsUnit.Presentation;
+                            break;
+
+                        case "-del":
+                            Sets.Mode = ModeChangVp.Del;
+                            break;
+
+                        case "-add":
+                            Sets.Mode = ModeChangVp.Add;
+                            break;
+
+                        case "-exon":
+                            Sets.ExitConfirmation = true;
+                            break;
+
+                        case "-exoff":
+                            Sets.ExitConfirmation = false;
+                            break;
+
+                        case "-bakon":
+                            Sets.AddBak = true;
+                            break;
+
+                        case "-bakoff":
+                            Sets.AddBak = false;
+                            break;
+
+                        default:
+                            Logger.Add(new Logger($"Параметр аргумента не существует будет исключен. {argsL[i]}", MesagType.Error));
+                            break;
+                    }
+
+                }
+            }
 
             #endregion
 
-            return true;
+            return pdfFiles;
         }
 
     }
