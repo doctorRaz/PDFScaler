@@ -52,6 +52,7 @@ namespace drz.PdfVpMod.PdfSharp
         /// Saves the PDF.
         /// </summary>
         /// <param name="pdfDoc">The PDF document.</param>
+        /// <param name="addBak"></param>
         /// <returns></returns>
         public bool PdfSave(PdfDocument pdfDoc, bool addBak = true)
         {
