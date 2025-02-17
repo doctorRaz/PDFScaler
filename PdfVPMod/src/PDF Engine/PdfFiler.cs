@@ -53,24 +53,24 @@ namespace drz.PdfVpMod.PdfSharp
         /// </summary>
         /// <param name="pdfDoc">The PDF document.</param>
         /// <returns></returns>
-        public bool PdfSave(PdfDocument pdfDoc, bool addBak=true)
+        public bool PdfSave(PdfDocument pdfDoc, bool addBak = true)
         {
             string sPDFfile = string.Empty;
             try
             {
                 sPDFfile = pdfDoc.FullPath;
 
-                //string sTempFile = Path.Combine(DataSetWpfOpt.sTemp, "temp.pdf");
-                string sTempFile = Path.Combine(Path.GetTempPath(), "temp.pdf");
-
-                //подбираем в темп уникальное имя
-                sTempFile = UtilitesWorkFil.GetFileNameUniqu(sTempFile);
-
-                //сохраняем в темп, если все Ок
-                pdfDoc.Save(sTempFile);
-
                 if (addBak)//сохраняем копию
                 {
+                    //string sTempFile = Path.Combine(DataSetWpfOpt.sTemp, "temp.pdf");
+                    string sTempFile = Path.Combine(Path.GetTempPath(), "temp.pdf");
+
+                    //подбираем в темп уникальное имя
+                    sTempFile = UtilitesWorkFil.GetFileNameUniqu(sTempFile);
+
+                    //сохраняем в темп, если все Ок
+                    pdfDoc.Save(sTempFile);
+
                     //подбираем сущ. файлу уникальное имя *.BAK
                     string sPDFfileBAK = UtilitesWorkFil.GetFileNameUniqu($"{sPDFfile}.BAK");
 
@@ -81,9 +81,9 @@ namespace drz.PdfVpMod.PdfSharp
                     File.Move(sTempFile, sPDFfile);
                 }
                 else//перезапись существующего
-                {
-                    //todo добавить обработчик записи существующего
-
+                {          
+                    //сразу сохраняем по месту
+                    pdfDoc.Save(sPDFfile);
                 }
                 logItem = new Logger($"Файл сохранен: {sPDFfile}", MesagType.Ok);
                 Logger.Add(logItem);
