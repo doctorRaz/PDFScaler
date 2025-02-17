@@ -56,6 +56,7 @@
     <Compile Include="src\Enum\Enum.MesagType.cs" />
     <Compile Include="src\Enum\Enum.ModeChangVp.cs" />
     <Compile Include="src\Enum\Enum.WinGraphicsUnit.cs" />
+    <Compile Include="src\Servise\Setting.cs" />
     <Compile Include="src\PDF Engine\PageVpMod.cs" />
     <Compile Include="src\PDF Engine\PdfConversion.cs" />
     <Compile Include="src\PDF Engine\PdfFiler.cs" />

@@ -59,7 +59,6 @@
     <Compile Include="src\Abstractions\Interfaces\IConsoleService.cs" />
     <Compile Include="src\Enum\Enum.FB.cs" />
     <Compile Include="src\Enum\Enum.WConsoleColor.cs" />
-    <Compile Include="src\Infrastructure\Setting.cs" />
     <Compile Include="src\Infrastructure\ConsoleFocus.cs" />
     <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
     <Compile Include="src\Infrastructure\ConsoleService.cs" />

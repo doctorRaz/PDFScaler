@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
 using drz.PdfVpMod.Enum;
 
-namespace drz.PDFScaler
+namespace drz.PdfVpMod.Servise
 {
     //https://www.google.com/url?q=https://translated.turbopages.org/proxy_u/en-ru.ru.6eb8cb99-67b179cb-0385a42a-74722d776562/https/stackoverflow.com/questions/7385921/how-to-write-a-comment-to-an-xml-file-when-using-the-xmlserializer&source=gmail&ust=1739815037916000&usg=AOvVaw1ct3e-CIQ1wZEzPd6FIseL
 
