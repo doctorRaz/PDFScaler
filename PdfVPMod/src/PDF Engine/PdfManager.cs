@@ -20,48 +20,31 @@ namespace drz.PdfVpMod.PdfSharp
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PdfManager" /> class.
-        /// <br>Default unit Millimeter <see cref="XGraphicsUnit.Millimeter" /></br>
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public PdfManager(List<ILogger> logger)
-        {
-            Logger = logger;
-            _convertUnit = XGraphicsUnit.Millimeter;
-            ChangeVpPage = ModeChangVp.Add;
-        }
-               
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PdfManager" /> class.
-        /// </summary>
-        /// <param name="logger">The logger.</param>
-        /// <param name="convertUnit">The convert unit.</param>
-        /// <param name="changeVpPage"></param>
+        /// <param name="sets"></param>
         public PdfManager(List<ILogger> logger,
-                          WinGraphicsUnit convertUnit,
-                          ModeChangVp changeVpPage = ModeChangVp.Add)
+                         Setting sets)
         {
             Logger = logger;
-            WinConvertUnit = convertUnit;
-            ChangeVpPage = changeVpPage;
+            _sets = sets;
         }
         #endregion
 
         /// <summary>
         /// PDFs обработка.
         /// </summary>
-        /// <param name="PdfFiles">The PDF files.</param>
-        /// <param name="addBak">сохранять оригинал</param>
-        public void PdfRun(List<string> PdfFiles,bool addBak)
+        /// <param name="pdfFiles">The PDF files.</param>
+        public void PdfRun(List<string> pdfFiles)
         {
             //новый филер документов
             PdfFiler Filer = new PdfFiler(Logger);
 
             //новый конвертер
-            PdfConversion Conv = new PdfConversion(Logger);
+            PdfConversion Conv = new PdfConversion(Logger, Sets);
 
             //по списку файлов
-            foreach (string pdffile in PdfFiles)
+            foreach (string pdffile in pdfFiles)
             {
                 //получаем документ
                 if (!Filer.PdfOpen(pdffile))//документа нет пропуск
@@ -71,47 +54,46 @@ namespace drz.PdfVpMod.PdfSharp
 
                 PdfDocument pdfDoc = Filer.PdfDoc;
 
-                if (Conv.ConversionRun(Filer.PdfDoc,//PDF doc
-                                      ConvertUnit,//единицы
-                                      ChangeVpPage)//режим только добавление VP
-                    )// если хоть один VP добавлен
+                if (Conv.ConversionRun(Filer.PdfDoc))//режим только добавление VP
                 {
-                    Filer.PdfSave(pdfDoc,addBak);//сохраняем                   
+                    Filer.PdfSave(pdfDoc, Sets.AddBak);//сохраняем                   
                 }
                 else//ни один VP не добавлен, сохранять не надо
                 {
-                    logItem = new Logger($"Изменений нет. Файл не сохранен: {pdffile}", MesagType.Info);
-                    Logger.Add(logItem);
+                    Logger.Add(new Logger($"Изменений нет. Файл не сохранен: {pdffile}", MesagType.Info));
                 }
             }
         }
 
         #region Environ        
 
-        ModeChangVp ChangeVpPage;
+        Setting _sets;
 
-        ILogger logItem;
+        Setting Sets => _sets;
 
         List<ILogger> Logger;
 
-        XGraphicsUnit _convertUnit;
-        XGraphicsUnit ConvertUnit => _convertUnit;
 
-        WinGraphicsUnit WinConvertUnit
-        {
-            set
-            {
-                switch (value)
-                {
-                    case WinGraphicsUnit.Centimeter: _convertUnit = XGraphicsUnit.Centimeter; break;
-                    case WinGraphicsUnit.Inch: _convertUnit = XGraphicsUnit.Inch; break;
-                    case WinGraphicsUnit.Millimeter: _convertUnit = XGraphicsUnit.Millimeter; break;
-                    case WinGraphicsUnit.Point: _convertUnit = XGraphicsUnit.Point; break;
-                    case WinGraphicsUnit.Presentation: _convertUnit = XGraphicsUnit.Presentation; break;
-                    default: throw new InvalidEnumArgumentException();
-                }
-            }
-        }
+        //ModeChangVp ChangeVpPage => Sets.Mode;
+
+        //XGraphicsUnit _convertUnit;
+        //XGraphicsUnit ConvertUnit => _convertUnit;
+
+        //WinGraphicsUnit WinConvertUnit
+        //{
+        //    set
+        //    {
+        //        switch (value)
+        //        {
+        //            case WinGraphicsUnit.Centimeter: _convertUnit = XGraphicsUnit.Centimeter; break;
+        //            case WinGraphicsUnit.Inch: _convertUnit = XGraphicsUnit.Inch; break;
+        //            case WinGraphicsUnit.Millimeter: _convertUnit = XGraphicsUnit.Millimeter; break;
+        //            case WinGraphicsUnit.Point: _convertUnit = XGraphicsUnit.Point; break;
+        //            case WinGraphicsUnit.Presentation: _convertUnit = XGraphicsUnit.Presentation; break;
+        //            default: throw new InvalidEnumArgumentException();
+        //        }
+        //    }
+        //}
 
         #endregion
     }

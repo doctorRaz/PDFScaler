@@ -1,70 +1,49 @@
 ﻿using System;
 using System.CodeDom;
+using System.Collections.Generic;
 using System.Linq;
+
+using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Interfaces;
+using drz.PdfVpMod.Servise;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
 namespace drz.PdfVpMod.PdfSharp
 {
+
+
     /// <summary>
     /// Добавляет удаляет VP с масштабом вида
     /// </summary>
     internal class PageVpMod
     {
+        List<ILogger> Logger;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PageVpMod"/> class.
         /// </summary>
-        public PageVpMod()
+        public PageVpMod(List<ILogger> logger)
         {
-
+            Logger = logger;
         }
 
-        /// <summary>
-        /// Pages the VP mod delete.
-        /// </summary>
-        /// <param name="page">The page.</param>
-        /// <returns>Успех</returns>
-        public bool PageVpModDel(PdfPage page)
-        {
-            _isErr = false;
-            _page = page;
-            _arrVP = Page.Elements.GetObject("/VP") as PdfArray;
 
-            if (ArrVP != null)//VP yes
-            {
-                try
-                {
-                    Page.Elements.Remove("/VP");
-                    _mesag = "VP удален";
-                    return true;
-
-                }
-                catch (Exception ex)
-                {
-                    _mesag = ex.Message;
-                    _isErr = true;
-                    return false;
-                }
-            }
-            else
-            {
-                _mesag = "VP отсутствует";
-                return false;
-            }
-
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PageVpMod"/> class.
         /// </summary>
         /// <param name="page">The page.</param>
+        /// <param name="_pageNum"></param>
         /// <param name="convertUnit">The convert unit.</param>
-        /// <param name="isModified">true - Add or Modify<br>false - only Add</br> </param>           
+        /// <param name="isMod">true - Add or Modify<br>false - only Add</br> </param>           
         public bool PageVpModAdd(PdfPage page,
+                         int _pageNum,
                         XGraphicsUnit convertUnit = XGraphicsUnit.Millimeter,
-                        bool isModified = false)
+                        bool isMod = false)
         {
+            pageNum = _pageNum;
             _page = page;
 
             XUnit unit = new XUnit(1, convertUnit);
@@ -85,7 +64,6 @@ namespace drz.PdfVpMod.PdfSharp
 
                     if (AddArrVP())
                     {
-                        _mesag = "VP добавлен в";
                         return true;
                     }
                     else
@@ -93,32 +71,27 @@ namespace drz.PdfVpMod.PdfSharp
                         return false;
                     }
                 }
-                else if (isModified)//заказано изменить VP scale factor
+                else if (isMod)//заказано изменить VP scale factor
                 {
                     if (ModArrVP())
-                    {
-                        _mesag = "VP изменен в";
-
+                    {                        
                         return true;
                     }
                     else
-                    {
-                        _mesag = "VP не изменен в";
-
+                    {                        
                         return false;
                     }
                 }
                 else
                 {
-                    _mesag = "VP существует в";
+                    Logger.Add(new Logger($"\tVP существует в Page:{pageNum}", MesagType.Info));
                     return false;
                 }
                 #endregion 
             }
             catch (Exception ex)
             {
-                _mesag = ex.Message;
-                _isErr = true;
+                Logger.Add(new Logger($"\tVP сбой в Page:{pageNum} {ex.Message}", MesagType.Error));
                 return false;
             }
         }
@@ -129,7 +102,7 @@ namespace drz.PdfVpMod.PdfSharp
         /// <returns>Успех</returns>
         bool ModArrVP()
         {
-            bool isMod=false;
+            bool isMod = false;
             try
             {
                 PdfDictionary dicMeasure = null;
@@ -155,12 +128,14 @@ namespace drz.PdfVpMod.PdfSharp
                         if (dr != sr)
                         {
                             item.Elements.SetValue("/C", new PdfReal(Scalefactor));
-                            isMod= true;
+                            isMod = true;
+                            Logger.Add(new Logger($"\tVP изменен в Page:{pageNum}", MesagType.Ok));
                             break;
                         }
                         else
                         {
-                            isMod= false;
+                            isMod = false;
+                            Logger.Add(new Logger($"\tVP не изменен в Page:{pageNum}", MesagType.Info));
                             break;
                         }
                     }
@@ -169,8 +144,7 @@ namespace drz.PdfVpMod.PdfSharp
             }
             catch (Exception ex)
             {
-                _mesag += ex.Message;
-                _isErr = true;
+                Logger.Add(new Logger($"\tVP сбой при изменении Page:{pageNum} {ex.Message}", MesagType.Error));
                 return false;
             }
         }
@@ -266,14 +240,48 @@ namespace drz.PdfVpMod.PdfSharp
                 #endregion
 
                 #endregion
+                Logger.Add(new Logger($"\tVP добавлен в Page:{pageNum}", MesagType.Ok));
                 return true;
             }
             catch (Exception ex)
             {
-                _mesag = ex.Message;
-                _isErr = true;
+                Logger.Add(new Logger($"\tVP сбой при добавлении Page:{pageNum} {ex.Message}", MesagType.Error));
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Pages the VP mod delete.
+        /// </summary>
+        /// <param name="page">The page.</param>
+        /// <param name="pageNum"></param>
+        /// <returns>Успех</returns>
+        public bool PageVpModDel(PdfPage page, int pageNum)
+        {
+            _page = page;
+            _arrVP = Page.Elements.GetObject("/VP") as PdfArray;
+
+            if (ArrVP != null)//VP yes
+            {
+                try
+                {
+                    Page.Elements.Remove("/VP");
+
+                    Logger.Add(new Logger($"\tVP удален из Page:{pageNum}", MesagType.Ok));
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Add(new Logger($"\tVP сбой удаления в Page:{pageNum} {ex.Message}", MesagType.Error));
+                    return false;
+                }
+            }
+            else
+            {
+                Logger.Add(new Logger($"\tVP отсутствует в Page:{pageNum}", MesagType.Info));
+                return false;
+            }
+
         }
 
         /// <summary>
@@ -293,23 +301,6 @@ namespace drz.PdfVpMod.PdfSharp
         public PdfArray ArrVP => _arrVP;
 
         /// <summary>
-        /// Gets the message.
-        /// </summary>
-        /// <value>
-        /// The message.
-        /// </value>
-        public string Mesag => _mesag;
-
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is error.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is error; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsErr => _isErr;
-
-        /// <summary>
         /// Gets the scale factor.
         /// </summary>
         /// <value>
@@ -317,13 +308,12 @@ namespace drz.PdfVpMod.PdfSharp
         /// </value>
         public double Scalefactor => _scalefactor;
 
-
+        int pageNum;
 
         PdfPage _page;
         PdfArray _arrVP;
-        //bool _isChanged;
-        bool _isErr;
-        string _mesag;
+
+
         double _scalefactor;
 
     }

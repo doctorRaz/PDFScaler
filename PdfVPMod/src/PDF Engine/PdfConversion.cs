@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.ComponentModel;
 
 using drz.PdfVpMod.Enum;
 using drz.PdfVpMod.Interfaces;
@@ -18,84 +19,66 @@ namespace drz.PdfVpMod.PdfSharp
         /// Настройка конвертора VP
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public PdfConversion(List<ILogger> logger)
+        /// <param name="sets"></param>
+        public PdfConversion(List<ILogger> logger, Setting sets)
         {
             Logger = logger;
+            _sets = sets;
+            WinConvertUnit = Sets.Unit;
+            //ChangeVpPage = sets.Mode;// changeVpPage;
+            _isModified = false;
         }
         #endregion
 
         /// <summary>
-        /// Обработка документаn.
+        /// Обработка документа.
         /// </summary>
         /// <param name="PdfDoc">PDF document.</param>
-        /// <param name="convertUnit">The convert unit.</param>
-        /// <param name="changeVpPage">if set to <c>true</c> [change vp page].</param>
         /// <returns>
         /// успех
         /// </returns>
-        public bool ConversionRun(PdfDocument PdfDoc,
-                           XGraphicsUnit convertUnit,
-                           ModeChangVp changeVpPage = ModeChangVp.Add)
+        public bool ConversionRun(PdfDocument PdfDoc)
         {
-            _convertUnit = convertUnit;
-            ChangeVpPage = changeVpPage;
             _isModified = false;
 
-            int pageNum = 0;//номер стр для логера
+            int pageNum = 1;//номер стр для логера
 
-            PageVpMod PVM = new PageVpMod();
+            PageVpMod PVM = new PageVpMod(Logger);//todo прокинуть логгер
             //перебор страниц
             foreach (PdfPage page in PdfDoc.Pages)
             {
                 if (ChangeVpPage == ModeChangVp.Del)//Delete VP
                 {
-                    if (PVM.PageVpModDel(page))
+                    if (PVM.PageVpModDel(page, pageNum))
                     {
                         _isModified = true;//если меняли хоть один лист
-                        _logItem = new Logger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Ok);
                     }
                     else
                     {
-                        if (PVM.IsErr)//Page not chang exept
-                        {
-                            _isModified = false;
-                            _logItem = new Logger($"\tVP сбой в Page:{++pageNum} {PVM.Mesag}", MesagType.Error);
-                        }
-                        else//Page not chang exist
-                        {
-                            _isModified = false;
-                            _logItem = new Logger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Info);
-                        }
+                        //_isModified = false;
                     }
                 }
                 else
                 {
-                    bool isModified = false;
+                    bool isMod = false;
                     if (ChangeVpPage == ModeChangVp.AddOrMod)
-                    { isModified = true; }
+                    {
+                        isMod = true;
+                    }
 
-                    bool IsChanged = PVM.PageVpModAdd(page, ConvertUnit, isModified);
+                    bool IsChanged = PVM.PageVpModAdd(page, pageNum, ConvertUnit, isMod);
 
                     if (IsChanged)//Page chang
                     {
                         _isModified = true;//если меняли хоть один лист
-                        _logItem = new Logger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Ok);
                     }
                     else//Page not chang
                     {
-                        if (PVM.IsErr)//Page not chang exept
-                        {
-                            _isModified = false;
-                            _logItem = new Logger($"\tVP сбой в Page:{++pageNum} {PVM.Mesag}", MesagType.Error);
-                        }
-                        else//Page not chang exist
-                        {
-                            _isModified = false;
-                            _logItem = new Logger($"\t{PVM.Mesag} Page:{++pageNum}", MesagType.Info);
-                        }
+                        //_isModified = false;
                     }
                 }
-                Logger.Add(_logItem);
+                //Logger.Add(_logItem);
+                ++pageNum;
             }
             if (IsModified)
             {
@@ -110,26 +93,50 @@ namespace drz.PdfVpMod.PdfSharp
 
         #region ENVIRON
 
+        Setting _sets;
+
+        Setting Sets => _sets;
+
+
         #region Servise
 
-        ILogger _logItem;
+        //ILogger _logItem;
 
         /// <summary>
         /// The logger
         /// </summary>
-        public List<ILogger> Logger;
+        public List<ILogger> Logger{ get; set; }
 
-        ModeChangVp ChangeVpPage;
+        //ModeChangVp ChangeVpPage;
 
         #endregion
 
         #region VP
 
 
-
+        ModeChangVp ChangeVpPage => Sets.Mode;
 
         XGraphicsUnit _convertUnit;
         XGraphicsUnit ConvertUnit => _convertUnit;
+
+        WinGraphicsUnit WinConvertUnit
+        {
+            set
+            {
+                switch (value)
+                {
+                    case WinGraphicsUnit.Centimeter: _convertUnit = XGraphicsUnit.Centimeter; break;
+                    case WinGraphicsUnit.Inch: _convertUnit = XGraphicsUnit.Inch; break;
+                    case WinGraphicsUnit.Millimeter: _convertUnit = XGraphicsUnit.Millimeter; break;
+                    case WinGraphicsUnit.Point: _convertUnit = XGraphicsUnit.Point; break;
+                    case WinGraphicsUnit.Presentation: _convertUnit = XGraphicsUnit.Presentation; break;
+                    default: throw new InvalidEnumArgumentException();
+                }
+            }
+        }
+
+
+
 
         #endregion
         #region PDF
@@ -153,49 +160,6 @@ namespace drz.PdfVpMod.PdfSharp
 
         #endregion
 
-
-
-
-        //        #region EXAMPLE
-        //#if DEBUG
-        //        /// <summary>
-        //        /// Adds the VP example.
-        //        /// </summary>
-        //        /// <param name="pdfDoc">The PDF document.</param>
-        //        public void GetSF(PdfDocument pdfDoc)
-        //        {
-
-        //            PdfPage page = pdfDoc.Pages[0];
-
-        //            PdfArray arrVP = page.Elements.GetObject("/VP") as PdfArray;
-        //            PdfDictionary dicVPitem = arrVP.Elements.Items[0] as PdfDictionary;
-
-        //            PdfArray dicBBox = dicVPitem.Elements.GetValue("/BBox") as PdfArray;
-
-        //            PdfDictionary dicMeasure = dicVPitem.Elements.GetObject("/Measure") as PdfDictionary;
-
-        //            PdfArray arrA = dicMeasure.Elements.GetValue("/A") as PdfArray;
-
-        //            PdfArray arrD = dicMeasure.Elements.GetValue("/D") as PdfArray;
-
-        //            PdfString arrR = dicMeasure.Elements.GetValue("/R") as PdfString;
-
-        //            PdfName nameSubtype = dicMeasure.Elements.GetValue("/Subtype") as PdfName;
-
-        //            PdfName nameType = dicMeasure.Elements.GetValue("/Type") as PdfName;
-
-        //            PdfArray arrX = dicMeasure.Elements.GetValue("/X") as PdfArray;
-
-        //            PdfDictionary dicC = arrX.Elements.Items[0] as PdfDictionary;
-
-        //            PdfReal ConversionFactor = dicC.Elements.GetValue("/C") as PdfReal;//(0.35278) собственно искомое
-
-        //            PdfName dicType = dicVPitem.Elements.GetValue("/Type") as PdfName;
-
-        //        }
-
-        //#endif
-        //        #endregion
     }
 
 }
