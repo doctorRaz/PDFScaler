@@ -40,7 +40,7 @@ namespace drz.PDFScaler.Servise
         /// <summary>Сборка содержащая текущий исполняемый код</summary>
         public static Assembly Asm => Assembly.GetExecutingAssembly();
 
-        /// <summary> Титул программы печати</summary>
+        /// <summary> Титул программы </summary>
         public static string TitleAttribute => (Attribute.GetCustomAttribute(
             Asm,
             typeof(AssemblyTitleAttribute),
@@ -83,7 +83,7 @@ namespace drz.PDFScaler.Servise
             false) as AssemblyTrademarkAttribute).Trademark;
 
         /// <summary>ProductVersion - Версия программы
-        /// <br>для идентификации в лицензии пограмма для нк или АК</br>
+        /// <br>для идентификации</br>
         /// </summary>
         public static string InformationalVersionAttribut => (Attribute.GetCustomAttribute(
                    Asm,
@@ -146,12 +146,12 @@ namespace drz.PDFScaler.Servise
 
         #endregion
 
-        #region О CAD
+        #region О программе
 
-        /// <summary>Название CAD программы </summary>
+        /// <summary>Название программы </summary>
         internal static string sAppProductName => System.Windows.Forms.Application.ProductName;
 
-        /// <summary>Мажор версия CAD программы </summary>
+        /// <summary>Мажор версия программы </summary>
 
         internal static string sAppMajor => ((System.Windows.Forms.Application.ProductVersion).Split('.'))[0];
 
