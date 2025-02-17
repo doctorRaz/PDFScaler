@@ -85,7 +85,7 @@ namespace drz.PDFScaler
                     using (FileStream fs = new FileStream(XMLpatch, FileMode.Open, FileAccess.Read))
                     {
                         //_lFieldsFrmts = new List<FieldsFrmt>();
-                       Setting Set0 = FormatterXML.Deserialize(fs) as Setting;
+                       Set = FormatterXML.Deserialize(fs) as Setting;
                     }
                     return true;
                 }
