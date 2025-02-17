@@ -38,7 +38,7 @@ namespace drz.PDFScaler
         /// <value>
         /// The unit.
         /// </value>
-        [XmlComment("Единицы видового окна: [Millimeter], ")]
+        [XmlComment("Опции единиц измерения видового экрана: по умолчанию-[Millimeter], [Point], [Inch], [Centimeter], [Presentation]")]
         public WinGraphicsUnit Unit
         {
             get
@@ -68,7 +68,7 @@ namespace drz.PDFScaler
         /// <value>
         /// The mode.
         /// </value>
-        [XmlComment("Способ изменения файла: Add, Del")]
+        [XmlComment("Способ изменения видового экрана: добавить VP - [Add], удалить VP - [Del], изменить VP - [AddOrMod]")]
         public ModeChangVp Mode
         {
             get
@@ -99,7 +99,7 @@ namespace drz.PDFScaler
         /// <value>
         ///   <c>true</c> if [exit confirmation]; otherwise, <c>false</c>.
         /// </value>
-        [XmlComment("Выход из программы без подтверждения false,  с запросом true")]
+        [XmlComment("Выход из программы без подтверждения - [false], с подтверждением - [true]")]
         public bool ExitConfirmation
         {
             get
@@ -129,7 +129,7 @@ namespace drz.PDFScaler
         /// <value>
         ///   <c>true</c> if [add backup]; otherwise, <c>false</c>.
         /// </value>
-        [XmlComment("Сохранять резервные копии [true], перезаписывать существующий файл PDF [false]")]
+        [XmlComment("Сохранять резервные копии PDF (*.bak) - [true], перезаписывать существующий файл PDF - [false]")]
         public bool AddBak
         {
             get
