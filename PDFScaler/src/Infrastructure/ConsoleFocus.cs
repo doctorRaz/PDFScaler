@@ -15,6 +15,7 @@ namespace drz.PDFScaler.Infrastructure
         public static extern bool SetForegroundWindow(IntPtr WindowHandle);
 
         public const int SW_RESTORE = 9;
+
         /// <summary>
         /// Set focus
         /// </summary>
@@ -30,7 +31,5 @@ namespace drz.PDFScaler.Infrastructure
                 SetForegroundWindow(objProcesses[0].MainWindowHandle);
             }
         }
-
-
     }
 }

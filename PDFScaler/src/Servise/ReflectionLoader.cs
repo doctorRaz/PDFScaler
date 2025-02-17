@@ -10,6 +10,9 @@ namespace drz.PDFScaler.Servise
     partial class ReflectionLoader
 
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReflectionLoader"/> class.
+        /// </summary>
         internal ReflectionLoader()
         {
             AsmEventAdd();//add  event Assembly resolve                   

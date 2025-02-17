@@ -18,12 +18,21 @@ namespace drz.PDFScaler.Infrastructure
 
         Setting Sets;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Repository"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="sets">The sets.</param>
         public Repository(List<ILogger> logger, Setting sets)
         {
             Logger = logger;
             Sets = sets;
         }
 
+        /// <summary>
+        /// Gets the pd ffiles win.
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetPDFfilesWin()
         {
             OpenFileDialog OFD = new OpenFileDialog
@@ -56,6 +65,11 @@ namespace drz.PDFScaler.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Gets the PDF files.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
         public List<string> GetPDFfiles(string[] args)
         {
 
@@ -81,11 +95,6 @@ namespace drz.PDFScaler.Infrastructure
                 {
                     IEnumerable<string> files = Directory.EnumerateFiles(argsL[i], "*.pdf");
                     pdfFiles.AddRange(files/*.ToList()*/);
-
-                    //foreach (var item in Directory.EnumerateFiles(argsL[i], "*.pdf"))
-                    //{
-                    //    argsL.Add(item);
-                    //}
                 }
                 else//аргументы ком строки
                 {

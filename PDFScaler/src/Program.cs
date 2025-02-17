@@ -69,11 +69,7 @@ namespace drz.PDFScaler
             else//файлов нет
             {
                 if (UiMenu.Create())
-                {//продолжение открыть файлы
-                    //var unit = Sets.Unit.ToString();
-                    //var mode = Sets.Mode.ToString();
-                    //var bak = Sets.AddBak.ToString();
-                    //var ex = Sets.ExitConfirmation.ToString();
+                {//предлжение открыть файлы
                     CS.ConsoleWriteLine("продолжим...", MesagType.Info);
                     CS.ConsoleWriteLine($"\tРежим приложения:\t{Sets.Mode.ToString()}", MesagType.Ok);
                     CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit.ToString()}", MesagType.Ok);

@@ -56,27 +56,13 @@ namespace drz.PDFScaler.Servise
         }
 #else
 
-        public void ConsoleWriteLineFB(string Message,
-                                        WConsoleColor FColor = WConsoleColor.Default,
-                                        WConsoleColor BColor = WConsoleColor.Default,
-                                        string Title = null,
-                                        [CallerMemberName] string CallerName = null)
-        {
-            _title = Title;
-
-
-            Console.ForegroundColor = ConvertEnumWToConsole(FColor, FB.Foreground);
-            Console.BackgroundColor = ConvertEnumWToConsole(BColor, FB.Bacground);
-
-#if DEBUG
-            Console.WriteLine($"{CallerName}: {Message}");
-#else
-            Console.WriteLine($"{Message}");
-#endif
-            Console.ResetColor();
-
-        }
-
+        /// <summary>
+        /// Consoles the write line.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="TypeMessage"></param>
+        /// <param name="Title">The title.</param>
+        /// <param name="CallerName">Name of the caller.</param>
         public void ConsoleWriteLine(string Message,
                             MesagType TypeMessage = MesagType.None,
                              string Title = null,
@@ -96,6 +82,13 @@ namespace drz.PDFScaler.Servise
 
         }
 
+        /// <summary>
+        /// Consoles the write.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="TypeMesag">The type mesag.</param>
+        /// <param name="Title">The title.</param>
+        /// <param name="CallerName">Name of the caller.</param>
         public void ConsoleWrite(string Message,
              MesagType TypeMesag = MesagType.None,
               string Title = null,
@@ -114,6 +107,11 @@ namespace drz.PDFScaler.Servise
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// Prints the specified logger.
+        /// </summary>
+        /// <param name="Logger">The logger.</param>
+        /// <param name="ExitConfirmation">if set to <c>true</c> [exit confirmation].</param>
         public void Print(List<ILogger> Logger, bool ExitConfirmation)
         {
 
@@ -144,11 +142,6 @@ namespace drz.PDFScaler.Servise
         }
 
 #endif
-        #endregion
-
-        #region Enum
-
-
         #endregion
 
         #region Convert Enum
@@ -196,8 +189,6 @@ namespace drz.PDFScaler.Servise
             }
         }
         #endregion
-
-
 
         /// <summary>
         /// Цвета

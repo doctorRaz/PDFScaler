@@ -12,21 +12,7 @@ namespace drz.PDFScaler.Interfaces
     /// </summary>
     partial interface IConsoleService
     {
-        ///// <summary>
-        ///// Вывод сообщения в консоль, принудительная раскраска 
-        ///// </summary>
-        ///// <param name="Message">Выводимое сообщение</param>
-        ///// <param name="FColor">Color of the foreground</param>
-        ///// <param name="BColor">Color of the background</param>
-        ///// <param name="Title">The title.</param>
-        ///// <param name="CallerName">Вызывающий метод. При использовании обязательно использование <code>[CallerMemberName]</code></param>
-        //void ConsoleWriteLineFB(string Message,
-        //                         WConsoleColor FColor = WConsoleColor.Default,
-        //                         WConsoleColor BColor = WConsoleColor.Default,
-        //                         string Title = null,
-        //                         [CallerMemberName] string CallerName = null);
-
-
+    
         /// <summary>
         /// Consoles the write line.
         /// </summary>
