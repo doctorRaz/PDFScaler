@@ -16,17 +16,6 @@ namespace drz.PDFScaler.Servise
     /// </summary>
     internal class Repository
     {
-        //List<string> _pdfFiles = new List<string>();
-
-        /// <summary>
-        /// Gets the PDF files.
-        /// </summary>
-        /// <value>
-        /// The PDF files.
-        /// </value>
-        //public List<string> PdfFiles => _pdfFiles;
-
-
         List<ILogger> Logger;
 
         Setting Sets;
@@ -37,7 +26,7 @@ namespace drz.PDFScaler.Servise
             Sets = sets;
         }
 
-        public bool GetPDFfilesWin()
+        public List<string> GetPDFfilesWin()
         {
             OpenFileDialog OFD = new OpenFileDialog
             {
@@ -55,9 +44,9 @@ namespace drz.PDFScaler.Servise
             };
             if (OFD.ShowDialog(new Form() { TopMost = true/*, TopLevel =true*/ }) == DialogResult.OK)
             {
-                _pdfFiles = OFD.FileNames.ToList<string>();
+                List<string> pdfFiles = OFD.FileNames.ToList<string>();
                 ConsoleFocus.FocusProcess(DataSetWpfOpt.AsmFileNameWithoutExtension);
-                return true;
+                return pdfFiles;
             }
             else
             {
@@ -65,13 +54,12 @@ namespace drz.PDFScaler.Servise
                 Logger.Add(logItem);
 
                 ConsoleFocus.FocusProcess(DataSetWpfOpt.AsmFileNameWithoutExtension);
-                return false;
+                return new List<string>();
             }
         }
 
         public List<string> GetPDFfiles(string[] args)
         {
-            //todo в отдельный класс
 
             #region UINSI
             List<string> pdfFiles = new List<string>();
@@ -132,6 +120,10 @@ namespace drz.PDFScaler.Servise
 
                         case "-add":
                             Sets.Mode = ModeChangVp.Add;
+                            break;
+
+                        case "-mod":
+                            Sets.Mode = ModeChangVp.AddOrMod;
                             break;
 
                         case "-exon":
