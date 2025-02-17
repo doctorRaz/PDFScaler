@@ -4,14 +4,15 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
-[assembly: AssemblyTitle("PdfExt")]
+[assembly: AssemblyTitle("PdfVPMod")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PdfExt")]
-[assembly: AssemblyCopyright("Copyright ©  2025")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyConfiguration("Alfa")]
+[assembly: AssemblyCompany("doctorRaz@gmail.com")]
+[assembly: AssemblyProduct("PdfVPMod")]
+[assembly: AssemblyCopyright("Разыграев Андрей")]
+[assembly: AssemblyTrademark("doctorRAZ 2014-2025")]
 [assembly: AssemblyCulture("")]
+[assembly: AssemblyInformationalVersion("Add or delete or modify VP scale for PDF")]
 
 // Установка значения False для параметра ComVisible делает типы в этой сборке невидимыми
 // для компонентов COM. Если необходимо обратиться к типу в этой сборке через
@@ -28,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Номер сборки
 //      Редакция
 //
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.2.*")]
+//[assembly: AssemblyFileVersion("1.0.0.0")]

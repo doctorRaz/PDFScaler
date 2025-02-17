@@ -1,4 +1,4 @@
-﻿namespace drz.PDFScaler.Interfaces
+﻿namespace drz.PDFScaler.Enum
 {
     /// <summary>
     ///Цвет раскраски текста или фона

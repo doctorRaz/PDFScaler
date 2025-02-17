@@ -1,6 +1,8 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Interfaces;
 
 
 namespace drz.PDFScaler.Interfaces
@@ -10,19 +12,19 @@ namespace drz.PDFScaler.Interfaces
     /// </summary>
     partial interface IConsoleService
     {
-        /// <summary>
-        /// Вывод сообщения в консоль, принудительная раскраска 
-        /// </summary>
-        /// <param name="Message">Выводимое сообщение</param>
-        /// <param name="FColor">Color of the foreground</param>
-        /// <param name="BColor">Color of the background</param>
-        /// <param name="Title">The title.</param>
-        /// <param name="CallerName">Вызывающий метод. При использовании обязательно использование <code>[CallerMemberName]</code></param>
-        void ConsoleWriteLineFB(string Message,
-                                 WConsoleColor FColor = WConsoleColor.Default,
-                                 WConsoleColor BColor = WConsoleColor.Default,
-                                 string Title = null,
-                                 [CallerMemberName] string CallerName = null);
+        ///// <summary>
+        ///// Вывод сообщения в консоль, принудительная раскраска 
+        ///// </summary>
+        ///// <param name="Message">Выводимое сообщение</param>
+        ///// <param name="FColor">Color of the foreground</param>
+        ///// <param name="BColor">Color of the background</param>
+        ///// <param name="Title">The title.</param>
+        ///// <param name="CallerName">Вызывающий метод. При использовании обязательно использование <code>[CallerMemberName]</code></param>
+        //void ConsoleWriteLineFB(string Message,
+        //                         WConsoleColor FColor = WConsoleColor.Default,
+        //                         WConsoleColor BColor = WConsoleColor.Default,
+        //                         string Title = null,
+        //                         [CallerMemberName] string CallerName = null);
 
 
         /// <summary>
@@ -48,6 +50,14 @@ namespace drz.PDFScaler.Interfaces
                     MesagType TypeMesag = MesagType.None,
                      string Title = null,
                      [CallerMemberName] string CallerName = null);
+
+        /// <summary>
+        /// Prints the specified logger.
+        /// </summary>
+        /// <param name="Logger">The logger.</param>
+        /// <param name="ExitConfirmation">if set to <c>true</c> [exit confirmation].</param>
+        void Print(List<ILogger> Logger, bool ExitConfirmation);
     }
+
 
 }

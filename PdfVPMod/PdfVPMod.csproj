@@ -11,7 +11,7 @@
     <AssemblyName>PdfVPMod</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <Deterministic>false</Deterministic>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -56,19 +56,17 @@
     <Compile Include="src\Enum\Enum.MesagType.cs" />
     <Compile Include="src\Enum\Enum.ModeChangVp.cs" />
     <Compile Include="src\Enum\Enum.WinGraphicsUnit.cs" />
-    <Compile Include="src\Servise\Setting.cs" />
+    <Compile Include="src\Infrastructure\Setting.cs" />
     <Compile Include="src\PDF Engine\PageVpMod.cs" />
     <Compile Include="src\PDF Engine\PdfConversion.cs" />
     <Compile Include="src\PDF Engine\PdfFiler.cs" />
     <Compile Include="src\PDF Engine\PdfManager.cs" />
-    <Compile Include="src\Servise\Logger.cs" />
+    <Compile Include="src\Infrastructure\Logger.cs" />
     <Compile Include="src\Servise\UtilitesWorkFil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="share.te.ua.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Infrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

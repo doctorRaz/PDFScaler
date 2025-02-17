@@ -1,12 +1,10 @@
 ﻿
 using System.Collections.Generic;
-using System.ComponentModel;
 
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Infrastructure;
 using drz.PdfVpMod.Interfaces;
-using drz.PdfVpMod.Servise;
 
-using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
 namespace drz.PdfVpMod.PdfSharp

@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 
 
-namespace drz.PDFScaler.Servise
+namespace drz.PDFScaler.Infrastructure
 {
     /// <summary> Пути разделители и пр.</summary>
     public class DataSetWpfOpt
@@ -16,19 +16,19 @@ namespace drz.PDFScaler.Servise
         #endregion
         #region ВЕРСИЯ ПРОГРАММЫ
         /// <summary>Версия программы</summary>
-        internal static System.Version sysVersion => Asm.GetName().Version;
+        internal static System.Version SysVersion => Asm.GetName().Version;
 
         /// <summary>Версия мажор</summary>
-        internal static int Major => sysVersion.Major;
+        internal static int Major => SysVersion.Major;
 
         /// <summary>Версия минор</summary>
-        internal static int Minor => sysVersion.Minor;
+        internal static int Minor => SysVersion.Minor;
 
         /// <summary>Версия билд</summary>
-        public static int Build => sysVersion.Build;
+        public static int Build => SysVersion.Build;
 
         /// <summary>Версия ревизия</summary>
-        internal static int Revision => sysVersion.Revision;
+        internal static int Revision => SysVersion.Revision;
 
         /// <summary>Бета или нет, чет нечет</summary>
         //static string _sBeta => iMinor == 0 || iMinor >3 ? "" : iMinor == 1 ? "<alfa>" : "<beta>";
@@ -138,9 +138,6 @@ namespace drz.PDFScaler.Servise
 #else
             return result.ToLongDateString();
 #endif
-
-
-
         }
 
 
@@ -149,11 +146,11 @@ namespace drz.PDFScaler.Servise
         #region О программе
 
         /// <summary>Название программы </summary>
-        internal static string sAppProductName => System.Windows.Forms.Application.ProductName;
+        internal static string AppProductName => System.Windows.Forms.Application.ProductName;
 
         /// <summary>Мажор версия программы </summary>
 
-        internal static string sAppMajor => ((System.Windows.Forms.Application.ProductVersion).Split('.'))[0];
+        internal static string AppMajor => ((System.Windows.Forms.Application.ProductVersion).Split('.'))[0];
 
 
         #endregion
@@ -168,10 +165,10 @@ namespace drz.PDFScaler.Servise
         private static string _sUserAppData => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         /// <summary>Путь к рабочему столу</summary>
-        public static string sUserDesktop => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        public static string UserDesktop => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         /// <summary>Имя машины</summary>
-        public static string sMachineName => Environment.MachineName;
+        public static string MachineName => Environment.MachineName;
 
         //public static string sTemp=>Path.GetTempPath();
 

@@ -4,12 +4,10 @@ using System.Linq;
 using System.Windows.Forms;
 
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Infrastructure;
 using drz.PdfVpMod.Interfaces;
-using drz.PdfVpMod.Servise;
 
-using PDFUnisci;
-
-namespace drz.PDFScaler.Servise
+namespace drz.PDFScaler.Infrastructure
 {
     /// <summary>
     /// Сервис получения файлов
@@ -115,7 +113,7 @@ namespace drz.PDFScaler.Servise
                             break;
 
                         case "-del":
-                            Sets.Mode = ModeChangVp.Del;
+                            Sets.Mode = ModeChangVp.Delete;
                             break;
 
                         case "-add":
@@ -123,7 +121,7 @@ namespace drz.PDFScaler.Servise
                             break;
 
                         case "-mod":
-                            Sets.Mode = ModeChangVp.AddOrMod;
+                            Sets.Mode = ModeChangVp.AddOrModify;
                             break;
 
                         case "-exon":

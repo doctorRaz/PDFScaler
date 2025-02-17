@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
+using drz.PDFScaler.Enum;
+using drz.PDFScaler.Infrastructure;
 using drz.PDFScaler.Interfaces;
 using drz.PdfVpMod.Enum;
-
+using drz.PdfVpMod.Interfaces;
+using drz.PdfVpMod.Infrastructure;
 
 
 namespace drz.PDFScaler.Servise
@@ -66,7 +71,7 @@ namespace drz.PDFScaler.Servise
 #if DEBUG
             Console.WriteLine($"{CallerName}: {Message}");
 #else
-            Console.WriteLine($"{Message}"); 
+            Console.WriteLine($"{Message}");
 #endif
             Console.ResetColor();
 
@@ -109,7 +114,34 @@ namespace drz.PDFScaler.Servise
             Console.ResetColor();
         }
 
+        public void Print(List<ILogger> Logger, bool ExitConfirmation)
+        {
 
+            foreach (Logger logger in Logger.Cast<Logger>())
+            {
+                if (logger.MesagType == MesagType.Error)
+                {
+                    ExitConfirmation = true;//не закрывать консоль
+                }
+#if DEBUG
+                ConsoleWriteLine($"{logger.DateTimeStamp}: {logger.CallerName} {logger.Messag}", logger.MesagType);
+#else
+                ConsoleWriteLine($"{logger.Messag}", logger.MesagType);
+#endif
+            }
+            Logger.Clear();
+
+            if (ExitConfirmation)
+            {
+                Console.Write("\nДля продолжения нажмите любую клавишу...");
+                Console.ReadKey();
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
 
 #endif
         #endregion
@@ -185,7 +217,7 @@ namespace drz.PDFScaler.Servise
                         _colorB = ConsoleColor.DarkRed;
                         break;
                     case MesagType.Warning:
-                        _colorF = ConsoleColor.DarkRed;
+                        _colorF = ConsoleColor.Red;
                         _colorB = Console.BackgroundColor;
                         break;
                     case MesagType.Info:

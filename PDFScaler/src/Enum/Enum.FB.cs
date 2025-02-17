@@ -1,4 +1,4 @@
-﻿namespace drz.PDFScaler.Interfaces
+﻿namespace drz.PDFScaler.Enum
 {
     /// <summary>
     /// Признак фон или текст

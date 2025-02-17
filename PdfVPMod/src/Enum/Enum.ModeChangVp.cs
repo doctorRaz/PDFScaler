@@ -13,11 +13,11 @@
         /// <summary>
         /// Добавить, изменить существующий
         /// </summary>
-        AddOrMod,
+        AddOrModify,
 
         /// <summary>
         /// Удалить
         /// </summary>
-        Del
+        Delete
     }
 }

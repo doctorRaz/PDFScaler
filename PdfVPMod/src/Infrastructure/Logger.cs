@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using drz.PdfVpMod.Enum;
 using drz.PdfVpMod.Interfaces;
 
-namespace drz.PdfVpMod.Servise
+namespace drz.PdfVpMod.Infrastructure
 {
     /// <summary>
     /// Сервис сохранения сообщений
@@ -63,7 +63,7 @@ namespace drz.PdfVpMod.Servise
             _mesagType = mesagType;
         }
 
-    
+
 
         DateTime _dateTimeStamp;
         string _callerName;

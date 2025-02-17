@@ -60,17 +60,13 @@
     <Compile Include="src\Enum\Enum.FB.cs" />
     <Compile Include="src\Enum\Enum.WConsoleColor.cs" />
     <Compile Include="src\Infrastructure\ConsoleFocus.cs" />
-    <Compile Include="src\Servise\DataSetWpf_Opt.cs" />
-    <Compile Include="src\Infrastructure\ConsoleService.cs" />
+    <Compile Include="src\Servise\Menu.cs" />
+    <Compile Include="src\Infrastructure\DataSetWpf_Opt.cs" />
+    <Compile Include="src\Servise\ConsoleService.cs" />
     <Compile Include="src\Servise\ReflectionLoader.cs" />
-    <Compile Include="src\Servise\MessagWelcom.cs" />
     <Compile Include="src\Program.cs" />
-    <Compile Include="src\Servise\Repository.cs" />
+    <Compile Include="src\Infrastructure\Repository.cs" />
     <Compile Include="src\Infrastructure\Config.cs" />
-    <Compile Include="src\UI\log.cs" />
-    <Compile Include="src\UI\Menu.cs" />
-    <Compile Include="src\UI\PdfInterface.cs" />
-    <Compile Include="src\UI\Uinsi.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="share.te.ua.ico" />

@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 using drz.PdfVpMod.Enum;
 
-namespace drz.PdfVpMod.Servise
+namespace drz.PdfVpMod.Infrastructure
 {
     //https://www.google.com/url?q=https://translated.turbopages.org/proxy_u/en-ru.ru.6eb8cb99-67b179cb-0385a42a-74722d776562/https/stackoverflow.com/questions/7385921/how-to-write-a-comment-to-an-xml-file-when-using-the-xmlserializer&source=gmail&ust=1739815037916000&usg=AOvVaw1ct3e-CIQ1wZEzPd6FIseL
 
@@ -64,7 +64,7 @@ namespace drz.PdfVpMod.Servise
         /// <value>
         /// The mode.
         /// </value>
-        [XmlComment("Способ изменения видового экрана: добавить VP - [Add], удалить VP - [Del], изменить VP - [AddOrMod]")]
+        [XmlComment("Способ изменения видового экрана: добавить VP - [Add], удалить VP - [Delete], изменить VP - [AddOrModify]")]
         public ModeChangVp Mode
         {
             get
@@ -77,7 +77,7 @@ namespace drz.PdfVpMod.Servise
             }
         }
 
-        bool _exitConfirmation = false;
+        bool _exitConfirmation = true;
 
         /// <summary>
         /// Gets or sets the exit confirmation XML comment.

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace drz.PDFScaler.Servise
+namespace drz.PDFScaler.Infrastructure
 {
     /// <summary>
     /// Фозвращает фокус консоли

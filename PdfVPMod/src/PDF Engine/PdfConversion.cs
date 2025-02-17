@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Infrastructure;
 using drz.PdfVpMod.Interfaces;
-using drz.PdfVpMod.Servise;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -41,13 +41,13 @@ namespace drz.PdfVpMod.PdfSharp
         {
             _isModified = false;
 
-            int pageNum = 1;//номер стр для логера
+            int pageNum = 1;//номер стр для логгера
 
-            PageVpMod PVM = new PageVpMod(Logger);//todo прокинуть логгер
+            PageVpMod PVM = new PageVpMod(Logger); 
             //перебор страниц
             foreach (PdfPage page in PdfDoc.Pages)
             {
-                if (ChangeVpPage == ModeChangVp.Del)//Delete VP
+                if (ChangeVpPage == ModeChangVp.Delete)//Delete VP
                 {
                     if (PVM.PageVpModDel(page, pageNum))
                     {
@@ -61,7 +61,7 @@ namespace drz.PdfVpMod.PdfSharp
                 else
                 {
                     bool isMod = false;
-                    if (ChangeVpPage == ModeChangVp.AddOrMod)
+                    if (ChangeVpPage == ModeChangVp.AddOrModify)
                     {
                         isMod = true;
                     }
@@ -72,10 +72,10 @@ namespace drz.PdfVpMod.PdfSharp
                     {
                         _isModified = true;//если меняли хоть один лист
                     }
-                    else//Page not chang
-                    {
-                        //_isModified = false;
-                    }
+                    //else//Page not chang
+                    //{
+                    //    //_isModified = false;
+                    //}
                 }
                 //Logger.Add(_logItem);
                 ++pageNum;
@@ -105,7 +105,7 @@ namespace drz.PdfVpMod.PdfSharp
         /// <summary>
         /// The logger
         /// </summary>
-        public List<ILogger> Logger{ get; set; }
+        public List<ILogger> Logger { get; set; }
 
         //ModeChangVp ChangeVpPage;
 

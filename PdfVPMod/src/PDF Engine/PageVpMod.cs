@@ -1,11 +1,10 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Infrastructure;
 using drz.PdfVpMod.Interfaces;
-using drz.PdfVpMod.Servise;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -74,11 +73,11 @@ namespace drz.PdfVpMod.PdfSharp
                 else if (isMod)//заказано изменить VP scale factor
                 {
                     if (ModArrVP())
-                    {                        
+                    {
                         return true;
                     }
                     else
-                    {                        
+                    {
                         return false;
                     }
                 }

@@ -1,19 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
-using drz.PDFScaler.Servise;
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Infrastructure;
 using drz.PdfVpMod.Interfaces;
-using drz.PdfVpMod.Servise;
 
-using LogManager;
-
-namespace drz.PDFScaler
+namespace drz.PDFScaler.Infrastructure
 {
     class Config
     {
@@ -36,7 +31,7 @@ namespace drz.PDFScaler
         }
 
         /// <summary> путь к XML </summary>
-        static string XMLpatch => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"{DataSetWpfOpt.sAppProductName}.config");
+        static string XMLpatch => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"{DataSetWpfOpt.AppProductName}.config");
 
         static XmlSerializer FormatterXML => new XmlSerializer(typeof(Setting));
 
@@ -85,7 +80,7 @@ namespace drz.PDFScaler
                     using (FileStream fs = new FileStream(XMLpatch, FileMode.Open, FileAccess.Read))
                     {
                         //_lFieldsFrmts = new List<FieldsFrmt>();
-                       Set = FormatterXML.Deserialize(fs) as Setting;
+                        Set = FormatterXML.Deserialize(fs) as Setting;
                     }
                     return true;
                 }
@@ -102,23 +97,5 @@ namespace drz.PDFScaler
                 return Serialize();
             }
         }
-
-
-        //x прибить что ниже
-        static int _ExitConfirmation = 0;
-        public static int ExitConfirmation
-        {
-            get
-            {
-                if (LogHelper.ErrorLog.Count() > 0) return 1;
-                return _ExitConfirmation;
-            }
-
-            set
-            {
-                if (value >= 1) _ExitConfirmation = 1;
-                else _ExitConfirmation = 0;
-            }
-        }        
     }
 }

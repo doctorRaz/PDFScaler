@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("doctorRaz@gmail.com")]
 [assembly: AssemblyProduct("PDFScaler")]
 [assembly: AssemblyCopyright("Разыграев Андрей")]
-[assembly: AssemblyTrademark("©doctorRAZ 2014-2025")]
+[assembly: AssemblyTrademark("doctorRAZ 2014-2025")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyInformationalVersion("PDFScaler for PDF")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.*")]
+[assembly: AssemblyVersion("0.2.*")]
 //[assembly: AssemblyFileVersion("1.0.0.0")]

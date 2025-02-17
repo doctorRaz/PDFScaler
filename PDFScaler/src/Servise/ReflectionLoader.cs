@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 
+using drz.PDFScaler.Infrastructure;
+
 
 namespace drz.PDFScaler.Servise
 {
@@ -78,7 +80,8 @@ namespace drz.PDFScaler.Servise
             catch
             {
                 return false;
-            };
+            }
+            ;
         }
         #endregion
 
@@ -88,7 +91,7 @@ namespace drz.PDFScaler.Servise
         /// <param name="WithSubfolders">Учитывать поддиректории</param>
         /// <param name="sSerchPatern">Маска поиска</param>
         /// <returns>Пути к файлам</returns>
-          static string[] GetFilesOfDir(string sPath, bool WithSubfolders, string sSerchPatern = "*.pdf")
+        static string[] GetFilesOfDir(string sPath, bool WithSubfolders, string sSerchPatern = "*.pdf")
         {
             try
             {

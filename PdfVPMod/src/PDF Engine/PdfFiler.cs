@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Infrastructure;
 using drz.PdfVpMod.Interfaces;
 using drz.PdfVpMod.Servise;
 
@@ -82,7 +83,7 @@ namespace drz.PdfVpMod.PdfSharp
                     File.Move(sTempFile, sPDFfile);
                 }
                 else//перезапись существующего
-                {          
+                {
                     //сразу сохраняем по месту
                     pdfDoc.Save(sPDFfile);
                 }
