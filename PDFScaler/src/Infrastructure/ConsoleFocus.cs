@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace drz.Servise
+namespace drz.PDFScaler.Infrastructure
 {
     /// <summary>
     /// Фозвращает фокус консоли
@@ -15,6 +15,7 @@ namespace drz.Servise
         public static extern bool SetForegroundWindow(IntPtr WindowHandle);
 
         public const int SW_RESTORE = 9;
+
         /// <summary>
         /// Set focus
         /// </summary>
@@ -30,7 +31,5 @@ namespace drz.Servise
                 SetForegroundWindow(objProcesses[0].MainWindowHandle);
             }
         }
-
-
     }
 }

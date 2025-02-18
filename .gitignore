@@ -370,3 +370,7 @@ FodyWeavers.xsd
 /lib
 *.pdf
 /temp
+/@release
+/PDFUnisci
+/@old
+/PDFScaler/src/UI

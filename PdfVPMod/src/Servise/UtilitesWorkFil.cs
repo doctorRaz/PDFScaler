@@ -1,15 +1,16 @@
 ﻿using System;
 using System.IO;
 
-using drz.PDFScaler;
-
-namespace drz.Servise
+namespace drz.PdfVpMod.Servise
 {
+    /// <summary>
+    /// утилиты для работы с файлами
+    /// </summary>
     internal class UtilitesWorkFil
     {
 
         /// <summary>
-        /// Копирует файл в назначенную дирректорию
+        /// Копирует файл в назначенную директорию
         /// </summary>
         /// <param name="sFulPathFileCopiedFil">Полный путь копируемого файла</param>
         /// <param name="sPathDestination">Каталог куда копировать</param>
@@ -17,7 +18,7 @@ namespace drz.Servise
         /// <br>Неудача - Описание ошибки</br>
         /// </param>
         /// <returns>Успех</returns>
-        public static bool tryCopyTo(string sFulPathFileCopiedFil, string sPathDestination, out string sOut)
+        public static bool TryCopyTo(string sFulPathFileCopiedFil, string sPathDestination, out string sOut)
         {
             try
             {
@@ -100,7 +101,7 @@ namespace drz.Servise
         /// <param name="WithSubfolders">Учитывать поддиректории</param>
         /// <param name="sSerchPatern">Маска поиска</param>
         /// <returns>Пути к файлам</returns>
-        internal static string[] GetFilesOfDir(string sPath, bool WithSubfolders, string sSerchPatern = "*.pdf")
+        static string[] GetFilesOfDir(string sPath, bool WithSubfolders, string sSerchPatern = "*.pdf")
         {
             try
             {
@@ -110,10 +111,9 @@ namespace drz.Servise
                                             ? SearchOption.AllDirectories
                                             : SearchOption.TopDirectoryOnly));
             }
-            catch (System.Exception ex)
+            catch
             {
-                Logger logItem = new Logger(ex.Message, Abstractions.Interfaces.MesagType.Error);
-                Program.Logger.Add(logItem);
+                //Console.WriteLine(ex.Message);
                 return new string[0];
             }
         }

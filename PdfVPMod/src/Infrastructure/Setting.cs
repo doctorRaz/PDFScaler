@@ -1,0 +1,213 @@
+﻿using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Xml;
+using System.Xml.Serialization;
+
+using drz.PdfVpMod.Enum;
+
+namespace drz.PdfVpMod.Infrastructure
+{
+    //https://www.google.com/url?q=https://translated.turbopages.org/proxy_u/en-ru.ru.6eb8cb99-67b179cb-0385a42a-74722d776562/https/stackoverflow.com/questions/7385921/how-to-write-a-comment-to-an-xml-file-when-using-the-xmlserializer&source=gmail&ust=1739815037916000&usg=AOvVaw1ct3e-CIQ1wZEzPd6FIseL
+
+
+    /// <summary>
+    /// настройки программы
+    /// </summary>
+    [Serializable]
+    public class Setting
+    {
+        WinGraphicsUnit _unit = WinGraphicsUnit.Millimeter;
+
+        /// <summary>
+        /// Gets or sets the unit XML comment.
+        /// </summary>
+        /// <value>
+        /// The unit XML comment.
+        /// </value>
+        [XmlAnyElement("UnitXmlComment")]
+        public XmlComment UnitXmlComment { get { return GetType().GetXmlComment(); } set { } }
+
+        /// <summary>
+        /// Gets or sets the unit.
+        /// </summary>
+        /// <value>
+        /// The unit.
+        /// </value>
+        [XmlComment("Опции единиц измерения видового экрана: по умолчанию-[Millimeter], [Point], [Inch], [Centimeter], [Presentation]")]
+        public WinGraphicsUnit Unit
+        {
+            get
+            {
+                return _unit;
+            }
+            set
+            {
+                _unit = value;
+            }
+        }
+
+        ModeChangVp _mode = ModeChangVp.Add;
+
+        /// <summary>
+        /// Gets or sets the mode XML comment.
+        /// </summary>
+        /// <value>
+        /// The mode XML comment.
+        /// </value>
+        [XmlAnyElement("ModeXmlComment")]
+        public XmlComment ModeXmlComment { get { return GetType().GetXmlComment(); } set { } }
+
+        /// <summary>
+        /// Gets or sets the mode.
+        /// </summary>
+        /// <value>
+        /// The mode.
+        /// </value>
+        [XmlComment("Способ изменения видового экрана: добавить VP - [Add], удалить VP - [Delete], изменить VP - [AddOrModify]")]
+        public ModeChangVp Mode
+        {
+            get
+            {
+                return _mode;
+            }
+            set
+            {
+                _mode = value;
+            }
+        }
+
+        bool _exitConfirmation = true;
+
+        /// <summary>
+        /// Gets or sets the exit confirmation XML comment.
+        /// </summary>
+        /// <value>
+        /// The exit confirmation XML comment.
+        /// </value>
+        [XmlAnyElement("ExitConfirmationXmlComment")]
+        public XmlComment ExitConfirmationXmlComment { get { return GetType().GetXmlComment(); } set { } }
+
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [exit confirmation].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [exit confirmation]; otherwise, <c>false</c>.
+        /// </value>
+        [XmlComment("Выход из программы без подтверждения - [false], с подтверждением - [true]")]
+        public bool ExitConfirmation
+        {
+            get
+            {
+                return _exitConfirmation;
+            }
+            set
+            {
+                _exitConfirmation = value;
+            }
+        }
+
+        bool _addBak = true;
+
+        /// <summary>
+        /// Gets or sets the add backup XML comment.
+        /// </summary>
+        /// <value>
+        /// The add backup XML comment.
+        /// </value>
+        [XmlAnyElement("AddBakXmlComment")]
+        public XmlComment AddBakXmlComment { get { return GetType().GetXmlComment(); } set { } }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [add backup].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [add backup]; otherwise, <c>false</c>.
+        /// </value>
+        [XmlComment("Сохранять резервные копии PDF (*.bak) - [true], перезаписывать существующий файл PDF - [false]")]
+        public bool AddBak
+        {
+            get
+            {
+                return _addBak;
+            }
+            set
+            {
+                _addBak = value;
+            }
+        }
+
+        static Setting()
+        {
+
+        }
+
+
+    }
+
+
+    #region ExtensionXML   
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="System.Attribute" />
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    public class XmlCommentAttribute : Attribute
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XmlCommentAttribute"/> class.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        public XmlCommentAttribute(string value)
+        {
+            this.Value = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        /// <value>
+        /// The value.
+        /// </value>
+        public string Value { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class XmlCommentExtensions
+    {
+        const string XmlCommentPropertyPostfix = "XmlComment";
+
+        static XmlCommentAttribute GetXmlCommentAttribute(this Type type, string memberName)
+        {
+            var member = type.GetProperty(memberName);
+            if (member == null)
+                return null;
+            var attr = member.GetCustomAttribute<XmlCommentAttribute>();
+            return attr;
+        }
+
+        /// <summary>
+        /// Gets the XML comment.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="memberName">Name of the member.</param>
+        /// <returns></returns>
+        public static XmlComment GetXmlComment(this Type type, [CallerMemberName] string memberName = "")
+        {
+            var attr = GetXmlCommentAttribute(type, memberName);
+            if (attr == null)
+            {
+                if (memberName.EndsWith(XmlCommentPropertyPostfix))
+                    attr = GetXmlCommentAttribute(type, memberName.Substring(0, memberName.Length - XmlCommentPropertyPostfix.Length));
+            }
+            if (attr == null || string.IsNullOrEmpty(attr.Value))
+                return null;
+            return new XmlDocument().CreateComment(attr.Value);
+        }
+    }
+    #endregion
+}

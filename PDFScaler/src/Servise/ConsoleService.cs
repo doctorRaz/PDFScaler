@@ -1,16 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
-using drz.Abstractions.Interfaces;
-using drz.Servise;
+using drz.PDFScaler.Enum;
+using drz.PDFScaler.Infrastructure;
+using drz.PDFScaler.Interfaces;
+using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Interfaces;
+using drz.PdfVpMod.Infrastructure;
 
 
-
-namespace drz.Infrastructure
+namespace drz.PDFScaler.Servise
 {
-    internal class ConsoleService : MessageService, IConsoleService
+    /// <summary>
+    /// Реализация сообщений в консоль
+    /// </summary>
+    /// <seealso cref="drz.PDFScaler.Interfaces.IConsoleService" />
+    internal class ConsoleService :/* MessageService,*/ IConsoleService
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleService"/> class.
+        /// </summary>
         public ConsoleService()
         {
             //Console.BackgroundColor =ConsoleColor.Black;
@@ -44,34 +56,20 @@ namespace drz.Infrastructure
         }
 #else
 
-        public void ConsoleWriteLineFB(string Message,
-                                        WConsoleColor FColor = WConsoleColor.Default,
-                                        WConsoleColor BColor = WConsoleColor.Default,
-                                        string Title = null,
-                                        [CallerMemberName] string CallerName = null)
-        {
-            _title = Title;
-
-
-            Console.ForegroundColor = ConvertEnumWToConsole(FColor, FB.Foreground);
-            Console.BackgroundColor = ConvertEnumWToConsole(BColor, FB.Bacground);
-
-#if DEBUG
-            Console.WriteLine($"{CallerName}: {Message}");
-#else
-            Console.WriteLine($"{Message}"); 
-#endif
-            Console.ResetColor();
-
-        }
-
+        /// <summary>
+        /// Consoles the write line.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="TypeMessage"></param>
+        /// <param name="Title">The title.</param>
+        /// <param name="CallerName">Name of the caller.</param>
         public void ConsoleWriteLine(string Message,
-                            MesagType TypeMesag = MesagType.None,
+                            MesagType TypeMessage = MesagType.None,
                              string Title = null,
                              [CallerMemberName] string CallerName = null)
         {
             _title = Title;
-            ColorFB CFB = new ColorFB(TypeMesag);
+            ColorFB CFB = new ColorFB(TypeMessage);
             Console.ForegroundColor = CFB.ColorF;
             Console.BackgroundColor = CFB.ColorB;
 #if DEBUG
@@ -84,6 +82,13 @@ namespace drz.Infrastructure
 
         }
 
+        /// <summary>
+        /// Consoles the write.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="TypeMesag">The type mesag.</param>
+        /// <param name="Title">The title.</param>
+        /// <param name="CallerName">Name of the caller.</param>
         public void ConsoleWrite(string Message,
              MesagType TypeMesag = MesagType.None,
               string Title = null,
@@ -102,29 +107,51 @@ namespace drz.Infrastructure
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// Prints the specified logger.
+        /// </summary>
+        /// <param name="Logger">The logger.</param>
+        /// <param name="ExitConfirmation">if set to <c>true</c> [exit confirmation].</param>
+        public void Print(List<ILogger> Logger, bool ExitConfirmation)
+        {
 
+            foreach (Logger logger in Logger.Cast<Logger>())
+            {
+                if (logger.MesagType == MesagType.Error)
+                {
+                    ExitConfirmation = true;//не закрывать консоль
+                }
+#if DEBUG
+                ConsoleWriteLine($"{logger.DateTimeStamp}: {logger.CallerName} {logger.Messag}", logger.MesagType);
+#else
+                ConsoleWriteLine($"{logger.Messag}", logger.MesagType);
+#endif
+            }
+            Logger.Clear();
+
+            if (ExitConfirmation)
+            {
+                Console.Write("\nДля продолжения нажмите любую клавишу...");
+                Console.ReadKey();
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
 
 #endif
         #endregion
 
-        #region Enum
-        enum FB
-        {
-            Foreground,
-            Bacground
-        }
-
-        #endregion
-
-
-
         #region Convert Enum
 
         /// <summary>
-        /// Converts the enum WindowResult to MessageBoxResult.
+        /// Converts the enum w to console.
         /// </summary>
-        /// <param name="WColor">WindowResult</param>
-        /// <returns>MessageBoxResult</returns>
+        /// <param name="WColor">Color of the w.</param>
+        /// <param name="fb">The fb.</param>
+        /// <returns></returns>
         /// <exception cref="System.ComponentModel.InvalidEnumArgumentException"></exception>
         ConsoleColor ConvertEnumWToConsole(WConsoleColor WColor, FB fb)
         {
@@ -163,8 +190,6 @@ namespace drz.Infrastructure
         }
         #endregion
 
-
-
         /// <summary>
         /// Цвета
         /// </summary>
@@ -183,7 +208,7 @@ namespace drz.Infrastructure
                         _colorB = ConsoleColor.DarkRed;
                         break;
                     case MesagType.Warning:
-                        _colorF = ConsoleColor.DarkRed;
+                        _colorF = ConsoleColor.Red;
                         _colorB = Console.BackgroundColor;
                         break;
                     case MesagType.Info:
@@ -211,7 +236,7 @@ namespace drz.Infrastructure
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_title)) return DataSetWpfOpt.sTitleAttribute + " " + DataSetWpfOpt.sVersion;
+                if (string.IsNullOrWhiteSpace(_title)) return DataSetWpfOpt.TitleAttribute + " " + DataSetWpfOpt.Version;
                 else return _title;
             }
         }

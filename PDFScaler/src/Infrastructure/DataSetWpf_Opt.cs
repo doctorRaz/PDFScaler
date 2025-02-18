@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 
 
-namespace drz.Servise
+namespace drz.PDFScaler.Infrastructure
 {
     /// <summary> Пути разделители и пр.</summary>
     public class DataSetWpfOpt
@@ -13,149 +13,144 @@ namespace drz.Servise
         /// <summary>Домен машины</summary>
         internal static string Userdomain = System.Environment.GetEnvironmentVariable("USERDOMAIN");
 
-        /// <summary>Почта</summary>
-       
         #endregion
         #region ВЕРСИЯ ПРОГРАММЫ
         /// <summary>Версия программы</summary>
-        internal static System.Version sysVersion => asm.GetName().Version;
+        internal static System.Version SysVersion => Asm.GetName().Version;
 
         /// <summary>Версия мажор</summary>
-        internal static int iMajor => sysVersion.Major;
+        internal static int Major => SysVersion.Major;
 
         /// <summary>Версия минор</summary>
-        internal static int iMinor => sysVersion.Minor;
+        internal static int Minor => SysVersion.Minor;
 
         /// <summary>Версия билд</summary>
-        public static int iBuild => sysVersion.Build;
+        public static int Build => SysVersion.Build;
 
         /// <summary>Версия ревизия</summary>
-        internal static int iRevision => sysVersion.Revision;
+        internal static int Revision => SysVersion.Revision;
 
         /// <summary>Бета или нет, чет нечет</summary>
         //static string _sBeta => iMinor == 0 || iMinor >3 ? "" : iMinor == 1 ? "<alfa>" : "<beta>";
-        private static string _sBeta => iMinor > 0 & iMinor <= 5 ? "<beta>" : "";
+        static string _sBeta => Minor > 0 & Minor <= 5 ? "<beta>" : "";
         #endregion
 
         #region Assembly
 
         /// <summary>Сборка содержащая текущий исполняемый код</summary>
-        public static Assembly asm => Assembly.GetExecutingAssembly();
+        public static Assembly Asm => Assembly.GetExecutingAssembly();
 
-        /// <summary> Титул программы печати</summary>
-        public static string sTitleAttribute => (Attribute.GetCustomAttribute(
-            asm,
+        /// <summary> Титул программы </summary>
+        public static string TitleAttribute => (Attribute.GetCustomAttribute(
+            Asm,
             typeof(AssemblyTitleAttribute),
             false) as AssemblyTitleAttribute).Title;
 
         /// <summary>Описание программы </summary>
-        public static string sDescription => (Attribute.GetCustomAttribute(
-            asm,
+        public static string Description => (Attribute.GetCustomAttribute(
+            Asm,
             typeof(AssemblyDescriptionAttribute),
             false) as AssemblyDescriptionAttribute).Description;//!описание
 
         /// <summary>Конфигурация программы </summary>
-        public static string sConfiguration => (Attribute.GetCustomAttribute(
-            asm,
+        public static string Configuration => (Attribute.GetCustomAttribute(
+            Asm,
             typeof(AssemblyConfigurationAttribute),
             false) as AssemblyConfigurationAttribute).Configuration;
 
         /// <summary>Компания </summary>
-        public static string sCompany => (Attribute.GetCustomAttribute(
-            asm,
+        public static string Company => (Attribute.GetCustomAttribute(
+            Asm,
             typeof(AssemblyCompanyAttribute),
             false) as AssemblyCompanyAttribute).Company;
 
         /// <summary>Продукт </summary>
-        public static string sProduct => (Attribute.GetCustomAttribute(
-            asm,
+        public static string Product => (Attribute.GetCustomAttribute(
+            Asm,
             typeof(AssemblyProductAttribute),
             false) as AssemblyProductAttribute).Product;
 
         /// <summary>копирайт</summary>
-        public static string sCopyright => (Attribute.GetCustomAttribute(
-            asm,
+        public static string Copyright => (Attribute.GetCustomAttribute(
+            Asm,
             typeof(AssemblyCopyrightAttribute),
             false) as AssemblyCopyrightAttribute).Copyright;
 
         /// <summary>торговая марка</summary>
-        public static string sTrademark => (Attribute.GetCustomAttribute(
-            asm,
+        public static string Trademark => (Attribute.GetCustomAttribute(
+            Asm,
             typeof(AssemblyTrademarkAttribute),
             false) as AssemblyTrademarkAttribute).Trademark;
 
         /// <summary>ProductVersion - Версия программы
-        /// <br>для идентификации в лицензии пограмма для нк или АК</br>
+        /// <br>для идентификации</br>
         /// </summary>
-        public static string sInformationalVersionAttribut => (Attribute.GetCustomAttribute(
-                   asm,
+        public static string InformationalVersionAttribut => (Attribute.GetCustomAttribute(
+                   Asm,
                    typeof(AssemblyInformationalVersionAttribute),
                    false) as AssemblyInformationalVersionAttribute).InformationalVersion;
 
         /// <summary>Полный путь к сборке </summary>
-        public static string sAsmFulPath => asm.Location;
+        public static string AsmFulPath => Asm.Location;
 
         /// <summary>Имя сборки без расширения</summary>
-        public static string sAsmFileNameWithoutExtension => Path.GetFileNameWithoutExtension(sAsmFulPath);
+        public static string AsmFileNameWithoutExtension => Path.GetFileNameWithoutExtension(AsmFulPath);
 
         /// <summary>Имя сборки с расширением</summary>
-        public static string sAsmFileName => Path.GetFileName(sAsmFulPath);
+        public static string AsmFileName => Path.GetFileName(AsmFulPath);
 
         /// <summary>версия программы </summary>
-        public static string sVersion => iMajor.ToString()
+        public static string Version => Major.ToString()
                                          + "."
-                                         + iMinor.ToString()
+                                         + Minor.ToString()
                                          + "."
-                                         + iBuild.ToString()
+                                         + Build.ToString()
                                          + _sBeta//_sysVersion.ToString() + _sBeta;
                                          ;
         /// <summary>Полная версия с окончанием </summary>
-        public static string sVersionFull => iMajor.ToString()
+        public static string VersionFull => Major.ToString()
                                              + "."
-                                             + iMinor.ToString()
+                                             + Minor.ToString()
                                              + "."
-                                             + iBuild.ToString()
+                                             + Build.ToString()
                                              + "."
-                                             + iRevision.ToString()
+                                             + Revision.ToString()
                                              + _sBeta;//_sysVersion.ToString() + _sBeta;
 
         /// <summary>Полная версия без окончания </summary>
-        public static string sVersionShort => iMajor.ToString()
+        public static string VersionShort => Major.ToString()
                                              + "."
-                                             + iMinor.ToString()
+                                             + Minor.ToString()
                                              + "."
-                                             + iBuild.ToString()
+                                             + Build.ToString()
                                              + "."
-                                             + iRevision.ToString();
+                                             + Revision.ToString();
 
         /// <summary>Дата сборки</summary>
-        public static string sDateRelis()
+        public static string DateRelis()
         {
             DateTime result = new DateTime(2000, 1, 1);
-            result = result.AddDays(iBuild);
-            result = result.AddSeconds(iRevision * 2);
+            result = result.AddDays(Build);
+            result = result.AddSeconds(Revision * 2);
 
 #if DEBUG
             return result.ToString();
 #else
             return result.ToLongDateString();
 #endif
-
-
-
         }
 
 
         #endregion
 
-        #region О CAD
+        #region О программе
 
-        /// <summary>Название CAD программы </summary>
-        internal static string sAppProductName => System.Windows.Forms.Application.ProductName;
+        /// <summary>Название программы </summary>
+        internal static string AppProductName => System.Windows.Forms.Application.ProductName;
 
-        /// <summary>Мажор версия CAD программы </summary>
+        /// <summary>Мажор версия программы </summary>
 
-        internal static string sAppMajor => ((System.Windows.Forms.Application.ProductVersion).Split('.'))[0];
+        internal static string AppMajor => ((System.Windows.Forms.Application.ProductVersion).Split('.'))[0];
 
 
         #endregion
@@ -170,14 +165,13 @@ namespace drz.Servise
         private static string _sUserAppData => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         /// <summary>Путь к рабочему столу</summary>
-        public static string sUserDesktop => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        public static string UserDesktop => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         /// <summary>Имя машины</summary>
-        public static string sMachineName => Environment.MachineName;
+        public static string MachineName => Environment.MachineName;
 
-        /// <summary>папка темп</summary>
-       public static string sTemp=>Path.GetTempPath();
- 
+        //public static string sTemp=>Path.GetTempPath();
+
 
         #endregion
 

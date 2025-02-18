@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using drz.Abstractions.Interfaces;
-using drz.Infrastructure;
-using drz.PDF_Engine;
-using drz.Servise;
+using drz.PDFScaler.Infrastructure;
+using drz.PDFScaler.Interfaces;
+using drz.PDFScaler.Servise;
+using drz.PdfVpMod.Enum;
+using drz.PdfVpMod.Infrastructure;
+using drz.PdfVpMod.Interfaces;
+using drz.PdfVpMod.PdfSharp;
+using System.IO;
 
+
+
+#if NET
+using System.Reflection;
+[assembly: AssemblyInformationalVersion("PDFScaler for PDF")]
+#endif
 
 namespace drz.PDFScaler
 {
@@ -20,80 +30,83 @@ namespace drz.PDFScaler
 
     internal class Program
     {
-        public static List<Logger> Logger;
+        /// <summary>
+        /// логер событий
+        /// </summary>
+        public static List<ILogger> Logger;
 
         [STAThread]
         static void Main(string[] args)
         {
-            ReflectionLoader cmd = new ReflectionLoader();
 
+            //загрузчик dll
+            new ReflectionLoader();
+            Prog(args);
+        }
+        static void Prog(string[] args)
+        {
 
-            ConsoleKey response;
+            IConsoleService CS = new ConsoleService();//цветная консоль
 
-            //цветная консоль
-            IConsoleService CS = new ConsoleService();
+            Logger = new List<ILogger>(); //logger сообщения
 
-            //logger просто сообщения
-            Logger = new List<Logger>();
+            Config cfg = new Config(Logger); //читаю конфигурацию
 
-            //движок PdfScaler
-            PdfScaler PS = new PdfScaler();
+            Setting Sets = cfg.Set;//настройки
 
-            if (!PS.IsArrVP)//косяк с шаблоном
+            Repository GF = new Repository(Logger, Sets);
+
+            ConsoleKey response = new ConsoleKey();
+
+            //"D:/@Developers/В работе/!Текущее/Programmers/!NET/GitHubMy/PDFScaler/temp/test" "D:/@Developers/В работе/!Текущее/Programmers/!NET/GitHubMy/PDFScaler/temp/NOT_DESIGNATION.pdf" -bakoN -mm -add -exon
+
+            List<string> filesPdf = GF.GetPDFfiles(args);//пытаемся получить из ком строки список файлов и параметры ком строки
+
+            //настройки загружены из default/xml и/или ком строки
+            //Manager 
+            PdfManager PS = new PdfManager(Logger,
+                                            Sets);
+
+            if (filesPdf.Count > 0)//файлы есть
             {
-                foreach (Logger logger in Logger)
-                {
-                    CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
-                }
-
-                CS.ConsoleWriteLine("Press any Key");//даем возможность прочитать
-                response = Console.ReadKey().Key;
+                PS.PdfRun(filesPdf);
+                CS.Print(Logger, Sets.ExitConfirmation);
                 return;
             }
 
-            //приветственные сообщения
-            CS.ConsoleWrite(MessagWelcom.Header, MesagType.Warning);
-            foreach (string item in MessagWelcom.Welcom)
+            else//файлов нет
             {
-                CS.ConsoleWriteLine(item, MesagType.Ok);
-            }
-            //предложение продолжить
-            CS.ConsoleWrite(MessagWelcom.MesagStart, MesagType.Ok);
+                if (UiMenu.Create())
+                {//предлжение открыть файлы
+                    CS.ConsoleWriteLine("\nНастройки приложения...\n", MesagType.Ok);
+                    CS.ConsoleWriteLine($"\tРежим приложения:\t{Sets.Mode.ToString()}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit.ToString()}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tРезервная копия:\t{Sets.AddBak.ToString()}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation.ToString()}", MesagType.Ok );
 
-            response = Console.ReadKey(/*false*/).Key;
-            CS.ConsoleWriteLine("");
-            if (response != ConsoleKey.Y)//юзер отказался
-            {
-                return;
-            }
-
-            do
-            {
-                PS.PdfRun();
-                //if (!PS.PdfRun()) //движок
-                //{
-                foreach (Logger logger in Logger)
-                {
-                    CS.ConsoleWriteLine(logger.Messag, logger.MesagType);
+                    CS.ConsoleWrite($"\nОткрыть диалог выбора файлов? [Y]-да, любая клавиша выход: ", MesagType.Ok);
+                    response = Console.ReadKey().Key;
+                    Console.WriteLine("");
+                    if (response != ConsoleKey.Y)
+                    {
+                        return;
+                    }
                 }
-                //}
-
-                CS.ConsoleWrite(MessagWelcom.MesagReplase);
-                response = Console.ReadKey(/*false*/).Key;
-                if (response == ConsoleKey.Y)
+                else
                 {
-                    CS.ConsoleWriteLine("");
-                    //logger
-                    Logger = new List<Logger>();
-                    //Console.Clear();
+                    return;
                 }
-            } while (response == ConsoleKey.Y);
+            }
+
+            filesPdf = GF.GetPDFfilesWin();//пытаемся получить файлы из диалога
+            if (filesPdf.Count > 0)
+            {
+                PS.PdfRun(filesPdf);
+            }
+            CS.Print(Logger, Sets.ExitConfirmation);
 
         }
 
-
-       
     }
 
-  
 }

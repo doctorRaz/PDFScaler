@@ -1,14 +1,19 @@
 ﻿using System;
 using System.IO;
 
+using drz.PDFScaler.Infrastructure;
 
-namespace drz.Servise
+
+namespace drz.PDFScaler.Servise
 {
-    /// <summary> Все входы в печать </summary>
+    /// <summary> Подгрузка библиотек </summary>
     partial class ReflectionLoader
 
     {
-        public ReflectionLoader()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReflectionLoader"/> class.
+        /// </summary>
+        internal ReflectionLoader()
         {
             AsmEventAdd();//add  event Assembly resolve                   
 
@@ -17,7 +22,7 @@ namespace drz.Servise
         #region System.Reflection            
         private System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            string sPath = string.Empty;
+            string sPath;
 
             if (args.Name.IndexOf(",") > -1)
             {
@@ -44,12 +49,12 @@ namespace drz.Servise
         string AssemblFulNameDll(string sDllName)
         {
             string asmPath = String.Empty;
-            string sAsmFileFullName = DataSetWpfOpt.sAsmFulPath;//каталог DLL
+            string sAsmFileFullName = DataSetWpfOpt.AsmFulPath;//каталог DLL
             // string sAsmFileFullName = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
             string sPath = Directory.GetParent(sAsmFileFullName).FullName;
 
 
-            string[] asmPaths = UtilitesWorkFil.GetFilesOfDir(sPath, true, sDllName);
+            string[] asmPaths = GetFilesOfDir(sPath, true, sDllName);
             if (asmPaths.Length > 0)
             {
                 string asmPathTmp = asmPaths[0];//хватаем первую в списке
@@ -78,11 +83,34 @@ namespace drz.Servise
             catch
             {
                 return false;
-            };
+            }
+            ;
         }
         #endregion
 
-      
- 
+        #region Utilities Files
+        /// <summary>Получить список путей фалов в директории</summary>
+        /// <param name="sPath">Директория с файлами</param>
+        /// <param name="WithSubfolders">Учитывать поддиректории</param>
+        /// <param name="sSerchPatern">Маска поиска</param>
+        /// <returns>Пути к файлам</returns>
+        static string[] GetFilesOfDir(string sPath, bool WithSubfolders, string sSerchPatern = "*.pdf")
+        {
+            try
+            {
+                return Directory.GetFiles(sPath,
+                                            sSerchPatern,
+                                            (WithSubfolders
+                                            ? SearchOption.AllDirectories
+                                            : SearchOption.TopDirectoryOnly));
+            }
+            catch
+            {
+                //Console.WriteLine(ex.Message);
+                return new string[0];
+            }
+        }
+        #endregion
+
     }
 }
