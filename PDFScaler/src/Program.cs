@@ -91,8 +91,8 @@ namespace drz.PDFScaler
                     CS.Print(Logger, false);//выводим если что есть, только War,Err
 
                     //предлжение открыть файлы
-                    CS.ConsoleWriteLine("Настройки приложения...", MesagType.Ok);
-                    CS.ConsoleWriteLine($"\tРежим приложения:\t{Sets.Mode.ToString()}", MesagType.Info);
+                    CS.ConsoleWriteLine("Текущие настройки приложения...", MesagType.Ok);
+                    CS.ConsoleWriteLine($"\tРежим изменения:\t{Sets.Mode.ToString()}", MesagType.Info);
                     CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit.ToString()}", MesagType.Info);
                     CS.ConsoleWriteLine($"\tРезервная копия:\t{Sets.AddBak.ToString()}", MesagType.Info);
                     CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation.ToString()}", MesagType.Info);

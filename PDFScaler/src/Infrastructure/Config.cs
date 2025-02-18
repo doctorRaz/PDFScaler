@@ -19,19 +19,17 @@ namespace drz.PDFScaler.Infrastructure
             Set = new Setting();
             if (Deserialize())
             {
-                Logger logItem = new Logger($"Настройки прочитаны {XMLpatch}", MesagType.Info);
-                Logger.Add(logItem);
+                Logger.Add(new Logger($"Настройки прочитаны {XMLpatch}", MesagType.Info));
             }
             else
             {
-                Logger logItem = new Logger($"Не удалось прочитать и сохранить настройки {XMLpatch}", MesagType.Error);
-                Logger.Add(logItem);
+                Logger.Add(new Logger($"Не удалось прочитать и сохранить настройки {XMLpatch}", MesagType.Error));
             }
 
         }
 
         /// <summary> путь к XML </summary>
-       internal static string XMLpatch => Path.Combine(Path.GetDirectoryName(DataSetWpfOpt.AsmFulPath), $"{DataSetWpfOpt.AppProductName}.config");
+        internal static string XMLpatch => Path.Combine(Path.GetDirectoryName(DataSetWpfOpt.AsmFulPath), $"{DataSetWpfOpt.AppProductName}.config");
 
         static XmlSerializer FormatterXML => new XmlSerializer(typeof(Setting));
 
