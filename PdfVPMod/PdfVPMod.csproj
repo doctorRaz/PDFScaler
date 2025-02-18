@@ -38,8 +38,8 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PdfSharp">
-      <HintPath>..\lib\pdfsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    <Reference Include="PdfSharp-gdi">
+      <HintPath>..\lib\PDFsharp-gdi.1.50.5147\lib\net20\PdfSharp-gdi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,6 +67,8 @@
   <ItemGroup>
     <Content Include="share.te.ua.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
