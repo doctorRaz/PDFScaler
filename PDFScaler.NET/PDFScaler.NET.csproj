@@ -1,89 +1,102 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-	  <BaseOutputPath>..\bin\</BaseOutputPath>
-	  <UseWPF>true</UseWPF>
-	  <UseWindowsForms>true</UseWindowsForms>
-	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-	  
-	  	<!--атрибуты сборки-->
-	<!--<GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>-->
-	<!--<AssemblyName></AssemblyName>-->
-	<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
-	<SignAssembly>False</SignAssembly>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<BaseOutputPath>..\bin\</BaseOutputPath>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
-	<!-- <Title>PlotSPDSn.Nas</Title> -->
-	<Product>PDFScaler.NET</Product>
-	<Company>doctorRaz@gmail.com</Company>
-	<Authors>Разыграев Андрей</Authors>
-	<Description>Добавление масштаба в видовой экран страниц файлов PDF</Description>
-	<Copyright>Разыграев Андрей</Copyright>
+		<!--https://stackoverflow.com/questions/58994946/how-to-build-app-without-app-runtimeconfig-json-->
+		<!--По сути, вам нужны следующие свойства в файле вашего проекта-->
+		<!--<PublishTrimmed>true</PublishTrimmed>-->
+		<!--<PublishReadyToRun>true</PublishReadyToRun>
+		<PublishSingleFile>true</PublishSingleFile>-->
+ 		<!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+		<!--По сути, вам нужны следующие свойства в файле вашего проекта-->
 
-	<!--<GenerateAssemblyInformationalVersionAttribute>true</GenerateAssemblyInformationalVersionAttribute>
+		<!--атрибуты сборки-->
+		<!--<GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>-->
+		<!--<AssemblyName></AssemblyName>-->
+		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+		<SignAssembly>False</SignAssembly>
+
+		<!-- <Title>PlotSPDSn.Nas</Title> -->
+		<Product>PDFScaler.NET</Product>
+		<Company>doctorRaz@gmail.com</Company>
+		<Authors>Разыграев Андрей</Authors>
+		<Description>Добавление масштаба в видовой экран страниц файлов PDF</Description>
+		<Copyright>Разыграев Андрей</Copyright>
+
+		<!--<GenerateAssemblyInformationalVersionAttribute>true</GenerateAssemblyInformationalVersionAttribute>
 	<InformationalVersion>1, PlotSPDS for nanoCAD</InformationalVersion>-->
 
-	<Trademark>doctorRAZ 2014-2025</Trademark>
-	<!--атрибуты сборки-->
+		<Trademark>doctorRAZ 2014-2025</Trademark>
+		<!--атрибуты сборки-->
 
-	<!--<Version />-->
-	<GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-	<GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
-	<Deterministic>false</Deterministic>
-	<AssemblyVersion>0.2.*</AssemblyVersion>
-	<StartupObject>drz.PDFScaler.Program</StartupObject>
-	<ApplicationIcon>share.te.ua.ico</ApplicationIcon>
-	<!--<Version />-->
-	  
-	  
-  </PropertyGroup>
+		<!--<Version />-->
+		<GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+		<GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+		<Deterministic>false</Deterministic>
+		<AssemblyVersion>0.2.*</AssemblyVersion>
+		<StartupObject>drz.PDFScaler.Program</StartupObject>
+		<ApplicationIcon>share.te.ua.ico</ApplicationIcon>
+		<!--<Version />-->
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-   	<GenerateDocumentationFile>True</GenerateDocumentationFile>
-  </PropertyGroup>
 
-   <ItemGroup>
-    <Compile Include="..\PDFScaler\src\Abstractions\Interfaces\IConsoleService.cs" Link="src\Abstractions\Interfaces\IConsoleService.cs" />	  
-	   <Compile Include="..\PDFScaler\src\Enum\Enum.FB.cs" Link="src\Enum\Enum.FB.cs" />
-	   <Compile Include="..\PDFScaler\src\Enum\Enum.WConsoleColor.cs" Link="src\Enum\Enum.WConsoleColor.cs" />
-  
-	   <Compile Include="..\PDFScaler\src\Infrastructure\Config.cs" Link="src\Infrastructure\Config.cs" />
-	   <Compile Include="..\PDFScaler\src\Infrastructure\ConsoleFocus.cs" Link="src\Infrastructure\ConsoleFocus.cs" />
-	   <Compile Include="..\PDFScaler\src\Infrastructure\DataSetWpf_Opt.cs" Link="src\Infrastructure\DataSetWpf_Opt.cs" />
-	   <Compile Include="..\PDFScaler\src\Infrastructure\Repository.cs" Link="src\Infrastructure\Repository.cs" />
-	  
-	   <Compile Include="..\PDFScaler\src\Servise\ConsoleService.cs" Link="src\Servise\ConsoleService.cs" />
-	   <Compile Include="..\PDFScaler\src\Servise\Menu.cs" Link="src\Servise\Menu.cs" />
-	   <Compile Include="..\PDFScaler\src\Servise\ReflectionLoader.cs" Link="src\Servise\ReflectionLoader.cs" />
-	  
-	   <Compile Include="..\PDFScaler\src\Program.cs" Link="src\Program.cs" />
-	  
-  </ItemGroup>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <COMReference Include="IWshRuntimeLibrary">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>1</VersionMajor>
-      <Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="share.te.ua.ico" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PdfVPMod\PdfVPMod.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Include="..\PDFScaler\src\Abstractions\Interfaces\IConsoleService.cs" Link="src\Abstractions\Interfaces\IConsoleService.cs" />
+		<Compile Include="..\PDFScaler\src\Enum\Enum.FB.cs" Link="src\Enum\Enum.FB.cs" />
+		<Compile Include="..\PDFScaler\src\Enum\Enum.WConsoleColor.cs" Link="src\Enum\Enum.WConsoleColor.cs" />
 
-  <!--<ItemGroup>
+		<Compile Include="..\PDFScaler\src\Infrastructure\Config.cs" Link="src\Infrastructure\Config.cs" />
+		<Compile Include="..\PDFScaler\src\Infrastructure\ConsoleFocus.cs" Link="src\Infrastructure\ConsoleFocus.cs" />
+		<Compile Include="..\PDFScaler\src\Infrastructure\DataSetWpf_Opt.cs" Link="src\Infrastructure\DataSetWpf_Opt.cs" />
+		<Compile Include="..\PDFScaler\src\Infrastructure\Repository.cs" Link="src\Infrastructure\Repository.cs" />
+
+		<Compile Include="..\PDFScaler\src\Servise\ConsoleService.cs" Link="src\Servise\ConsoleService.cs" />
+		<Compile Include="..\PDFScaler\src\Servise\Menu.cs" Link="src\Servise\Menu.cs" />
+		<Compile Include="..\PDFScaler\src\Servise\ReflectionLoader.cs" Link="src\Servise\ReflectionLoader.cs" />
+
+		<Compile Include="..\PDFScaler\src\Program.cs" Link="src\Program.cs" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<COMReference Include="IWshRuntimeLibrary">
+			<WrapperTool>tlbimp</WrapperTool>
+			<VersionMinor>0</VersionMinor>
+			<VersionMajor>1</VersionMajor>
+			<Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
+			<Lcid>0</Lcid>
+			<Isolated>false</Isolated>
+			<EmbedInteropTypes>true</EmbedInteropTypes>
+		</COMReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="share.te.ua.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PdfVPMod\PdfVPMod.csproj" />
+	</ItemGroup>
+
+	<!--<ItemGroup>
     <Folder Include="src\Abstractions\Interfaces\" />
     <Folder Include="src\Infrastructure\" />
     <Folder Include="src\Servise\" />
