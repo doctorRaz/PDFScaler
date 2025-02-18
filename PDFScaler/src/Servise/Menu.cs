@@ -25,11 +25,28 @@ namespace drz.PDFScaler.Servise
             IConsoleService CS = new ConsoleService();//цветная консоль
 
             #region Title
-            CS.ConsoleWriteLine($"{DataSetWpfOpt.Product} {DataSetWpfOpt.VersionFull}\nCopyright(C) {DataSetWpfOpt.Trademark} by {DataSetWpfOpt.Copyright}\n", MesagType.Warning);
+            //CS.ConsoleWriteLine($"{DataSetWpfOpt.Product} {DataSetWpfOpt.VersionFull}\n", MesagType.Ok);
             #endregion
 
             #region License
-            CS.ConsoleWriteLine("This program is free software: you can redistribute it and / or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\nYou should have received a copy of the GNU General Public License along with this program. If not, see < http://www.gnu.org/licenses/>.\n", MesagType.Info);
+            //todo перевести лицензию
+            CS.ConsoleWriteLine("\t\tApache License\n" +
+                "\tVersion 2.0, January 2004\n", MesagType.Ok);
+            CS.ConsoleWriteLine($"   Copyright(C) {DataSetWpfOpt.Trademark} by {DataSetWpfOpt.Copyright}\n", MesagType.Ok);
+
+            CS.ConsoleWrite ("   Лицензировано в соответствии с Apache License, Version 2.0 (\"Лицензия\");\n" +
+                "   Вы не можете использовать этот файл, кроме как в соответствии с Лицензией.\n" +
+                "   Вы можете получить копию Лицензии по адресу: ", MesagType.None);
+            CS.ConsoleWriteLine("http://www.apache.org/licenses/LICENSE-2.0", MesagType.Ok);
+
+            CS.ConsoleWrite("\n   Если это не требуется применимым законодательством или не согласовано в письменной форме,\n" +
+                "   программное обеспечение, распространяемое в соответствии с Лицензией,\n" +
+                "   распространяется на условиях ", MesagType.None);
+            CS.ConsoleWriteLine("\"КАК ЕСТЬ\", БЕЗ ГАРАНТИЙ ИЛИ УСЛОВИЙ ЛЮБОГО РОДА,", MesagType.Warning);
+            CS.ConsoleWriteLine("   явных или подразумеваемых.\n" +
+                "   См.Лицензию для получения информации о конкретных языках, регулирующих разрешения\n" +
+                "   и ограничения в соответствии с Лицензией.", MesagType.None);
+            CS.ConsoleWriteLine("   ========================================================================================\n", MesagType.None);
             #endregion
 
             #region Using
@@ -122,12 +139,13 @@ namespace drz.PDFScaler.Servise
 
                 if (response == ConsoleKey.Y)
                 {
+                    string targetPath = Path.Combine(Path.GetDirectoryName(DataSetWpfOpt.AsmFulPath), $"{DataSetWpfOpt.AsmFileNameWithoutExtension}.exe");
 
                     //Add
                     WshShell shell = new WshShell();
                     IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(pathPdfAdd);
                     shortcut.Description = $"Ярлык {DataSetWpfOpt.Product} добавить VP";
-                    shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                    shortcut.TargetPath = targetPath;
                     shortcut.Save();
                     CS.ConsoleWriteLine($"Ярлык \"{Path.GetFileName(pathPdfAdd)}\" добавлен", MesagType.Info);
 
@@ -135,7 +153,7 @@ namespace drz.PDFScaler.Servise
                     shell = new WshShell();
                     shortcut = (IWshShortcut)shell.CreateShortcut(pathPdfMod);
                     shortcut.Description = $"Ярлык {DataSetWpfOpt.Product} изменить VP";
-                    shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                    shortcut.TargetPath = targetPath;
                     shortcut.Arguments = "-mod";
                     shortcut.Save();
                     CS.ConsoleWriteLine($"Ярлык \"{Path.GetFileName(pathPdfMod)}\" добавлен", MesagType.Info);
@@ -144,7 +162,7 @@ namespace drz.PDFScaler.Servise
                     shell = new WshShell();
                     shortcut = (IWshShortcut)shell.CreateShortcut(pathPdfDel);
                     shortcut.Description = $"Ярлык {DataSetWpfOpt.Product} удалить VP";
-                    shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                    shortcut.TargetPath = targetPath;
                     shortcut.Arguments = "-del";
                     shortcut.Save();
                     CS.ConsoleWriteLine($"Ярлык \"{Path.GetFileName(pathPdfDel)}\" добавлен", MesagType.Info);
