@@ -12,7 +12,7 @@ namespace drz.PdfVpMod.Infrastructure
 
 
     /// <summary>
-    /// настройки программы
+    /// Настройки программы
     /// </summary>
     [Serializable]
     public class Setting
@@ -34,7 +34,12 @@ namespace drz.PdfVpMod.Infrastructure
         /// <value>
         /// The unit.
         /// </value>
-        [XmlComment("Опции единиц измерения видового экрана: по умолчанию-[Millimeter], [Point], [Inch], [Centimeter], [Presentation]")]
+        [XmlComment("<Unit> Опции единиц измерения видового экрана:\n" +
+            "\t\t[Millimeter] - миллиметры (по умолчанию)\n" +
+            "\t\t[Point] - точки/пойнты\n" +
+            "\t\t[Inch] - дюймы\n" +
+            "\t\t[Centimeter] - сантиметры\n" +
+            "\t\t[Presentation] - единицы презентации (не знаю, что это)")]
         public WinGraphicsUnit Unit
         {
             get
@@ -47,6 +52,9 @@ namespace drz.PdfVpMod.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Режим default
+        /// </summary>
         ModeChangVp _mode = ModeChangVp.Add;
 
         /// <summary>
@@ -64,7 +72,10 @@ namespace drz.PdfVpMod.Infrastructure
         /// <value>
         /// The mode.
         /// </value>
-        [XmlComment("Способ изменения видового экрана: добавить VP - [Add], удалить VP - [Delete], изменить VP - [AddOrModify]")]
+        [XmlComment("<Mode> Способ изменения видового экрана (VP):\n" +
+            "\t\t[Add] - добавить VP (по умолчанию)\n" +
+            "\t\t[Delete] - удалить VP\n" +
+            "\t\t[AddOrModify] - изменить VP")]
         public ModeChangVp Mode
         {
             get
@@ -77,6 +88,9 @@ namespace drz.PdfVpMod.Infrastructure
             }
         }
 
+        /// <summary>
+        /// The exit confirmation default
+        /// </summary>
         bool _exitConfirmation = true;
 
         /// <summary>
@@ -95,7 +109,9 @@ namespace drz.PdfVpMod.Infrastructure
         /// <value>
         ///   <c>true</c> if [exit confirmation]; otherwise, <c>false</c>.
         /// </value>
-        [XmlComment("Выход из программы без подтверждения - [false], с подтверждением - [true]")]
+        [XmlComment("<ExitConfirmation> Выход из программы:\n" +
+            "\t\t[true] - с подтверждением (по умолчанию)\n" +
+            "\t\t[false] - без подтверждения, если нет ошибок")]
         public bool ExitConfirmation
         {
             get
@@ -108,6 +124,9 @@ namespace drz.PdfVpMod.Infrastructure
             }
         }
 
+        /// <summary>
+        /// The add backup default
+        /// </summary>
         bool _addBak = true;
 
         /// <summary>
@@ -125,7 +144,9 @@ namespace drz.PdfVpMod.Infrastructure
         /// <value>
         ///   <c>true</c> if [add backup]; otherwise, <c>false</c>.
         /// </value>
-        [XmlComment("Сохранять резервные копии PDF (*.bak) - [true], перезаписывать существующий файл PDF - [false]")]
+        [XmlComment("<AddBak> Резервные копии файлов PDF:\n" +
+            "\t\t[true] - сохранять *.bak (по умолчанию)\n" +
+            "\t\t[false] - не сохранять перезаписывать оригинальный файл")]
         public bool AddBak
         {
             get
@@ -138,19 +159,17 @@ namespace drz.PdfVpMod.Infrastructure
             }
         }
 
-        static Setting()
-        {
+        //static Setting()
+        //{
 
-        }
-
+        //}
 
     }
-
 
     #region ExtensionXML   
 
     /// <summary>
-    /// 
+    /// Xml Comment Attribute
     /// </summary>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
@@ -175,7 +194,7 @@ namespace drz.PdfVpMod.Infrastructure
     }
 
     /// <summary>
-    /// 
+    /// Xml Comment Extensions
     /// </summary>
     public static class XmlCommentExtensions
     {

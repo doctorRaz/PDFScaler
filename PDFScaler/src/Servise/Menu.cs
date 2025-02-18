@@ -101,7 +101,7 @@ namespace drz.PDFScaler.Servise
 
             if (System.IO.File.Exists(pathPdfAdd))
             {
-                CS.ConsoleWrite($"Вы хотите удалить ярлыки {DataSetWpfOpt.Product} из 'SEND TO'? [Y]-да, другая клавиша продолжить: ", MesagType.Warning);
+                CS.ConsoleWrite($"Вы хотите удалить ярлыки {DataSetWpfOpt.Product} из 'SEND TO'?\n\t[Y]-да, другая клавиша продолжить: ", MesagType.Warning);
 
                 ConsoleKey response = Console.ReadKey().Key;
                 Console.WriteLine("");
@@ -133,7 +133,7 @@ namespace drz.PDFScaler.Servise
             }
             else
             {
-                CS.ConsoleWrite($"Вы можете добавить ярлыки {DataSetWpfOpt.Product} в 'SEND TO'? [Y]-да, другая клавиша продолжить: ", MesagType.Ok);
+                CS.ConsoleWrite($"Вы хотите] добавить ярлыки {DataSetWpfOpt.Product} в 'SEND TO'?\n\t[Y]-да, другая клавиша продолжить: ", MesagType.Ok);
                 ConsoleKey response = Console.ReadKey().Key;
                 Console.WriteLine("");
 
