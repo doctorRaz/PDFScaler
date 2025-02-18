@@ -131,8 +131,10 @@ namespace drz.PDFScaler.Servise
 
             if (ExitConfirmation)
             {
-                Console.Write("\nДля продолжения нажмите любую клавишу...");
+
+                Console.Write("Для продолжения нажмите любую клавишу...");
                 Console.ReadKey();
+                Console.WriteLine("");
                 return;
             }
             else

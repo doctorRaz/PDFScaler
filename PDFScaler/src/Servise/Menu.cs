@@ -24,10 +24,6 @@ namespace drz.PDFScaler.Servise
         {
             IConsoleService CS = new ConsoleService();//цветная консоль
 
-            #region Title
-            //CS.ConsoleWriteLine($"{DataSetWpfOpt.Product} {DataSetWpfOpt.VersionFull}\n", MesagType.Ok);
-            #endregion
-
             #region License
             //todo перевести лицензию
             CS.ConsoleWriteLine("\t\tApache License\n" +
@@ -93,14 +89,9 @@ namespace drz.PDFScaler.Servise
             Console.WriteLine("\tрежим закрытия окна консоли:");
             Console.WriteLine("\t\t-exon\tтребуется подтверждения (значение по умолчанию)");
             Console.WriteLine($"\t\t-exoff\tподтверждение требуется только если в работе {DataSetWpfOpt.Product} были ошибки");
-            //Console.WriteLine("");
 
             CS.ConsoleWriteLine("   ========================================================================================", MesagType.None);
             #endregion
-
-            //CS.ConsoleWriteLine("Инструкция:", MesagType.Ok);
-
-            CS.ConsoleWriteLine($"В этом меню отображается опция создания или удаления ссылки на ярлыки {DataSetWpfOpt.Product} в \"Send to\"...\n", MesagType.Ok);
 
             string sendto = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
             string pathPdfAdd = Path.Combine(sendto, $"{DataSetWpfOpt.Product} ADD.lnk");
