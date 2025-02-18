@@ -93,7 +93,7 @@ namespace drz.PDFScaler.Infrastructure
                 }
                 else if (Directory.Exists(argsL[i]))//если директория
                 {
-                    IEnumerable<string> files = Directory.EnumerateFiles(argsL[i], "*.pdf");
+                    IEnumerable<string> files = Directory.EnumerateFiles(argsL[i], "*.pdf",SearchOption.AllDirectories);
                     pdfFiles.AddRange(files/*.ToList()*/);
                 }
                 else//аргументы ком строки
