@@ -17,7 +17,7 @@
 	<SignAssembly>False</SignAssembly>
 
 	<!-- <Title>PlotSPDSn.Nas</Title> -->
-	<Product>PDFScaler</Product>
+	<Product>PDFScaler.NET</Product>
 	<Company>doctorRaz@gmail.com</Company>
 	<Authors>Разыграев Андрей</Authors>
 	<Description>Добавление масштаба в видовой экран страниц файлов PDF</Description>

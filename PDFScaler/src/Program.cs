@@ -9,6 +9,8 @@ using drz.PdfVpMod.Infrastructure;
 using drz.PdfVpMod.Interfaces;
 using drz.PdfVpMod.PdfSharp;
 using System.IO;
+using System.Text;
+
 
 
 
@@ -46,6 +48,10 @@ namespace drz.PDFScaler
         static void Prog(string[] args)
         {
 
+#if NET
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+#endif
+
             IConsoleService CS = new ConsoleService();//цветная консоль
 
             Logger = new List<ILogger>(); //logger сообщения
@@ -57,6 +63,7 @@ namespace drz.PDFScaler
             Repository GF = new Repository(Logger, Sets);
 
             ConsoleKey response = new ConsoleKey();
+            // "d:\@Developers\В работе\!Текущее\Programmers\!NET\GitHubMy\PDFScaler\temp" -mod
 
             //"D:/@Developers/В работе/!Текущее/Programmers/!NET/GitHubMy/PDFScaler/temp/test" "D:/@Developers/В работе/!Текущее/Programmers/!NET/GitHubMy/PDFScaler/temp/NOT_DESIGNATION.pdf" -bakoN -mm -add -exon
 
@@ -69,22 +76,28 @@ namespace drz.PDFScaler
 
             if (filesPdf.Count > 0)//файлы есть
             {
-                PS.PdfRun(filesPdf);
-                CS.Print(Logger, Sets.ExitConfirmation);
+                CS.Print(Logger, false);//что было
+
+                PS.PdfRun(filesPdf);//обработка
+
+                CS.Print(Logger, Sets.ExitConfirmation);//что будет
                 return;
             }
 
             else//файлов нет
             {
                 if (UiMenu.Create())
-                {//предлжение открыть файлы
-                    CS.ConsoleWriteLine("\nНастройки приложения...\n", MesagType.Ok);
+                {
+                    CS.Print(Logger, false);//выводим если что есть, только War,Err
+
+                    //предлжение открыть файлы
+                    CS.ConsoleWriteLine("Настройки приложения...", MesagType.Ok);
                     CS.ConsoleWriteLine($"\tРежим приложения:\t{Sets.Mode.ToString()}", MesagType.Info);
                     CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit.ToString()}", MesagType.Info);
                     CS.ConsoleWriteLine($"\tРезервная копия:\t{Sets.AddBak.ToString()}", MesagType.Info);
-                    CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation.ToString()}", MesagType.Ok );
-
-                    CS.ConsoleWrite($"\nОткрыть диалог выбора файлов? [Y]-да, любая клавиша выход: ", MesagType.Ok);
+                    CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation.ToString()}", MesagType.Info);
+                    Console.WriteLine("");
+                    CS.ConsoleWrite($"Открыть диалог выбора файлов?\n\t[Y]-да, любая клавиша выход: ", MesagType.Ok);
                     response = Console.ReadKey().Key;
                     Console.WriteLine("");
                     if (response != ConsoleKey.Y)
