@@ -31,7 +31,7 @@ namespace drz.PDFScaler.Infrastructure
         }
 
         /// <summary> путь к XML </summary>
-        static string XMLpatch => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"{DataSetWpfOpt.AppProductName}.config");
+       internal static string XMLpatch => Path.Combine(Path.GetDirectoryName(DataSetWpfOpt.AsmFulPath), $"{DataSetWpfOpt.AppProductName}.config");
 
         static XmlSerializer FormatterXML => new XmlSerializer(typeof(Setting));
 
@@ -49,13 +49,13 @@ namespace drz.PDFScaler.Infrastructure
             {
                 if (File.Exists(XMLpatch))
                 {
-                    File.SetAttributes(XMLpatch, FileAttributes.Normal);//прибить во избежание
+                    File.SetAttributes(XMLpatch, FileAttributes.Normal);
                 }
                 using (FileStream fs = new FileStream(XMLpatch, FileMode.Create))
                 {
                     FormatterXML.Serialize(fs, Set);
                 }
-                Logger logItem = new Logger($"Сохранены настройки по умолчанию {XMLpatch}", MesagType.Info);
+                Logger logItem = new Logger($"Записаны настройки по умолчанию {XMLpatch}", MesagType.Info);
                 Logger.Add(logItem);
                 return true;
             }
