@@ -55,7 +55,7 @@ namespace drz.PDFScaler.Infrastructure
                 {
                     FormatterXML.Serialize(fs, Set);
                 }
-                Logger logItem = new Logger($"Записаны настройки по умолчанию {XMLpatch}", MesagType.Info);
+                Logger logItem = new Logger($"Записаны настройки по умолчанию {XMLpatch}", MesagType.Ok);
                 Logger.Add(logItem);
                 return true;
             }
@@ -86,7 +86,7 @@ namespace drz.PDFScaler.Infrastructure
                 }
                 catch (Exception e)
                 {
-                    Logger logItem = new Logger($"Не удалось прочитать настройки {XMLpatch}\n{e.Message}", MesagType.Info);
+                    Logger logItem = new Logger($"Не удалось прочитать настройки {XMLpatch}\n{e.Message}", MesagType.Warning);
                     Logger.Add(logItem);
                     return Serialize();
                 }
