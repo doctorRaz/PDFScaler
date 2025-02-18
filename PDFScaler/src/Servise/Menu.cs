@@ -34,22 +34,40 @@ namespace drz.PDFScaler.Servise
                 "\tVersion 2.0, January 2004\n", MesagType.Ok);
             CS.ConsoleWriteLine($"   Copyright(C) {DataSetWpfOpt.Trademark} by {DataSetWpfOpt.Copyright}\n", MesagType.Ok);
 
-            CS.ConsoleWrite ("   Лицензировано в соответствии с Apache License, Version 2.0 (\"Лицензия\");\n" +
+            CS.ConsoleWrite("   Лицензировано в соответствии с Apache License, Version 2.0 (\"Лицензия\");\n" +
                 "   Вы не можете использовать этот файл, кроме как в соответствии с Лицензией.\n" +
                 "   Вы можете получить копию Лицензии по адресу: ", MesagType.None);
             CS.ConsoleWriteLine("http://www.apache.org/licenses/LICENSE-2.0", MesagType.Ok);
 
-            CS.ConsoleWrite("\n   Если это не требуется применимым законодательством или не согласовано в письменной форме,\n" +
-                "   программное обеспечение, распространяемое в соответствии с Лицензией,\n" +
-                "   распространяется на условиях ", MesagType.None);
-            CS.ConsoleWriteLine("\"КАК ЕСТЬ\", БЕЗ ГАРАНТИЙ ИЛИ УСЛОВИЙ ЛЮБОГО РОДА,", MesagType.Warning);
-            CS.ConsoleWriteLine("   явных или подразумеваемых.\n" +
+            CS.ConsoleWriteLine("\n   Если применимое законодательство не требует иного или это не согласовано в письменной форме,\n" +
+                "   программное обеспечение, распространяемое по Лицензии, распространяется на условиях ", MesagType.None);
+            CS.ConsoleWrite("   \"КАК ЕСТЬ\", БЕЗ ГАРАНТИЙ ИЛИ УСЛОВИЙ ЛЮБОГО РОДА, ", MesagType.Warning);
+            CS.ConsoleWriteLine("как явных, так и подразумеваемых.\n" +
                 "   См.Лицензию для получения информации о конкретных языках, регулирующих разрешения\n" +
                 "   и ограничения в соответствии с Лицензией.", MesagType.None);
-            CS.ConsoleWriteLine("   ========================================================================================\n", MesagType.None);
+            CS.ConsoleWriteLine("   ========================================================================================", MesagType.None);
+            #endregion
+            #region About
+            CS.ConsoleWriteLine("\tНазначение програмы:", MesagType.Ok);
+            CS.ConsoleWriteLine($"   {DataSetWpfOpt.Product} изменяет содержимое файлов PDF, добавляя к каждой странице PDF файла,\nвидовой экран с заданным масштабом измерений.");
+            CS.ConsoleWriteLine("   В результате подложки PDF вставленные внешними ссылками будут иметь одинаковый масштаб\nв AutoCAD и nanoCAD.");
+            CS.ConsoleWriteLine("   После обработки всех файлов будут созданы резервные копии оригинальных файлов *.bak\n(настройка по умолчанию)");
+            CS.ConsoleWriteLine("!!!!Обрабатываемые файлы не должны быть открыты для просмотра и не загружены в чертеж,\nкак внешние ссылки", MesagType.Warning);
+            CS.ConsoleWrite("Больше информации: ", MesagType.None);
+            CS.ConsoleWriteLine("https://doctorraz.blogspot.com/2025/02/pdfscaler-autocad-nanocad.html", MesagType.Ok);
+            CS.ConsoleWriteLine("   ========================================================================================", MesagType.None);
+            #endregion
+
+            #region Config XML
+            CS.ConsoleWriteLine("\tНастройки:", MesagType.Ok);
+            CS.ConsoleWriteLine($"При каждом запуске {DataSetWpfOpt.Product} считывает конфигурационный файл: ");
+            CS.ConsoleWriteLine($"<{Config.XMLpatch}>", MesagType.Ok);
+            CS.ConsoleWriteLine($"Оции запуска {DataSetWpfOpt.Product} можно изменить в текстовом редакторе.\n");
+            
             #endregion
 
             #region Using
+            CS.ConsoleWriteLine("\t!!!Опции командной строки разово переопределяют конфигурационный файл!!!",MesagType.Warning);
             CS.ConsoleWriteLine($"Опции командной строки: {DataSetWpfOpt.Product} [options] filenames", MesagType.Ok);
             Console.WriteLine("Опции:");
 
@@ -74,24 +92,15 @@ namespace drz.PDFScaler.Servise
 
             Console.WriteLine("\tрежим закрытия окна консоли:");
             Console.WriteLine("\t\t-exon\tтребуется подтверждения (значение по умолчанию)");
-            Console.WriteLine("\t\t-exoff\tподтверждение требуется если были ошибки");
-            Console.WriteLine("");
+            Console.WriteLine($"\t\t-exoff\tподтверждение требуется только если в работе {DataSetWpfOpt.Product} были ошибки");
+            //Console.WriteLine("");
 
+            CS.ConsoleWriteLine("   ========================================================================================", MesagType.None);
             #endregion
 
-            #region About
-            CS.ConsoleWriteLine("Программа изменяет содержимое файлов PDF, добавляя к каждой странице PDF файла, видовой экран с заданным масштабом измерений.", MesagType.Ok);
-            CS.ConsoleWriteLine("В результате подложки PDF вставленные внешними ссылками будут иметь одинаковый масштаб в AutoCAD и nanoCAD.", MesagType.Ok);
-            CS.ConsoleWriteLine("После обработки всех файлов будут созданы резервные копии оригинальных файлов *.bak (настройка по умолчанию)\n", MesagType.Ok);
-            CS.ConsoleWriteLine("Обрабатываемые файлы не должны быть открыты для просмотра и не загружены в чертеж, как внешние ссылки\n", MesagType.Warning);
-            #endregion
+            //CS.ConsoleWriteLine("Инструкция:", MesagType.Ok);
 
-            Console.WriteLine("Больше информации: https://doctorraz.blogspot.com/2025/02/pdfscaler-autocad-nanocad.html\n");
-
-
-            CS.ConsoleWriteLine("Инструкция:", MesagType.Ok);
-
-            CS.ConsoleWriteLine("В этом меню отображается опция создания или удаления ссылки на ярлыки {DataSetWpfOpt.Product} в \"Send to\".\n", MesagType.Ok);
+            CS.ConsoleWriteLine($"В этом меню отображается опция создания или удаления ссылки на ярлыки {DataSetWpfOpt.Product} в \"Send to\"...\n", MesagType.Ok);
 
             string sendto = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
             string pathPdfAdd = Path.Combine(sendto, $"{DataSetWpfOpt.Product} ADD.lnk");
@@ -133,7 +142,7 @@ namespace drz.PDFScaler.Servise
             }
             else
             {
-                CS.ConsoleWrite($"Вы можете добавить ярлык {DataSetWpfOpt.Product} в 'SEND TO'? [Y]-да, другая клавиша продолжить: ", MesagType.Ok);
+                CS.ConsoleWrite($"Вы можете добавить ярлыки {DataSetWpfOpt.Product} в 'SEND TO'? [Y]-да, другая клавиша продолжить: ", MesagType.Ok);
                 ConsoleKey response = Console.ReadKey().Key;
                 Console.WriteLine("");
 
