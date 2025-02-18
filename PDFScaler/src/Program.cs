@@ -8,7 +8,14 @@ using drz.PdfVpMod.Enum;
 using drz.PdfVpMod.Infrastructure;
 using drz.PdfVpMod.Interfaces;
 using drz.PdfVpMod.PdfSharp;
+using System.IO;
 
+
+
+#if NET
+using System.Reflection;
+[assembly: AssemblyInformationalVersion("PDFScaler for PDF")]
+#endif
 
 namespace drz.PDFScaler
 {
@@ -31,6 +38,7 @@ namespace drz.PDFScaler
         [STAThread]
         static void Main(string[] args)
         {
+
             //загрузчик dll
             new ReflectionLoader();
             Prog(args);
@@ -70,13 +78,13 @@ namespace drz.PDFScaler
             {
                 if (UiMenu.Create())
                 {//предлжение открыть файлы
-                    CS.ConsoleWriteLine("продолжим...", MesagType.Info);
-                    CS.ConsoleWriteLine($"\tРежим приложения:\t{Sets.Mode.ToString()}", MesagType.Ok);
-                    CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit.ToString()}", MesagType.Ok);
-                    CS.ConsoleWriteLine($"\tРезервная копия:\t{Sets.AddBak.ToString()}", MesagType.Ok);
-                    CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation.ToString()}", MesagType.Ok);
+                    CS.ConsoleWriteLine("\nНастройки приложения...\n", MesagType.Ok);
+                    CS.ConsoleWriteLine($"\tРежим приложения:\t{Sets.Mode.ToString()}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit.ToString()}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tРезервная копия:\t{Sets.AddBak.ToString()}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation.ToString()}", MesagType.Ok );
 
-                    CS.ConsoleWrite($"Открыть диалог выбора файлов? [Y]-да, любая клавиша выход: ", MesagType.Warning);
+                    CS.ConsoleWrite($"\nОткрыть диалог выбора файлов? [Y]-да, любая клавиша выход: ", MesagType.Ok);
                     response = Console.ReadKey().Key;
                     Console.WriteLine("");
                     if (response != ConsoleKey.Y)

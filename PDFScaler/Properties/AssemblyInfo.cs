@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные с этой сборкой.
 [assembly: AssemblyTitle("PDFScaler")]
-[assembly: AssemblyDescription("Добавление scale factor в страницы файла PDF")]
+[assembly: AssemblyDescription("Добавление масштаба в видовой экран страниц файлов PDF")]
 [assembly: AssemblyConfiguration("Alfa")]
 [assembly: AssemblyCompany("doctorRaz@gmail.com")]
 [assembly: AssemblyProduct("PDFScaler")]
