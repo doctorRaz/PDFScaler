@@ -60,11 +60,15 @@ namespace drz.PDFScaler.Servise
             CS.ConsoleWriteLine("   ========================================================================================", MesagType.None);
             #endregion
             #region About
-            CS.ConsoleWriteLine("\tНазначение програмы:", MesagType.Ok);
-            CS.ConsoleWriteLine($"   {DataSetWpfOpt.Product} изменяет содержимое файлов PDF, добавляя к каждой странице PDF файла,\nвидовой экран с заданным масштабом измерений.");
-            CS.ConsoleWriteLine("   В результате подложки PDF вставленные внешними ссылками будут иметь одинаковый масштаб\nв AutoCAD и nanoCAD.");
-            CS.ConsoleWriteLine("   После обработки всех файлов будут созданы резервные копии оригинальных файлов *.bak\n(настройка по умолчанию)");
-            CS.ConsoleWriteLine("!!!!Обрабатываемые файлы не должны быть открыты для просмотра и не загружены в чертеж,\nкак внешние ссылки", MesagType.Warning);
+            CS.ConsoleWriteLine("\tНазначение программы:", MesagType.Ok);
+            CS.ConsoleWriteLine($"   {DataSetWpfOpt.Product} изменяет содержимое файлов PDF, добавляя к каждой странице PDF файла,\n" +
+                $"видовой экран с заданным масштабом измерений.");
+            CS.ConsoleWriteLine("   В результате подложки PDF вставленные внешними ссылками будут иметь одинаковый масштаб\n" +
+                "в AutoCAD и nanoCAD.");
+            CS.ConsoleWriteLine("   После обработки всех файлов будут созданы резервные копии оригинальных файлов *.bak\n" +
+                "(настройка по умолчанию)");
+            CS.ConsoleWriteLine("!!!!Обрабатываемые файлы не должны быть открыты для просмотра и не загружены в чертеж,\n" +
+                "как внешние ссылки", MesagType.Warning);
             CS.ConsoleWrite("Больше информации: ", MesagType.None);
             CS.ConsoleWriteLine("https://doctorraz.blogspot.com/2025/02/pdfscaler-autocad-nanocad.html", MesagType.Ok);
             CS.ConsoleWriteLine("   ========================================================================================", MesagType.None);
@@ -72,10 +76,9 @@ namespace drz.PDFScaler.Servise
 
             #region Config XML
             CS.ConsoleWriteLine("\tНастройки:", MesagType.Ok);
-            CS.ConsoleWriteLine($"При каждом запуске {DataSetWpfOpt.Product} считывает конфигурационный файл: ");
+            CS.ConsoleWriteLine($"При каждом запуске {DataSetWpfOpt.Product} считывает конфигурационный файл:");
             CS.ConsoleWriteLine($"<{Config.XMLpatch}>", MesagType.Ok);
-            CS.ConsoleWriteLine($"Оции запуска {DataSetWpfOpt.Product} можно изменить в текстовом редакторе.\n");
-            
+            CS.ConsoleWriteLine($"Оции запуска {DataSetWpfOpt.Product} можно изменить в текстовом редакторе.\n");            
             #endregion
 
             #region Using
@@ -83,28 +86,28 @@ namespace drz.PDFScaler.Servise
             CS.ConsoleWriteLine($"Опции командной строки: {DataSetWpfOpt.Product} [options] filenames", MesagType.Ok);
             Console.WriteLine("Опции:");
 
-            Console.WriteLine("\tизменение масштаба видового экрана (VP) страницы:");
+            Console.WriteLine("\tИзменение масштаба видового экрана (VP) страницы:");
             Console.WriteLine("\t\t-mm\tМиллиметры (значение по умолчанию)");
             Console.WriteLine("\t\t-in\tДюймы");
             Console.WriteLine("\t\t-pt\tПойнты-точки");
             Console.WriteLine("\t\t-cm\tСантиметры");
-            Console.WriteLine("\t\t-pr\tЕдиницы презентации");
+            Console.WriteLine("\t\t-pr\tЕдиницы презентации (1/96 дюйма)");
             Console.WriteLine("");
 
-            Console.WriteLine("\tдобавление/удаление/изменение VP страницы:");
+            Console.WriteLine("\tДобавление/удаление/изменение VP страницы:");
             Console.WriteLine("\t\t-add\tДобавляет VP (значение по умолчанию)");
             Console.WriteLine("\t\t-del\tУдаляет VP");
             Console.WriteLine("\t\t-mod\tДобавляет VP или изменяет единицы существующего");
             Console.WriteLine("");
 
-            Console.WriteLine("\tсохранение PDF:");
-            Console.WriteLine("\t\t-bakon\tсоздается копия оригинального PDF (*.bak) (значение по умолчанию)");
+            Console.WriteLine("\tСохранение PDF:");
+            Console.WriteLine("\t\t-bakon\tсоздается копия оригинального PDF *.bak (значение по умолчанию)");
             Console.WriteLine("\t\t-bakoff\tоригинальный файл перезаписывается");
             Console.WriteLine("");
 
-            Console.WriteLine("\tрежим закрытия окна консоли:");
+            Console.WriteLine("\tПодтверждение закрытия окна консоли:");
             Console.WriteLine("\t\t-exon\tтребуется подтверждения (значение по умолчанию)");
-            Console.WriteLine($"\t\t-exoff\tподтверждение требуется только если в работе {DataSetWpfOpt.Product} были ошибки");
+            Console.WriteLine($"\t\t-exoff\tподтверждение не требуется, если не было ошибок)");
 
             CS.ConsoleWriteLine("   ========================================================================================", MesagType.None);
             #endregion
@@ -117,7 +120,8 @@ namespace drz.PDFScaler.Servise
 
             if (System.IO.File.Exists(pathPdfAdd))
             {
-                CS.ConsoleWrite($"Вы хотите удалить ярлыки {DataSetWpfOpt.Product} из 'SEND TO'?\n\t[Y]-да, другая клавиша продолжить: ", MesagType.Warning);
+                CS.ConsoleWrite($"Вы хотите удалить ярлыки {DataSetWpfOpt.Product} из 'SEND TO'?\n" +
+                    $"\t[Y]-да, другая клавиша продолжить: ", MesagType.Warning);
 
                 ConsoleKey response = Console.ReadKey().Key;
                 Console.WriteLine("");
@@ -149,13 +153,15 @@ namespace drz.PDFScaler.Servise
             }
             else
             {
-                CS.ConsoleWrite($"Вы хотите] добавить ярлыки {DataSetWpfOpt.Product} в 'SEND TO'?\n\t[Y]-да, другая клавиша продолжить: ", MesagType.Ok);
+                CS.ConsoleWrite($"Вы хотите] добавить ярлыки {DataSetWpfOpt.Product} в 'SEND TO'?\n" +
+                    $"\t[Y]-да, другая клавиша продолжить: ", MesagType.Ok);
                 ConsoleKey response = Console.ReadKey().Key;
                 Console.WriteLine("");
 
                 if (response == ConsoleKey.Y)
                 {
-                    string targetPath = Path.Combine(Path.GetDirectoryName(DataSetWpfOpt.AsmFulPath), $"{DataSetWpfOpt.AsmFileNameWithoutExtension}.exe");
+                    string targetPath = Path.Combine(Path.GetDirectoryName(DataSetWpfOpt.AsmFulPath),
+                                                     $"{DataSetWpfOpt.AsmFileNameWithoutExtension}.exe");
 
                     //Add
                     WshShell shell = new WshShell();
@@ -166,7 +172,7 @@ namespace drz.PDFScaler.Servise
                     CS.ConsoleWriteLine($"Ярлык \"{Path.GetFileName(pathPdfAdd)}\" добавлен", MesagType.Info);
 
                     //Mod
-                    shell = new WshShell();
+                    //shell = new WshShell();
                     shortcut = (IWshShortcut)shell.CreateShortcut(pathPdfMod);
                     shortcut.Description = $"Ярлык {DataSetWpfOpt.Product} изменить VP";
                     shortcut.TargetPath = targetPath;
@@ -175,7 +181,7 @@ namespace drz.PDFScaler.Servise
                     CS.ConsoleWriteLine($"Ярлык \"{Path.GetFileName(pathPdfMod)}\" добавлен", MesagType.Info);
 
                     //Delete
-                    shell = new WshShell();
+                    //shell = new WshShell();
                     shortcut = (IWshShortcut)shell.CreateShortcut(pathPdfDel);
                     shortcut.Description = $"Ярлык {DataSetWpfOpt.Product} удалить VP";
                     shortcut.TargetPath = targetPath;
@@ -195,6 +201,5 @@ namespace drz.PDFScaler.Servise
                 }
             }
         }
-
     }
 }
