@@ -83,28 +83,28 @@ namespace drz.PDFScaler.Servise
             CS.ConsoleWriteLine($"Опции командной строки: {DataSetWpfOpt.Product} [options] filenames", MesagType.Ok);
             Console.WriteLine("Опции:");
 
-            Console.WriteLine("\tизменение масштаба видового экрана (VP) страницы:");
+            Console.WriteLine("\tИзменение масштаба видового экрана (VP) страницы:");
             Console.WriteLine("\t\t-mm\tМиллиметры (значение по умолчанию)");
             Console.WriteLine("\t\t-in\tДюймы");
             Console.WriteLine("\t\t-pt\tПойнты-точки");
             Console.WriteLine("\t\t-cm\tСантиметры");
-            Console.WriteLine("\t\t-pr\tЕдиницы презентации");
+            Console.WriteLine("\t\t-pr\tЕдиницы презентации (1/96 дюйма)");
             Console.WriteLine("");
 
-            Console.WriteLine("\tдобавление/удаление/изменение VP страницы:");
+            Console.WriteLine("\tДобавление/удаление/изменение VP страницы:");
             Console.WriteLine("\t\t-add\tДобавляет VP (значение по умолчанию)");
             Console.WriteLine("\t\t-del\tУдаляет VP");
             Console.WriteLine("\t\t-mod\tДобавляет VP или изменяет единицы существующего");
             Console.WriteLine("");
 
-            Console.WriteLine("\tсохранение PDF:");
-            Console.WriteLine("\t\t-bakon\tсоздается копия оригинального PDF (*.bak) (значение по умолчанию)");
+            Console.WriteLine("\tСохранение PDF:");
+            Console.WriteLine("\t\t-bakon\tсоздается копия оригинального PDF *.bak (значение по умолчанию)");
             Console.WriteLine("\t\t-bakoff\tоригинальный файл перезаписывается");
             Console.WriteLine("");
 
-            Console.WriteLine("\tрежим закрытия окна консоли:");
+            Console.WriteLine("\tПодтверждение закрытия окна консоли:");
             Console.WriteLine("\t\t-exon\tтребуется подтверждения (значение по умолчанию)");
-            Console.WriteLine($"\t\t-exoff\tподтверждение требуется только если в работе {DataSetWpfOpt.Product} были ошибки");
+            Console.WriteLine($"\t\t-exoff\tподтверждение не требуется, если не было ошибок)");
 
             CS.ConsoleWriteLine("   ========================================================================================", MesagType.None);
             #endregion
