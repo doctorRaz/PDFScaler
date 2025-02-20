@@ -83,7 +83,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PdfExtScale\PdfExtScale.csproj">
+    <ProjectReference Include="..\..\PdfExtScale\Scale\PdfExtScale.csproj">
       <Project>{51c6ebd6-3c9c-470d-9b55-988533b029f7}</Project>
       <Name>PdfExtScale</Name>
     </ProjectReference>
