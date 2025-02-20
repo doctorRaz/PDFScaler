@@ -93,7 +93,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\PdfVPMod\PdfVpScale.csproj" />
+	  <ProjectReference Include="..\..\PdfExtScale\PdfExtScale.csproj">
+	    <Private>True</Private>
+	  </ProjectReference>
 	</ItemGroup>
 
 	<!--<ItemGroup>

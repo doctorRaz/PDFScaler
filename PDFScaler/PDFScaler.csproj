@@ -83,9 +83,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PdfVPMod\PdfVpScale.csproj">
+    <ProjectReference Include="..\..\PdfExtScale\PdfExtScale.csproj">
       <Project>{51c6ebd6-3c9c-470d-9b55-988533b029f7}</Project>
-      <Name>PdfVpScale</Name>
+      <Name>PdfExtScale</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
