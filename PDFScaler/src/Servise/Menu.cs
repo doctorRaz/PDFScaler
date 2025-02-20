@@ -41,7 +41,7 @@ namespace drz.PDFScaler.Servise
             IConsoleService CS = new ConsoleService();//цветная консоль
 
             #region License
-            //todo перевести лицензию
+
             CS.ConsoleWriteLine("\t\tApache License\n" +
                 "\tVersion 2.0, January 2004\n", MesagType.Ok);
             CS.ConsoleWriteLine($"   Copyright(C) {DataSetWpfOpt.Trademark} by {DataSetWpfOpt.Copyright}\n", MesagType.Ok);
@@ -53,7 +53,7 @@ namespace drz.PDFScaler.Servise
 
             CS.ConsoleWriteLine("\n   Если применимое законодательство не требует иного или это не согласовано в письменной форме,\n" +
                 "   программное обеспечение, распространяемое по Лицензии, распространяется на условиях ", MesagType.None);
-            CS.ConsoleWrite("   \"КАК ЕСТЬ\", БЕЗ ГАРАНТИЙ ИЛИ УСЛОВИЙ ЛЮБОГО РОДА, ", MesagType.Warning);
+            CS.ConsoleWrite("   \"КАК ЕСТЬ\", БЕЗ ГАРАНТИЙ ИЛИ УСЛОВИЙ ЛЮБОГО РОДА, ", MesagType.Warn);
             CS.ConsoleWriteLine("как явных, так и подразумеваемых.\n" +
                 "   См.Лицензию для получения информации о конкретных языках, регулирующих разрешения\n" +
                 "   и ограничения в соответствии с Лицензией.", MesagType.None);
@@ -68,7 +68,7 @@ namespace drz.PDFScaler.Servise
             CS.ConsoleWriteLine("   После обработки всех файлов будут созданы резервные копии оригинальных файлов *.bak\n" +
                 "(настройка по умолчанию)");
             CS.ConsoleWriteLine("!!!!Обрабатываемые файлы не должны быть открыты для просмотра и не загружены в чертеж,\n" +
-                "как внешние ссылки", MesagType.Warning);
+                "как внешние ссылки", MesagType.Warn);
             CS.ConsoleWrite("Больше информации: ", MesagType.None);
             CS.ConsoleWriteLine("https://doctorraz.blogspot.com/2025/02/pdfscaler-autocad-nanocad.html", MesagType.Ok);
             CS.ConsoleWriteLine("   ========================================================================================", MesagType.None);
@@ -82,7 +82,7 @@ namespace drz.PDFScaler.Servise
             #endregion
 
             #region Using
-            CS.ConsoleWriteLine("\t!!!Опции командной строки разово переопределяют конфигурационный файл!!!",MesagType.Warning);
+            CS.ConsoleWriteLine("\t!!!Опции командной строки разово переопределяют конфигурационный файл!!!",MesagType.Warn);
             CS.ConsoleWriteLine($"Опции командной строки: {DataSetWpfOpt.Product} [options] filenames", MesagType.Ok);
             Console.WriteLine("Опции:");
 
@@ -121,7 +121,7 @@ namespace drz.PDFScaler.Servise
             if (System.IO.File.Exists(pathPdfAdd))
             {
                 CS.ConsoleWrite($"Вы хотите удалить ярлыки {DataSetWpfOpt.Product} из 'SEND TO'?\n" +
-                    $"\t[Y]-да, другая клавиша продолжить: ", MesagType.Warning);
+                    $"\t[Y]-да, другая клавиша продолжить: ", MesagType.Warn);
 
                 ConsoleKey response = Console.ReadKey().Key;
                 Console.WriteLine("");
