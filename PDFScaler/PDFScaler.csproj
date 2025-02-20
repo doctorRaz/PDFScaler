@@ -56,17 +56,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\src\Abstractions\Interfaces\IConsoleService.cs" />
-    <Compile Include="..\src\Enum\Enum.FB.cs" />
-    <Compile Include="..\src\Enum\Enum.WConsoleColor.cs" />
-    <Compile Include="..\src\Infrastructure\ConsoleFocus.cs" />
-    <Compile Include="..\src\Servise\Menu.cs" />
-    <Compile Include="..\src\Infrastructure\DataSetWpf_Opt.cs" />
-    <Compile Include="..\src\Servise\ConsoleService.cs" />
-    <Compile Include="..\src\Servise\ReflectionLoader.cs" />
+    <Compile Include="..\src\Abstractions\Interfaces\IConsoleService.cs">
+      <Link>src\Abstractions\Interfaces\IConsoleService.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Enum\Enum.FB.cs">
+      <Link>src\Enum\Enum.FB.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Enum\Enum.WConsoleColor.cs">
+      <Link>src\Enum\Enum.WConsoleColor.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Infrastructure\ConsoleFocus.cs">
+      <Link>src\Infrastructure\ConsoleFocus.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Servise\Menu.cs">
+      <Link>src\Servise\Menu.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Infrastructure\DataSetWpf_Opt.cs">
+      <Link>src\Infrastructure\DataSetWpf_Opt.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Servise\ConsoleService.cs">
+      <Link>src\Servise\ConsoleService.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Servise\ReflectionLoader.cs">
+      <Link>src\Servise\ReflectionLoader.cs</Link>
+    </Compile>
     <Compile Include="..\src\Program.cs" />
-    <Compile Include="..\src\Infrastructure\Repository.cs" />
-    <Compile Include="..\src\Infrastructure\Config.cs" />
+    <Compile Include="..\src\Infrastructure\Repository.cs">
+      <Link>src\Infrastructure\Repository.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Infrastructure\Config.cs">
+      <Link>src\Infrastructure\Config.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="share.te.ua.ico" />
@@ -88,5 +108,6 @@
       <Name>PdfExtScale</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
