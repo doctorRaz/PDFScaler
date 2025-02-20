@@ -59,20 +59,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="..\PDFScaler\src\Abstractions\Interfaces\IConsoleService.cs" Link="src\Abstractions\Interfaces\IConsoleService.cs" />
-		<Compile Include="..\PDFScaler\src\Enum\Enum.FB.cs" Link="src\Enum\Enum.FB.cs" />
-		<Compile Include="..\PDFScaler\src\Enum\Enum.WConsoleColor.cs" Link="src\Enum\Enum.WConsoleColor.cs" />
+		<Compile Include="..\src\Abstractions\Interfaces\IConsoleService.cs" Link="src\Abstractions\Interfaces\IConsoleService.cs" />
+		<Compile Include="..\src\Enum\Enum.FB.cs" Link="src\Enum\Enum.FB.cs" />
+		<Compile Include="..\src\Enum\Enum.WConsoleColor.cs" Link="src\Enum\Enum.WConsoleColor.cs" />
 
-		<Compile Include="..\PDFScaler\src\Infrastructure\Config.cs" Link="src\Infrastructure\Config.cs" />
-		<Compile Include="..\PDFScaler\src\Infrastructure\ConsoleFocus.cs" Link="src\Infrastructure\ConsoleFocus.cs" />
-		<Compile Include="..\PDFScaler\src\Infrastructure\DataSetWpf_Opt.cs" Link="src\Infrastructure\DataSetWpf_Opt.cs" />
-		<Compile Include="..\PDFScaler\src\Infrastructure\Repository.cs" Link="src\Infrastructure\Repository.cs" />
+		<Compile Include="..\src\Infrastructure\Config.cs" Link="src\Infrastructure\Config.cs" />
+		<Compile Include="..\src\Infrastructure\ConsoleFocus.cs" Link="src\Infrastructure\ConsoleFocus.cs" />
+		<Compile Include="..\src\Infrastructure\DataSetWpf_Opt.cs" Link="src\Infrastructure\DataSetWpf_Opt.cs" />
+		<Compile Include="..\src\Infrastructure\Repository.cs" Link="src\Infrastructure\Repository.cs" />
 
-		<Compile Include="..\PDFScaler\src\Servise\ConsoleService.cs" Link="src\Servise\ConsoleService.cs" />
-		<Compile Include="..\PDFScaler\src\Servise\Menu.cs" Link="src\Servise\Menu.cs" />
-		<Compile Include="..\PDFScaler\src\Servise\ReflectionLoader.cs" Link="src\Servise\ReflectionLoader.cs" />
+		<Compile Include="..\src\Servise\ConsoleService.cs" Link="src\Servise\ConsoleService.cs" />
+		<Compile Include="..\src\Servise\Menu.cs" Link="src\Servise\Menu.cs" />
+		<Compile Include="..\src\Servise\ReflectionLoader.cs" Link="src\Servise\ReflectionLoader.cs" />
 
-		<Compile Include="..\PDFScaler\src\Program.cs" Link="src\Program.cs" />
+		<Compile Include="..\src\Program.cs" Link="src\Program.cs" />
 
 	</ItemGroup>
 
@@ -97,11 +97,5 @@
 	    <Private>True</Private>
 	  </ProjectReference>
 	</ItemGroup>
-
-	<!--<ItemGroup>
-    <Folder Include="src\Abstractions\Interfaces\" />
-    <Folder Include="src\Infrastructure\" />
-    <Folder Include="src\Servise\" />
-  </ItemGroup>-->
 
 </Project>
