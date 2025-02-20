@@ -112,10 +112,10 @@ namespace drz.PDFScaler
                 {
                     //предлжение открыть файлы
                     CS.ConsoleWriteLine("Текущие настройки приложения...", MesagType.Ok);
-                    CS.ConsoleWriteLine($"\tРежим изменения:\t{Sets.Mode.ToString()}", MesagType.Info);
-                    CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit.ToString()}", MesagType.Info);
-                    CS.ConsoleWriteLine($"\tРезервная копия:\t{Sets.AddBak.ToString()}", MesagType.Info);
-                    CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation.ToString()}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tРежим изменения:\t{Sets.Mode}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tРезервная копия:\t{Sets.AddBak}", MesagType.Info);
+                    CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation}", MesagType.Info);
                     Console.WriteLine("");
                     CS.ConsoleWrite($"Открыть диалог выбора файлов?\n\t[Y]-да, любая клавиша выход: ", MesagType.Ok);
                     response = Console.ReadKey().Key;
