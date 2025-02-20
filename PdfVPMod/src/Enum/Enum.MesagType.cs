@@ -17,7 +17,7 @@
 namespace drz.PdfVpMod.Enum
 {
     /// <summary>
-    /// тип сообщения Info Warning...
+    /// тип сообщения Info Warn...
     /// </summary>
     public enum MesagType
     {
@@ -32,19 +32,24 @@ namespace drz.PdfVpMod.Enum
         Info,
 
         /// <summary>
+        /// The ok
+        /// </summary>
+        Ok,
+
+        /// <summary>
+        /// The не выполнено
+        /// </summary>
+        Idle,
+        /// <summary>
         /// The warning
         /// </summary>
-        Warning,
+        Warn,
 
         /// <summary>
         /// The error
         /// </summary>
         Error,
 
-        /// <summary>
-        /// The ok
-        /// </summary>
-        Ok,
 
     }
 }

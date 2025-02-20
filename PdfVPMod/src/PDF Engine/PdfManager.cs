@@ -74,7 +74,7 @@ namespace drz.PdfVpMod.PdfSharp
                 }
                 else//ни один VP не добавлен, сохранять не надо
                 {
-                    Logger.Add(new Logger($"Изменений нет. Файл не сохранен: {pdffile}", MesagType.Info));
+                    Logger.Add(new Logger($"Изменений нет. Файл не сохранен: {pdffile}", MesagType.Idle));
                 }
             }
         }

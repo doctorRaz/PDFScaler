@@ -77,6 +77,8 @@ namespace drz.PDFScaler
             Setting Sets = cfg.Set;//настройки
 
             Repository GF = new Repository(Logger, Sets);
+            
+            CS.Print(Logger, false);//что было
 
             ConsoleKey response = new ConsoleKey();
             // "d:\@Developers\В работе\!Текущее\Programmers\!NET\GitHubMy\PDFScaler\temp" -mod
@@ -92,11 +94,15 @@ namespace drz.PDFScaler
 
             if (filesPdf.Count > 0)//файлы есть
             {
-                CS.Print(Logger, false);//что было
 
                 PS.PdfRun(filesPdf);//обработка
 
                 CS.Print(Logger, Sets.ExitConfirmation);//что будет
+                return;
+            }
+            else if(args.Length>0)
+            {
+                CS.Print(Logger, Sets.ExitConfirmation);//аргументы есть, а файлов нет
                 return;
             }
 
@@ -104,8 +110,6 @@ namespace drz.PDFScaler
             {
                 if (UiMenu.Create())
                 {
-                    CS.Print(Logger, false);//выводим если что есть, только War,Err
-
                     //предлжение открыть файлы
                     CS.ConsoleWriteLine("Текущие настройки приложения...", MesagType.Ok);
                     CS.ConsoleWriteLine($"\tРежим изменения:\t{Sets.Mode.ToString()}", MesagType.Info);

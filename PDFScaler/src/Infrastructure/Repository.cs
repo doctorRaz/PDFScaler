@@ -73,7 +73,7 @@ namespace drz.PDFScaler.Infrastructure
             }
             else
             {
-                ILogger logItem = new Logger("Файлы PDF не выбраны", MesagType.Info);
+                ILogger logItem = new Logger("Файлы PDF не выбраны", MesagType.Idle);
                 Logger.Add(logItem);
 
                 ConsoleFocus.FocusProcess(DataSetWpfOpt.AsmFileNameWithoutExtension);
@@ -104,7 +104,7 @@ namespace drz.PDFScaler.Infrastructure
                     }
                     else
                     {
-                        Logger.Add(new Logger($"Выбранный файл не является PDF и будет исключен. {argsL[i]}", MesagType.Warning));
+                        Logger.Add(new Logger($"Выбранный файл не является PDF и будет исключен. {argsL[i]}", MesagType.Idle));
                     }
                 }
                 else if (Directory.Exists(argsL[i]))//если директория
@@ -166,7 +166,7 @@ namespace drz.PDFScaler.Infrastructure
                             break;
 
                         default:
-                            Logger.Add(new Logger($"Параметр аргумента не существует будет исключен. {argsL[i]}", MesagType.Error));
+                            Logger.Add(new Logger($"Параметр аргумента не существует будет исключен. {argsL[i]}", MesagType.Idle));
                             break;
                     }
 

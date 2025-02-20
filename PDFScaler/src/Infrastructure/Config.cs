@@ -28,7 +28,10 @@ namespace drz.PDFScaler.Infrastructure
 {
     class Config
     {
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Config"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
         internal Config(List<ILogger> logger)
         {
             Logger = logger;
@@ -100,7 +103,7 @@ namespace drz.PDFScaler.Infrastructure
                 }
                 catch (Exception e)
                 {
-                    Logger logItem = new Logger($"Не удалось прочитать настройки {XMLpatch}\n{e.Message}", MesagType.Warning);
+                    Logger logItem = new Logger($"Не удалось прочитать настройки {XMLpatch}\n{e.Message}", MesagType.Idle);
                     Logger.Add(logItem);
                     return Serialize();
                 }

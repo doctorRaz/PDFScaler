@@ -130,10 +130,10 @@ namespace drz.PDFScaler.Servise
         /// <param name="ExitConfirmation">if set to <c>true</c> [exit confirmation].</param>
         public void Print(List<ILogger> Logger, bool ExitConfirmation)
         {
-
             foreach (Logger logger in Logger.Cast<Logger>())
             {
-                if (logger.MesagType == MesagType.Error)
+                //if (logger.MesagType == MesagType.Error || logger.MesagType == MesagType.Warn)
+                if ((int)logger.MesagType >2)
                 {
                     ExitConfirmation = true;//не закрывать консоль
                 }
@@ -158,8 +158,7 @@ namespace drz.PDFScaler.Servise
                 return;
             }
         }
-
-#endif
+        #endif
         #endregion
 
         #region Convert Enum
@@ -221,14 +220,6 @@ namespace drz.PDFScaler.Servise
                         _colorF = Console.ForegroundColor;
                         _colorB = Console.BackgroundColor;
                         break;
-                    case MesagType.Error:
-                        _colorF = ConsoleColor.White;
-                        _colorB = ConsoleColor.DarkRed;
-                        break;
-                    case MesagType.Warning:
-                        _colorF = ConsoleColor.Red;
-                        _colorB = Console.BackgroundColor;
-                        break;
                     case MesagType.Info:
                         _colorF = ConsoleColor.DarkGray;
                         _colorB = Console.BackgroundColor;
@@ -237,6 +228,20 @@ namespace drz.PDFScaler.Servise
                         _colorF = ConsoleColor.Green;
                         _colorB = Console.BackgroundColor;
                         break;
+                    case MesagType.Idle:
+                        _colorF = ConsoleColor.DarkYellow;
+                        _colorB = Console.BackgroundColor;
+                        break;
+
+                    case MesagType.Error:
+                        _colorF = ConsoleColor.White;
+                        _colorB = ConsoleColor.DarkRed;
+                        break;
+                    case MesagType.Warn:
+                        _colorF = ConsoleColor.Red;
+                        _colorB = Console.BackgroundColor;
+                        break;
+
                     default: throw new InvalidEnumArgumentException();
                 }
             }

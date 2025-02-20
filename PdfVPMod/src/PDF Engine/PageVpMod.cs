@@ -99,7 +99,7 @@ namespace drz.PdfVpMod.PdfSharp
                 }
                 else
                 {
-                    Logger.Add(new Logger($"\tVP существует в Page:{pageNum}", MesagType.Info));
+                    Logger.Add(new Logger($"\tVP существует в Page:{pageNum}", MesagType.Idle));
                     return false;
                 }
                 #endregion 
@@ -150,7 +150,7 @@ namespace drz.PdfVpMod.PdfSharp
                         else
                         {
                             isMod = false;
-                            Logger.Add(new Logger($"\tVP не изменен в Page:{pageNum}", MesagType.Info));
+                            Logger.Add(new Logger($"\tVP не изменен в Page:{pageNum}", MesagType.Idle));
                             break;
                         }
                     }
@@ -293,7 +293,7 @@ namespace drz.PdfVpMod.PdfSharp
             }
             else
             {
-                Logger.Add(new Logger($"\tVP отсутствует в Page:{pageNum}", MesagType.Info));
+                Logger.Add(new Logger($"\tVP отсутствует в Page:{pageNum}", MesagType.Idle));
                 return false;
             }
 
