@@ -80,7 +80,9 @@
     <Compile Include="..\src\Servise\ReflectionLoader.cs">
       <Link>src\Servise\ReflectionLoader.cs</Link>
     </Compile>
-    <Compile Include="..\src\Program.cs" />
+    <Compile Include="..\src\Program.cs">
+      <Link>src\Program.cs</Link>
+    </Compile>
     <Compile Include="..\src\Infrastructure\Repository.cs">
       <Link>src\Infrastructure\Repository.cs</Link>
     </Compile>
