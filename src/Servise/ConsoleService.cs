@@ -130,11 +130,16 @@ namespace drz.PDFScaler.Servise
         /// <param name="ExitConfirmation">if set to <c>true</c> [exit confirmation].</param>
         public void Print(List<ILogger> Logger, bool ExitConfirmation)
         {
+            string mes = "";
+            MesagType msgtype = MesagType.None;
             foreach (Logger logger in Logger.Cast<Logger>())
             {
-                //if (logger.MesagType == MesagType.Error || logger.MesagType == MesagType.Warn)
-                if ((int)logger.MesagType >2)
+
+                if ((int)logger.MesagType > 2)
                 {
+                    mes = "Не все файлы обработаны!\n" +
+                        "Просмотрите список сообщений\n";
+                    msgtype = MesagType.Warn;
                     ExitConfirmation = true;//не закрывать консоль
                 }
 #if DEBUG
@@ -148,7 +153,7 @@ namespace drz.PDFScaler.Servise
             if (ExitConfirmation)
             {
 
-                Console.Write("Для продолжения нажмите любую клавишу...");
+                ConsoleWrite($"{mes}Для продолжения нажмите любую клавишу...",msgtype);
                 Console.ReadKey();
                 Console.WriteLine("");
                 return;
@@ -158,7 +163,7 @@ namespace drz.PDFScaler.Servise
                 return;
             }
         }
-        #endif
+#endif
         #endregion
 
         #region Convert Enum

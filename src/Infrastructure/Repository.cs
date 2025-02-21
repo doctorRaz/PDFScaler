@@ -88,8 +88,6 @@ namespace drz.PDFScaler.Infrastructure
         /// <returns></returns>
         public List<string> GetPDFfiles(string[] args)
         {
-
-            #region UINSI
             List<string> pdfFiles = new List<string>();
 
             List<string> argsL = args.ToList();
@@ -166,14 +164,12 @@ namespace drz.PDFScaler.Infrastructure
                             break;
 
                         default:
-                            Logger.Add(new Logger($"Параметр аргумента не существует будет исключен. {argsL[i]}", MesagType.Idle));
+                            Logger.Add(new Logger($"Параметр аргумента не существует и будет исключен. {argsL[i]}", MesagType.Idle));
                             break;
                     }
 
                 }
             }
-
-            #endregion
 
             return pdfFiles;
         }

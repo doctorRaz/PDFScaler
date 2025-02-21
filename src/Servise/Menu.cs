@@ -168,6 +168,7 @@ namespace drz.PDFScaler.Servise
                     IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(pathPdfAdd);
                     shortcut.Description = $"ярлык {DataSetWpfOpt.Product} добавить VP";
                     shortcut.TargetPath = targetPath;
+                    shortcut.Arguments = "-add";
                     shortcut.Save();
                     CS.ConsoleWriteLine($"ярлык \"{Path.GetFileName(pathPdfAdd)}\" добавлен", MesagType.Info);
 

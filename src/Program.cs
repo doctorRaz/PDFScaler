@@ -78,7 +78,7 @@ namespace drz.PDFScaler
 
             Repository GF = new Repository(Logger, Sets);
             
-            CS.Print(Logger, false);//что было
+            CS.Print(Logger, false);//что было, без остановки если не было ошибок
 
             ConsoleKey response = new ConsoleKey();
             // "d:\@Developers\В работе\!Текущее\Programmers\!NET\GitHubMy\PDFScaler\temp" -mod
@@ -97,33 +97,20 @@ namespace drz.PDFScaler
 
                 PS.PdfRun(filesPdf);//обработка
 
-                CS.Print(Logger, Sets.ExitConfirmation);//что будет
+                CS.Print(Logger, Sets.ExitConfirmation);//отчет результата, показ по настройкам
                 return;
             }
-            else if(args.Length>0)
+            else if(args.Length>0)//файлов нет, но есть аргументы ком строки
             {
                 CS.Print(Logger, Sets.ExitConfirmation);//аргументы есть, а файлов нет
-                return;
+                // return;
             }
 
-            else//файлов нет
+            else//файлов нет аргументов нет
             {
                 if (UiMenu.Create())
                 {
-                    //предлжение открыть файлы
-                    CS.ConsoleWriteLine("Текущие настройки приложения...", MesagType.Ok);
-                    CS.ConsoleWriteLine($"\tРежим изменения:\t{Sets.Mode}", MesagType.Info);
-                    CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit}", MesagType.Info);
-                    CS.ConsoleWriteLine($"\tРезервная копия:\t{Sets.AddBak}", MesagType.Info);
-                    CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation}", MesagType.Info);
-                    Console.WriteLine("");
-                    CS.ConsoleWrite($"Открыть диалог выбора файлов?\n\t[Y]-да, любая клавиша выход: ", MesagType.Ok);
-                    response = Console.ReadKey().Key;
-                    Console.WriteLine("");
-                    if (response != ConsoleKey.Y)
-                    {
-                        return;
-                    }
+                   
                 }
                 else
                 {
@@ -131,12 +118,28 @@ namespace drz.PDFScaler
                 }
             }
 
+            //предлжение открыть файлы
+            //todo вытащить из иф
+            CS.ConsoleWriteLine("Текущие настройки приложения...", MesagType.Ok);
+            CS.ConsoleWriteLine($"\tРежим изменения:\t{Sets.Mode}", MesagType.Info);
+            CS.ConsoleWriteLine($"\tЕдиницы:\t\t{Sets.Unit}", MesagType.Info);
+            CS.ConsoleWriteLine($"\tРезервная копия:\t{Sets.AddBak}", MesagType.Info);
+            CS.ConsoleWriteLine($"\tЗапрос на выход:\t{Sets.ExitConfirmation}", MesagType.Info);
+            Console.WriteLine("");
+            CS.ConsoleWrite($"Открыть диалог выбора файлов?\n\t[Y]-да, любая клавиша выход: ", MesagType.Ok);
+            response = Console.ReadKey().Key;
+            Console.WriteLine("");
+            if (response != ConsoleKey.Y)
+            {
+                return;
+            }
+
             filesPdf = GF.GetPDFfilesWin();//пытаемся получить файлы из диалога
             if (filesPdf.Count > 0)
             {
                 PS.PdfRun(filesPdf);
             }
-            CS.Print(Logger, Sets.ExitConfirmation);
+            CS.Print(Logger, true);//коль оконный вызов надо результат показать по любому
 
         }
 
